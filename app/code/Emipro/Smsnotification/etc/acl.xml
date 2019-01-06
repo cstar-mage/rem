@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * {{Emipro}}_{{Smsnotification}} extension
+ *                     NOTICE OF LICENSE
+ * 
+ *                     This source file is subject to the MIT License
+ *                     that is bundled with this package in the file LICENSE.txt.
+ *                     It is also available through the world-wide-web at this URL:
+ *                     http://opensource.org/licenses/mit-license.php
+ * 
+ *                     @category  Emipro
+ *                     @package   Emipro_Smsnotification
+ *                     @copyright Copyright (c) 2015
+ *                     @license   http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::system">
+                    <resource id="Emipro_Smsnotification::smsnotification" title="Emipro - Order Notification by SMS" sortOrder="81">
+                        <resource id="Emipro_Smsnotification::smsevent" title="SMS Notification Events" sortOrder="10"/>
+                        <resource id="Emipro_Smsnotification::smslog" title="SMS Notification log" sortOrder="10"/>
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Emipro_Smsnotification::configuration" title="Emipro - Order Notification by SMS"/>
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

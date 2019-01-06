@@ -1,0 +1,85 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+?>
+<?php
+    /** @var \Amasty\ShopbyBase\Model\FilterSetting $filterSetting */
+    /** @var \Amasty\Shopby\Block\Navigation\FilterRenderer $block */
+    /** @var \Amasty\Shopby\Model\Layer\Filter\CategoryItems $filterItems */
+    /** @var \Amasty\Shopby\Model\Layer\Filter\Item $filterItem */
+    $filterUniqId = $block->escapeId(uniqid());
+    $filterCode = $block->escapeHtml($filterSetting->getFilterCode());
+?>
+
+<div class="amshopby-category-dropdown-wrapper amshopby-category-dropdown-wrapper-<?= $filterUniqId ?>">
+    <div class="amshopby-category-dropdown">
+        <div class="caret">
+            <?php foreach ($filterItems->getAllItems() as $filterItem) : ?>
+                <?php if (!$block->checkedFilter($filterItem)) : ?>
+                    <?php continue; ?>
+                <?php endif; ?>
+                <div class="amshopby-category-dropdow-multiselect-crumb">
+                    <?= $filterItem->getLabel() ?>
+                    <button data-remove-url="<?= $block->escapeUrl($filterItem->getUrl()) ?>"
+                            class="amshopby-category-dropdown-remove action-close"
+                            type="button"
+                            title="<?= __('Close')?>"/>
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            ".amshopby-category-dropdown-remove": {
+                "amShopbyFilterCategoryDropdown": {}
+            }
+        }
+
+    </script>
+
+</div>
+
+<ol class="items am_shopby_filter_items_<?= $filterCode; ?>_<?= $filterUniqId ?> amshopby-category-dropdown-view">
+    <form data-amshopby-filter="<?= $filterCode; ?>" data-amshopby-filter-request-var="<?= $block->getFilter()->getRequestVar(); ?>">
+        <?= $categoryTreeHtml; ?>
+    </form>
+</ol>
+
+<script>
+    require(["jquery", "jquery/ui"], function ($) {
+        var currentCategoryId = "<?= $block->getCurrentCategoryId();?>";
+
+        if (currentCategoryId) {
+            $(window).load(function () {
+                $(document).trigger('baseCategory', currentCategoryId);
+            });
+            $(document).ajaxComplete(function () {
+                $(document).trigger('baseCategory', currentCategoryId);
+            });
+        }
+
+        $(".am_shopby_filter_items_<?= $filterCode;?>_<?= $filterUniqId?>").hide();
+        $(".amshopby-category-dropdown-wrapper-<?= $filterUniqId?>").click(function () {
+            $(this).toggleClass('_active');
+            $(".am_shopby_filter_items_<?= $filterCode;?>_<?= $filterUniqId?>").toggle();
+        });
+        var collapseSelector = "<?= ($block->isTopNav() ? '.amasty-catalog-topnav' : '.sidebar') ?> .amshopby-category-collapse-icon";
+        $(collapseSelector).nextAll('ol').each(function () {
+            if ($(this).find('input[checked]').length == 0) {
+                $(this).hide();
+            } else {
+                $(this).prevAll('.amshopby-category-collapse-icon').toggleClass('_active');
+            }
+        });
+        $(collapseSelector).click(function (e) {
+            $(this).nextAll('ol').toggle();
+            $(this).toggleClass('_active');
+            e.preventDefault();
+            e.stopPropagation();
+        });
+    });
+</script>

@@ -1,0 +1,80 @@
+<?php
+	$smseventId = $block->getSmseventId();
+?>
+<div class="fieldset-wrapper-title" tabindex="-1">
+    <strong  class="title">
+        <span>SMS Notification Help</span>
+    </strong>
+</div>
+
+
+<div class="fieldset">
+	<div class="hor-scroll">
+		<table class="form-list">
+			<tbody>
+				<tr>
+					<!-- Order Confirmation -->
+					<?php if($smseventId == 1): ?>
+						<td class="value">
+							<label>
+								Use <b>{{var order_no}}</b> For Getting <b>Order No</b> value in SMS
+							</label>
+							<br>
+							<label>
+								Use <b>{{var product_name}}</b> For Getting purchased <b>Product Name</b> in SMS
+							</label>
+						</td>
+					<?php endif; ?>
+					<!-- Invoice Creation -->
+						<?php if($smseventId == 2): ?>
+						<td class="value">
+							<label>
+								Use <b>{{var order_no}}</b> For Getting <b>Order No</b> value in SMS
+							</label>
+							<br>
+							<label>
+								Use <b>{{var payment_amount}}</b> For Getting <b>Payment Amount</b> in SMS
+							</label>
+						</td>
+					<?php endif; ?>
+					<!-- Order Shipment -->
+					<?php if($smseventId == 3):?>
+						<td class="value">
+							<label>
+								Use <b>{{var order_no}}</b> For Getting <b>Order No</b> value in SMS
+							</label>
+							<br>
+							<label>
+								Use <b>{{var shipping_method}}</b> For Getting <b>Shipping Method</b> in SMS
+							</label>
+							<br>
+							<label>
+								Use <b>{{var shipment_id}}</b> For Getting <b>Shipping Id</b> in SMS
+							</label>
+						</td>
+					<?php endif; ?>
+					<!-- Credit Memo Creation -->
+					<?php if($smseventId == 4):?>
+						<td class="value">
+							<label>
+								Use <b>{{var order_no}}</b> For Getting <b>Order No</b> value in SMS
+							</label>
+							<br>
+							<label>
+								Use <b>{{var payment_amount}}</b> For Getting <b>Payment Amount</b> in SMS
+							</label>
+						</td>
+					<?php endif; ?>
+					<!-- Order Cancelled -->
+					<?php if($smseventId == 5): ?>
+						<td class="value">
+							<label>
+								Use <b>{{var order_no}}</b> For Getting <b>Order No</b> value in SMS
+							</label>
+						</td>
+					<?php endif; ?>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,50 @@
+.mageworx-fee-section {
+    margin-bottom: -20px;
+    float: left;
+    width: 100%;
+}
+
+.head-fee {
+    margin-bottom: 0px;
+}
+
+.admin__page-section-title.head-fee.active > .title:after {
+    content: '\e62b';
+    margin-left: 10px;
+}
+
+.admin__page-section-title.head-fee > .title:after {
+    color: inherit;
+    content: '\e628';
+    font-family: 'Admin Icons';
+    vertical-align: middle;
+    font-weight: normal;
+    overflow: hidden;
+    speak: none;
+    text-align: center;
+    margin-left: 10px;
+}
+
+#form_fees_fieds .admin__field {
+    display: block;
+    margin: 20px 20px 20px 20px;
+    vertical-align: top;
+}
+
+#form_fees_fieds .admin__field-option {
+    margin: 5px 5px 5px 5px;
+}
+
+#form_fees_fieds .multiselect {
+    height:100px
+}
+
+.form_fees_block {
+    float: left;
+    width: 50%;
+}
+
+.mageworx_shipping_fee_block {
+    float: right;
+    width: 50%;
+}

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xnotif
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\ConfigurableProduct\Model\ResourceModel\Attribute\OptionSelectBuilderInterface">
+        <plugin name="Magento_ConfigurableProduct_Plugin_Model_ResourceModel_Attribute_InStockOptionSelectBuilder"
+                type="Amasty\Xnotif\Plugins\ConfigurableProduct\Model\ResourceModel\Attribute\InStockOptionSelectBuilder"/>
+    </type>
+
+    <type name="Magento\Bundle\Block\Catalog\Product\View\Type\Bundle">
+        <plugin name="Amasty_xnotif::bundle-json-config"
+                type="Amasty\Xnotif\Plugins\Bundle\Block\Catalog\Product\View\Type\Bundle"/>
+    </type>
+
+    <type name="Magento\GroupedProduct\Block\Product\View\Type\Grouped">
+        <plugin name="Amasty_xnotif::grouped-change-template"
+                type="Amasty\Xnotif\Plugins\GroupedProduct\Block\Product\View\Type\Grouped"/>
+    </type>
+
+    <!-- generate data for configurable simple products on Swatches block -->
+    <type name="Magento\Swatches\Block\Product\Renderer\Configurable">
+        <plugin name="Amasty_xnotif::Configurable"
+                type="Amasty\Xnotif\Plugins\ConfigurableProduct\Block\Product\View\Type\Configurable"/>
+    </type>
+
+    <!-- generate data for configurable simple products -->
+    <type name="Magento\ConfigurableProduct\Block\Product\View\Type\Configurable">
+        <plugin name="Amasty_xnotif::xnotifConfigurable"
+                type="Amasty\Xnotif\Plugins\ConfigurableProduct\Block\Product\View\Type\Configurable"/>
+    </type>
+
+    <!-- check permission for unsubscribe start-->
+    <type name="Magento\ProductAlert\Controller\Unsubscribe\Price">
+        <plugin name="Amasty_Xnotif::UnsubscribePrice" type="Amasty\Xnotif\Plugins\ProductAlert\Controller\Unsubscribe"/>
+    </type>
+
+    <type name="Magento\ProductAlert\Controller\Unsubscribe\PriceAll">
+        <plugin name="Amasty_Xnotif::UnsubscribeAllPrice" type="Amasty\Xnotif\Plugins\ProductAlert\Controller\Unsubscribe"/>
+    </type>
+
+    <type name="Magento\ProductAlert\Controller\Unsubscribe\Stock">
+        <plugin name="Amasty_Xnotif::UnsubscribeStock" type="Amasty\Xnotif\Plugins\ProductAlert\Controller\Unsubscribe"/>
+    </type>
+
+    <type name="Magento\ProductAlert\Controller\Unsubscribe\StockAll">
+        <plugin name="Amasty_Xnotif::UnsubscribeAllStock" type="Amasty\Xnotif\Plugins\ProductAlert\Controller\Unsubscribe"/>
+    </type>
+    <!-- check permission for unsubscribe end-->
+
+    <!-- change unsubscribe url - add params start-->
+    <type name="Magento\ProductAlert\Block\Email\Price">
+        <plugin name="Amasty_Xnotif::GetUnsubscribeUrlPrice" type="Amasty\Xnotif\Plugins\ProductAlert\Block\Email\Url"/>
+    </type>
+
+    <type name="Magento\ProductAlert\Block\Email\Stock">
+        <plugin name="Amasty_Xnotif::GetUnsubscribeUrlStock" type="Amasty\Xnotif\Plugins\ProductAlert\Block\Email\Url"/>
+    </type>
+    <!-- change unsubscribe url - add params end-->
+
+    <type name="Magento\ProductAlert\Block\Product\View\Stock">
+        <plugin name="Amasty_Xnotif::observe-alert-block" type="Amasty\Xnotif\Plugins\ProductAlert\View"/>
+    </type>
+
+    <type name="Magento\ProductAlert\Block\Product\View\Price">
+        <plugin name="Amasty_Xnotif::observe-alert-block-price" type="Amasty\Xnotif\Plugins\ProductAlert\View"/>
+    </type>
+
+    <type name="Magento\Catalog\Block\Product\AbstractProduct">
+        <plugin name="Amasty_Xnotif::subscribe-on-category" type="Amasty\Xnotif\Plugins\Catalog\Block\Product\AbstractProduct"/>
+    </type>
+</config>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+    <css src="css/catalog_product_custom.css"/>
+    <script src='//platform-api.sharethis.com/js/sharethis.js#property=5ad44f0122309d0013d4ecb0' async='async' src_type="url" /> 
+    </head>
+    <body>
+        <referenceBlock name="content.aside">
+            <block class="Amasty\Quickview\Block\Config" name="Amasty.quickviewtwo" template="config2.phtml" />
+            <block class="Amasty\Xnotif\Block\Catalog\Category\Config" template="Amasty_Xnotif::category/config2.phtml" />
+        </referenceBlock>
+		<referenceContainer name="product.info.main">
+			<container name="custom.rating.container" htmlTag="div" htmlClass="rating-container" before="product.info.price">       
+			</container>
+		</referenceContainer>
+        <move element="page.main.title" destination="product.info.main" before="-"/>
+        <move element="product.info.stock.sku" destination="product.info.price" after="product.price.final"/>
+        <move element="product.info.type" destination="product.info.main" before="product.info.price"/>
+        <move element="product.info.review" destination="custom.rating.container" before="-"/>
+        <move element="product.info.type" destination="custom.rating.container" after="-"/>
+		<move element="product.info.overview" destination="product.info.main" before="extrahint"/>
+		<move element="product.info.mailto" destination="product.info.social" before="-"/>
+    </body>
+</page>

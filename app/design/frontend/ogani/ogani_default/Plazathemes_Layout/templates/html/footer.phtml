@@ -1,0 +1,66 @@
+<div class="footer-container">
+	<?php //echo $block->getLayout()->createBlock('Plazathemes\Brandslider\Block\Brandslider')->setTemplate('Plazathemes_Brandslider::brandslider.phtml')->toHtml();?>
+	<div class="footer-newsletter-custom">
+		<div class="container-inner">
+			<?php echo $block->getLayout()->createBlock('Magento\Newsletter\Block\Subscribe')->setTemplate('Magento_Newsletter::subscribe.phtml')->toHtml();?>
+		</div>
+	</div>
+	<div class="footer-top">
+		<div class="footer-top-content container-follow">
+			<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('follow_us')->toHtml();?>
+		</div>
+		<div class="footer-top-content container-store-info">
+			<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('store_infomation')->toHtml();?>
+		</div>
+		<div class="footer-top-content container-offers">
+			<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('our_offers')->toHtml();?>
+		</div>
+		<div class="footer-top-content container-service">
+			<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('services')->toHtml();?>
+		</div>
+	</div>
+	<div class="footer-middle">
+		<div class="container-app-link">
+			<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_app_link')->toHtml();?>
+		</div>		
+		<div class="container-store-contact">
+			<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('footer_store_contact')->toHtml();?>
+		</div>
+	</div>
+	<div class="footer-bottom">
+		<div class="container-inner">
+			<div class="row">
+				<div class="col-sm-5">
+					<?php echo $this->getChildHtml('copyright')?>
+				</div>
+				<div class="col-sm-7">
+					<div class="link_payment">
+						<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('payment_methor')->toHtml();?>
+					</div>
+					<?php echo $this->getChildHtml("store_switcher"); ?>
+				</div>
+			</div>
+			
+		</div>
+		<div id="back_top">
+			<a href="#back-top"><span>>top</span></a>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+			
+	require(["jquery"], function($){
+
+	   $(window).scroll(function() {
+			if($(this).scrollTop() > 300) {
+				$('#back_top').fadeIn();   
+			} else {
+				$('#back_top').fadeOut();
+			}
+		});
+		   $('#back_top').click(function() {
+			$('body,html').animate({scrollTop:0},500);
+		}); 
+	   
+	});
+</script>

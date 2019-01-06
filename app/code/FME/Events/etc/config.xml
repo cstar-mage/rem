@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <events>
+        	<basic_configs>
+                    <event_mod_enable>1</event_mod_enable>
+                    <header_link>All Events</header_link>
+                    <header_link_enable>1</header_link_enable>
+                    <bottom_link>Footer All Events</bottom_link>
+                    <bottom_link_enable>1</bottom_link_enable>                      		
+                    <std_latitude>32.7294</std_latitude>
+                    <std_longitude>73.0931</std_longitude>	
+                    <map_zoom>8</map_zoom>
+        	</basic_configs>
+            <seo_info>
+                <page_title>Events Manager</page_title>
+                <meta_description>Events Manager</meta_description>
+                <meta_keywords>Events Manager</meta_keywords>
+                <events_url_prefix>event</events_url_prefix>
+                <events_url_suffix>.html</events_url_suffix>
+            </seo_info>            
+            <event_status_notifications>               
+                <err_empty_collection>No record found!</err_empty_collection>
+            </event_status_notifications> 	      	    
+        </events>         
+    </default>
+</config>

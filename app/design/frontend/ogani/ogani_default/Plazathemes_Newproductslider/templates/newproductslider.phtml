@@ -1,0 +1,108 @@
+<?php
+	
+	$enable = $block->getConfig('enabled');
+	if($enable < 1) return ;  
+	$itemsDefault = 6;//$block->getConfig('itemsDefault');
+	$itemsDesktop = 6;//$block->getConfig('itemsDesktop');
+	$itemsDesktopSmall = 6;//$block->getConfig('itemsDesktopSmall');
+	$itemsTablet = $block->getConfig('itemsTablet');
+	$itemsMobile = $block->getConfig('itemsMobile');
+	$title = $block->getConfig('title'); 
+	$speed = $block->getConfig('speed');
+	$qty = $block->getConfig('qty');
+	$showCart = $block->getConfig('addtocart');
+	$showWishlist = 1;
+	$showCompare = 1;
+	$show_navigation = $block->getConfig('navigation');
+	$show_pagination = $block->getConfig('pagination');
+	$auto = $block->getConfig('auto');
+	$rows = $block->getConfig('row');
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$productCollection = $objectManager->create('Magento\Reports\Model\ResourceModel\Report\Collection\Factory'); 
+	$collection = $productCollection->create('Magento\Sales\Model\ResourceModel\Report\Bestsellers\Collection'); 
+
+	$collection->setPeriod('month');
+	
+?>
+<div class="new-product-slider">
+	<div class="block-title"><h3><?php echo $title;?></h3></div>
+	<div class="owl-container">
+		<div id="new_product_slider">
+			<?php 
+			$newItems =  $block -> getNewProduct()->getItems(); 
+			//~ $imageBlock =  $block->getLayout()->createBlock('Magento\Catalog\Block\Product\Image');
+			//~ $image = 'new_products_content_widget_grid';
+			//~ $type = 'widget-new-grid';
+			$templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::DEFAULT_VIEW;
+			$i=0;
+			$flag = 0;
+			foreach($collection as $_item) { 
+				if($flag >=3){
+					break;
+				}
+				$prdoduct = $objectManager->get('Magento\Catalog\Model\Product')->load($_item->getProductId());	
+				
+				$imagehelper = $objectManager->create('Magento\Catalog\Helper\Image');
+				$image = $imagehelper->init($prdoduct, 'product_page_image_small')
+                        ->setImageFile($prdoduct->getFile())
+                        ->resize(100,100)
+                        ->getUrl();
+                        
+				$categories = $prdoduct->getCategoryIds(); /*will return category ids array*/
+				$catName = '';
+				$catUrl = ';';
+				foreach($categories as $category){
+					$cat = $objectManager->create('Magento\Catalog\Model\Category')->load($category);
+					if($cat->getIncludeInMenu()==='1'){
+						$catName = $cat->getName();
+						$catUrl = $cat->getUrl();
+					}
+				}      	                  
+                //~ $image = $imagehelper->init($_item,'product_page_image_small')->constrainOnly(FALSE)->keepAspectRatio(TRUE)->keepFrame(FALSE)->resize(400)->getUrl();
+                
+                
+				//$productImage = $block->getImage($_item, $image);
+				?>
+				<?php if($i++%$rows==0) { ?> <div class="product_row"> <?php } ?>
+					<div class="product-items">
+						<div class="item-inner">
+							<div class="image-container pull-left">						
+								<a href="<?php echo $prdoduct->getProductUrl() ?>" class="product-item-photo">
+								<span class="product-image-container" style="width:300px;">
+								<span class="product-image-wrapper" style="padding-bottom: 123.33333333333%;">
+									<img class="product-image-photo" src=<?php echo $image; ?> width="300" height="370" alt=<?php echo $_item->getProductName(); ?>></span>
+							</span></a>
+							</div>						
+							<div class="des media-body">
+								<span class='cat'><a href='<?php echo $catUrl; ?>'><?php echo $catName; ?></a><span>
+								<strong class="product-item-name">
+									<a title="<?php echo $block->escapeHtml($_item->getProductName()) ?>"
+									   href="<?php echo $prdoduct->getProductUrl() ?>"
+									   class="product-item-link">
+										<?php echo $block->escapeHtml($_item->getProductName()) ?>
+									</a>
+								</strong>
+								<div class="price-box price-final_price" data-role="priceBox" data-product-id=<?php echo $_item->getProductId(); ?>>
+    
+
+								<span class="price-container price-final_price tax weee">
+										<span data-price-amount=<?php echo $_item->getProductPrice(); ?> data-price-type="finalPrice" class="price-wrapper ">
+										<span class="price"><?php echo "$".number_format(((float)$_item->getProductPrice()), 2, '.', ''); ?></span>    </span>
+										</span>
+
+								</div>
+								<?php //echo $_item->getProductPrice(); ?>
+								<?php //echo $block->getReviewsSummaryHtml($_item, $templateType,true); ?>
+							</div>	
+						</div>
+					</div>
+				
+				<?php if($i%$rows==0 || $i == count($newItems)) { ?> </div> <?php }?>
+			<?php 
+			$flag++;
+			}
+			?>
+		</div>
+	</div>
+</div>
+

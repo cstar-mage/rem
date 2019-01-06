@@ -1,0 +1,23 @@
+<?php 
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Cart
+ */
+
+/** @var $this \Amasty\Cart\Block\Product */
+$product = $this->getProduct(); 
+
+?>
+<a href="<?= $product->getProductUrl() ?>" title="<?= $product->getName(); ?>" class="added-item">
+    <?= $product->getName()?>
+</a>
+<p class="text"><?= __('is added to cart')?></p>
+<div class="am-photo-container">
+    <a href="<?= $product->getProductUrl(); ?>"
+       title="<?= $product->getName(); ?>"
+       tabindex="-1"
+       class="product-item-photo">
+        <?= $block->getImage($product, 'cart_page_product_thumbnail')->toHtml(); ?>
+    </a>
+</div>

@@ -1,0 +1,76 @@
+<?php
+$cutomer_data = $block->getCustomerLabel();
+?>
+<form action="<?php echo __($block->getPostformUrl()) ?>" method="POST" data-mage-init='{"validation": {"errorClass": "mage-error"}}' novalidate="novalidate">
+    
+    <input name="form_key" type="hidden" value="<?php echo __($block->getFormKey()); ?>" />
+    <?php $post_data=$block->getPostData();
+        if(is_array($post_data))
+        {
+            $post_data=  implode(",",$post_data);
+        }
+    ?>
+    <input type="hidden" name="all_number" value="<?php echo __($post_data); ?>">
+    <fieldset class="fieldset admin__fieldset " id="">
+        <legend class="admin__legend legend">
+            <span>Send SMS To Customers</span>
+        </legend>
+    </fieldset> 
+    <fieldset id="my-fieldset">
+        <div>
+            <div class="smslabel">
+                <span><b>Customers : </b></span>
+            </div>
+            <div>
+                <?php foreach ($cutomer_data as $customer): ?>
+                    <span><?php echo __($customer["email"]); ?><<?php echo __($customer["mobile"]); ?>>,</span>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <div class="smsfield">
+            <div class="smslabel">
+                <span><b>SMS Text : </b></span>
+            </div>
+            <div>
+                <textarea rows="5" cols="45" id="message_text" name="message_text" class="required-entry"></textarea>
+            </div>
+        </div>
+        <div class="smstextrender">
+            <div class="smstextrenderdata">
+                <a href="javascript:void(0)" id="customer_email" data->Customer Email,</a>
+                <a href="javascript:void(0)" id="customer_firstname" data->Customer FirstName,</a>
+                <a href="javascript:void(0)" id="customer_lastname" data->Customer LastName,</a>
+            </div>
+        </div>
+        <div class="sms_btn">
+            <button class="action tocart primary" type="submit">
+                <span>Send SMS</span>
+            </button>
+        </div>
+    </fieldset>
+</form>
+<script>
+    require(['jquery'], function ($) {
+        jQuery('document').ready(function () {
+            jQuery("#customer_email").click(function () {
+                var caretPos = document.getElementById("message_text").selectionStart;
+                var textAreaTxt = jQuery("#message_text").val();
+                var txtToAdd = "{{var customer_email}}";
+                jQuery("#message_text").val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));  
+            });
+            jQuery("#customer_firstname").click(function () {
+                var caretPos = document.getElementById("message_text").selectionStart;
+                var textAreaTxt = jQuery("#message_text").val();
+                var txtToAdd = "{{var customer_firstname}}";
+                jQuery("#message_text").val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));  
+            });
+            jQuery("#customer_lastname").click(function () {
+                var caretPos = document.getElementById("message_text").selectionStart;
+                var textAreaTxt = jQuery("#message_text").val();
+                var txtToAdd = "{{var customer_lastname}}";
+                jQuery("#message_text").val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));  
+            });
+        });
+    });
+</script>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+		<css src="css/checkout_cart_index.css"/>
+		<script src="Magento_Checkout::js/qty_increment.js"/>
+    </head>
+    <body>
+	    <referenceContainer name="content">
+            <block class="Amasty\Quickview\Block\Config" name="Amasty.quickviewtwo" template="config2.phtml" />
+            <block class="Amasty\Xnotif\Block\Catalog\Category\Config" template="Amasty_Xnotif::category/config2.phtml" />
+        </referenceContainer>  
+    </body>
+</page>

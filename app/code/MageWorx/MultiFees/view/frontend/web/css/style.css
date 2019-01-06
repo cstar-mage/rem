@@ -1,0 +1,153 @@
+.opc-block-summary .table-totals .totals-mageworx-fee-summary.expanded .mark, .opc-block-summary .table-totals .totals-mageworx-fee-summary.expanded .amount {
+    border-bottom: 0;
+}
+
+.abs-sidebar-totals .totals-mageworx-fee-summary.expanded .amount .price:after, .cart-totals .totals-mageworx-fee-summary.expanded .amount .price:after, .opc-block-summary .table-totals .totals-mageworx-fee-summary.expanded .amount .price:after {
+    content: '\e621';
+}
+
+.cart-totals .totals-mageworx-fee-details, .opc-block-summary .table-totals .totals-mageworx-fee-details {
+    border-bottom: 1px solid #ccc;
+    display: none;
+}
+
+.cart-totals .totals-mageworx-fee-details.shown, .opc-block-summary .table-totals .totals-mageworx-fee-details.shown {
+    display: table-row;
+}
+
+.cart-totals .totals-mageworx-fee-summary .mark, .cart-totals .totals-mageworx-fee-summary .amount, .opc-block-summary .table-totals .totals-mageworx-fee-summary .mark, .opc-block-summary .table-totals .totals-mageworx-fee-summary .amount {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.cart-totals .totals-mageworx-fee-summary .amount .price, .opc-block-summary .table-totals .totals-mageworx-fee-summary .amount .price {
+    padding-right: 20px;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.abs-sidebar-totals .totals-mageworx-fee-summary .amount .price > span, .cart-totals .totals-mageworx-fee-summary .amount .price > span, .opc-block-summary .table-totals .totals-mageworx-fee-summary .amount .price > span {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+}
+
+.abs-sidebar-totals .totals-mageworx-fee-summary .amount .price:after, .cart-totals .totals-mageworx-fee-summary .amount .price:after, .opc-block-summary .table-totals .totals-mageworx-fee-summary .amount .price:after {
+    -webkit-font-smoothing: antialiased;
+    font-size: 12px;
+    line-height: 12px;
+    color: inherit;
+    content: '\e622';
+    font-family: luma-icons;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+    overflow: hidden;
+    speak: none;
+    text-align: center;
+}
+
+.cart-totals .totals-mageworx-fee-summary .amount .price:after, .opc-block-summary .table-totals .totals-mageworx-fee-summary .amount .price:after {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
+
+.cart-totals .totals-mageworx-fee-summary.expanded .mark, .cart-totals .totals-mageworx-fee-summary.expanded .amount, .opc-block-summary .table-totals .totals-mageworx-fee-summary.expanded .mark, .opc-block-summary .table-totals .totals-mageworx-fee-summary.expanded .amount {
+    border-bottom: 0;
+}
+
+.abs-sidebar-totals .totals-mageworx-fee-summary.expanded .amount .price:after, .cart-totals .totals-mageworx-fee-summary.expanded .amount .price:after, .opc-block-summary .table-totals .totals-mageworx-fee-summary.expanded .amount .price:after {
+    content: '\e621';
+}
+
+/** tax **/
+
+.opc-block-summary .table-totals .totals-mageworx-fee-summary-tax.expanded .mark, .opc-block-summary .table-totals .totals-mageworx-fee-summary-tax.expanded .amount {
+    border-bottom: 0;
+}
+
+.abs-sidebar-totals .totals-mageworx-fee-summary-tax.expanded .amount .price:after, .cart-totals .totals-mageworx-fee-summary-tax.expanded .amount .price:after, .opc-block-summary .table-totals .totals-mageworx-fee-summary-tax.expanded .amount .price:after {
+    content: '\e621';
+}
+
+.cart-totals .totals-mageworx-fee-details-tax, .opc-block-summary .table-totals .totals-mageworx-fee-details-tax {
+    border-bottom: 1px solid #ccc;
+    display: none;
+}
+
+.cart-totals .totals-mageworx-fee-details-tax.shown, .opc-block-summary .table-totals .totals-mageworx-fee-details-tax.shown {
+    display: table-row;
+}
+
+.cart-totals .totals-mageworx-fee-summary-tax .mark, .cart-totals .totals-mageworx-fee-summary-tax .amount, .opc-block-summary .table-totals .totals-mageworx-fee-summary-tax .mark, .opc-block-summary .table-totals .totals-mageworx-fee-summary-tax .amount {
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.cart-totals .totals-mageworx-fee-summary-tax .amount .price, .opc-block-summary .table-totals .totals-mageworx-fee-summary-tax .amount .price {
+    padding-right: 20px;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.abs-sidebar-totals .totals-mageworx-fee-summary-tax .amount .price > span, .cart-totals .totals-mageworx-fee-summary-tax .amount .price > span, .opc-block-summary .table-totals .totals-mageworx-fee-summary-tax .amount .price > span {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+}
+
+.abs-sidebar-totals .totals-mageworx-fee-summary-tax .amount .price:after, .cart-totals .totals-mageworx-fee-summary-tax .amount .price:after, .opc-block-summary .table-totals .totals-mageworx-fee-summary-tax .amount .price:after {
+    -webkit-font-smoothing: antialiased;
+    font-size: 12px;
+    line-height: 12px;
+    color: inherit;
+    content: '\e622';
+    font-family: luma-icons;
+    vertical-align: middle;
+    display: inline-block;
+    font-weight: 400;
+    overflow: hidden;
+    speak: none;
+    text-align: center;
+}
+
+.cart-totals .totals-mageworx-fee-summary-tax .amount .price:after, .opc-block-summary .table-totals .totals-mageworx-fee-summary-tax .amount .price:after {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+}
+
+.cart-totals .totals-mageworx-fee-summary-tax.expanded .mark, .cart-totals .totals-mageworx-fee-summary-tax.expanded .amount, .opc-block-summary .table-totals .totals-mageworx-fee-summary-tax.expanded .mark, .opc-block-summary .table-totals .totals-mageworx-fee-summary-tax.expanded .amount {
+    border-bottom: 0;
+}
+
+.abs-sidebar-totals .totals-mageworx-fee-summary-tax.expanded .amount .price:after, .cart-totals .totals-mageworx-fee-summary-tax.expanded .amount .price:after, .opc-block-summary .table-totals .totals-mageworx-fee-summary-tax.expanded .amount .price:after {
+    content: '\e621';
+}
+
+#mageworx-shipping-fee-form .field-note, #mageworx-fee-form fieldset .field-note, #mageworx-payment-fee-form .field-note {
+    margin-bottom: 10px;
+}
+
+#mageworx-fee-container .title, #mageworx-payment-fee-container .title {
+    padding-bottom: 10px;
+}
+
+#block-fee-wrapper {
+    display: none;
+}

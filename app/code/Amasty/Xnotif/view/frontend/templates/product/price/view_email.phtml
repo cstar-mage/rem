@@ -1,0 +1,58 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xnotif
+ */
+?>
+<?php
+    /** @var Amasty\Xnotif\Helper\Data $helper */
+    $helper = $this->helper('Amasty\Xnotif\Helper\Data');
+    $urlHelper = $this->helper('Magento\Framework\Url\Helper\Data');
+
+    $productId = (int)$helper->getOriginalProduct($block)->getId();
+    $url = $block->escapeHtml($helper->getEmailUrl('price'));
+?>
+
+<div class="amxnotif-block">
+    <form id="form-validate-price" method="post" action="<?php echo $url; ?>">
+        <label for="notification-container-<?= $productId;?>">
+            <?= /* @escapeNotVerified */ __('Sign up for price alert'); ?>
+        </label>
+        <div class="notification-container" id="notification-container-<?= $productId ?>">
+            <div class="input-fields">
+                <input type="email"
+                       data-validate="{required:true, 'validate-email':true}"
+                       name="guest_email_price"
+                       id="amxnotif-guest-email_price-<?= $productId;?>"
+                       class="input-text amxnotif-guest-email"
+                       size="30"/>
+                <input type="hidden" name="product_id"
+                       value="<?= $productId;?>"/>
+                <input type="hidden" name="type" value="email"/>
+                <input type="hidden"
+                       name="<?= \Magento\Framework\App\Action\Action::PARAM_NAME_URL_ENCODED ?>"
+                       value="<?= $urlHelper->getEncodedUrl(); ?>"/>
+            </div>
+
+            <div class="actions-toolbar amxnotif_guest_action">
+                <div class="primary">
+                    <button type="submit" class="action submit primary">
+                        <span><?= /* @escapeNotVerified */ __('Subscribe'); ?></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        "mage/mage",
+        "mage/validation"
+    ], function ($) {
+        "use strict";
+        $('#form-validate-price').mage('validation');
+    });
+</script>

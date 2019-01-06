@@ -1,0 +1,58 @@
+<?php
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$aw_block = $objectManager->create('Aheadworks\Blog\Block\Sidebar\Recent');
+	$aw_posts = $aw_block->getPosts();
+	$fileSystem = $objectManager->create('\Magento\Store\Model\StoreManagerInterface');
+	$mediaPath = $fileSystem->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+	?><div class="head-container">
+			<div class="category-name">
+				<span class="category-name2"> Blog</span>
+		</div> </div><?php
+	foreach ($aw_posts as $_post) {
+		 ?>
+		<div class="w3-content w3-display-container mySlides">
+		<div class = "main-div">
+	   <div class = "image_sec">
+		 <?php if($_post->getFeaturedImageFile()){ ?>
+		<img src="<?php echo $mediaPath.$_post->getFeaturedImageFile() ?>">
+		<?php }else{ ?>
+			<img src="<?php echo $mediaPath.'remedy-verify.jpg' ?>">
+		<?php } ?>
+	   </div>
+	   <div class = "content-div">
+	    <h3 class="title"><a href="<?php echo $aw_block->escapeXssInUrl($aw_block->getPostUrl($_post)) ?>"><?php echo $_post->getTitle() ?></a></h3>
+	    <p class="short-des"><?php echo $_post->getShortContent() ?></p>
+	    <span class="button_more"><a href="<?php echo $aw_block->escapeXssInUrl($aw_block->getPostUrl($_post)) ?>">View More</a></span>
+	   </div>
+	   </div>
+<!--
+	  <img class="mySlides" src="img_lights.jpg" style="width:100%">
+	  <img class="mySlides" src="img_mountains.jpg" style="width:100%">
+	  <img class="mySlides" src="img_forest.jpg" style="width:100%">
+-->
+
+
+	</div>
+    <?php	}    ?>
+    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+	<button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>

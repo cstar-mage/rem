@@ -1,0 +1,129 @@
+<?php $block->renderFileLessToCss(); ?>
+<header class="header-container">
+		<div class="top-bar visible-lg visible-md">
+			<div class="container-inner">
+				<div class="container-size">
+					<div class="row">
+						<div class="col-sm-6">
+<!--
+							<div class="col-sm-6-left"><a href="#"><span>Shop By Brand</span></a></div>
+-->
+<?php
+    echo $block->getLayout()
+               ->createBlock('Magento\Cms\Block\Block')
+               ->setBlockId('phone_header')
+               ->toHtml();
+?>
+							<div class="col-sm-6-left"><a href="/blogs/remedy-recipes/"><span>Remedy Recipes</span></a></div>
+							<div class="col-sm-6-left"><a href="/event.html"><span>Events</span></a></div>
+							<div class="col-sm-6-left"><a href="/wishlist"><span>My Wishlist</span></a></div>
+							<?php //echo $this->getChildHtml("store_language"); ?>
+							<?php //echo $this->getChildHtml("currency"); ?>	
+						</div>
+						<div class="col-sm-6">
+							<?php //echo $this->getChildHtml("header.links"); ?>
+							<?php //echo $this->getChildHtml("top.links"); ?>
+							<div class="col-sm-6-right account"><?php echo $this->getChildHtml("my-account-link"); ?></div>
+							<div class="col-sm-6-right minicart"><?php echo $this->getChildHtml("minicart"); ?></div>
+							<div class="col-sm-6-right login"><?php echo $this->getChildHtml("authorization-link-login"); ?></div>
+							
+							<?php echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('link_follow_header')->toHtml();?>
+						</div>		
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="header">
+			<div class="container-inner">
+				<div class="header-inner">
+					<div class="h-left">
+						<?php echo $this->getChildHtml("logo"); ?>
+					</div>
+					<div class="h-right">
+						<?php echo $this->getChildHtml("hozmegamenu_top"); ?>
+						
+						<div class="search-abs">
+							<?php //echo $this->getChildHtml("minicart");?>
+<!--
+							<div class="search-switcher">
+-->
+								<div class="search-icon">
+									<?php echo $this->getChildHtml("top.search"); ?>
+									</div>
+<!--
+							</div>
+-->
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="nav-ozmegamenu-inner">
+			<div class="mobile-bar-icon"><span><?php /* @escapeNotVerified */ echo __('mobile icon'); ?></span></div>
+		</div>
+		<div class="mobile-bar-content">
+			<div class ="mobile-bar-close"><?php /* @escapeNotVerified */ echo __('Close'); ?></div>
+			<ul class = "tabs-mobile">
+				<li class="item item-menu"><?php /* @escapeNotVerified */ echo __('Menu'); ?></li>
+				
+				<li class="item item-setting"><?php /* @escapeNotVerified */ echo __('Setting'); ?></li>
+			</ul>
+			<div class="tabs-content-mobile tabs-menu">
+				<?php echo $this->getChildHtml("mobilemenu"); ?>
+			</div>
+			<div class="tabs-content-mobile tabs-setting" style="display:none;">
+				<?php echo $this->getChildHtml("top.links"); ?>
+				<?php echo $this->getChildHtml("store_language_mobile"); ?>
+				<?php echo $this->getChildHtml("currency_mobile"); ?>
+			</div>
+		</div>
+</header>
+<script type="text/javascript">
+require(["jquery"], function($){
+	$(document).ready(function(){
+		<!-- show, hide mobile bar content -->
+		$(".mobile-bar-icon").click(function(){
+			$(".mobile-bar-content").addClass("open");
+		});
+		$(".mobile-bar-close").click(function(){
+			$(".mobile-bar-content").removeClass("open");
+		});
+		
+		<!-- choose tabs-->
+		$(".tabs-mobile .item-menu").addClass("active");
+		$(".tabs-mobile .item").click(function(){
+			$(".tabs-mobile .item").removeClass("active");
+			$(this).addClass("active");
+		});
+		$(".tabs-mobile .item-menu").click(function(){
+			$(".tabs-content-mobile").css("display","none");
+			$(".tabs-menu").css("display","block");
+		});
+		$(".tabs-mobile .item-account").click(function(){
+			$(".tabs-content-mobile").css("display","none");
+			$(".tabs-account").css("display","block");
+		});
+		$(".tabs-mobile .item-setting").click(function(){
+			$(".tabs-content-mobile").css("display","none");
+			$(".tabs-setting").css("display","block");
+		});
+		//~ $(".header-container .header .container-inner .header-inner .h-right .nav-container .pt_custommenu div#pt_menu3").hover(function(){
+			//~ var hit = $(".header-container .header .container-inner .header-inner .h-right .nav-container .pt_custommenu div#pt_menu3 .popup .block1").height() + 70;
+	//~ 
+			//~ $(".header-container .header .container-inner .header-inner .h-right .nav-container .pt_custommenu div#pt_menu3 .popup .sub").height(446).delay("slow");
+		//~ });
+		
+	});
+	$(window).scroll(function () {
+	   if ($(this).scrollTop() > 0) {
+		 $('.header').addClass("fix-header");
+	   } else {
+		$('.header').removeClass("fix-header");
+	   }
+	});
+});
+</script>
+
+
+

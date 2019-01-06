@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <mageworx_multifees>
+            <main>
+                <enable_cart>0</enable_cart>
+                <apply_fee_on_click>0</apply_fee_on_click>
+                <include_fee_in_shipping_price>0</include_fee_in_shipping_price>
+                <tax_calculation_includes_tax>0</tax_calculation_includes_tax>
+                <display_tax_in_block>1</display_tax_in_block>
+                <display_tax_in_cart>1</display_tax_in_cart>
+                <display_tax_in_sales>1</display_tax_in_sales>
+            </main>
+        </mageworx_multifees>
+    </default>
+</config>

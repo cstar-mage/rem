@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="MageWorx_MultiFees::css/style.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="MageWorx\MultiFees\Block\Checkout\CartFeeData" name="mageworx_checkout_cart_fee_data" after="-" cacheable="false" template="MageWorx_MultiFees::info/cart_fee_data.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="cart.summary">
+            <block class="MageWorx\MultiFees\Block\Cart\Fee" name="checkout.cart.fee" as="fee" template="cart/fee_wrapper.phtml" after="checkout.cart.summary.title">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="mageworx-fee-form-container" xsi:type="array">
+                                <item name="component" xsi:type="string">MageWorx_MultiFees/js/view/mageworx-fee-form</item>
+                                <item name="provider" xsi:type="string">checkoutProvider</item>
+                                <item name="config" xsi:type="array">
+                                    <item name="template" xsi:type="string">MageWorx_MultiFees/mageworx-fee-form</item>
+                                </item>
+                                <item name="children" xsi:type="array">
+                                    <item name="mageworx-fee-form-fieldset" xsi:type="array">
+                                        <item name="component" xsi:type="string">uiComponent</item>
+                                        <item name="displayArea" xsi:type="string">mageworx-fee-form-fields</item>
+                                        <item name="children" xsi:type="array">
+                                            <!-- Wee add fields in LayoutProccessor class -->
+                                        </item>
+                                    </item>
+                                    <item name="errors" xsi:type="array">
+                                        <item name="sortOrder" xsi:type="string">0</item>
+                                        <item name="component" xsi:type="string">MageWorx_MultiFees/js/view/fee-messages</item>
+                                        <item name="displayArea" xsi:type="string">messages</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceBlock name="checkout.cart.totals">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="block-totals" xsi:type="array">
+                            <item name="children" xsi:type="array">
+                                <item name="mageworx_fee" xsi:type="array">
+                                    <item name="sortOrder" xsi:type="string">45</item>
+                                    <item name="component"  xsi:type="string">MageWorx_MultiFees/js/view/summary/fee</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="title" xsi:type="string" translate="true">Additional Fees</item>
+                                    </item>
+                                </item>
+                                <item name="mageworx_fee_tax" xsi:type="array">
+                                    <item name="sortOrder" xsi:type="string">46</item>
+                                    <item name="component"  xsi:type="string">MageWorx_MultiFees/js/view/summary/fee-tax</item>
+                                    <item name="config" xsi:type="array">
+                                        <item name="title" xsi:type="string" translate="true">Additional Fees (Incl. Tax)</item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

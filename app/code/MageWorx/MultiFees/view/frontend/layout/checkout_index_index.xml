@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="MageWorx_MultiFees::css/style.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="MageWorx\MultiFees\Block\Checkout\CartFeeData" name="mageworx_checkout_cart_fee_data" after="-" cacheable="false" template="MageWorx_MultiFees::info/cart_fee_data.phtml"/>
+            <block class="MageWorx\MultiFees\Block\Checkout\ShippingFeeData" name="mageworx_checkout_shipping_fee_data" after="-" cacheable="false" template="MageWorx_MultiFees::info/shipping_fee_data.phtml"/>
+            <block class="MageWorx\MultiFees\Block\Checkout\PaymentFeeData" name="mageworx_checkout_payment_fee_data" after="-" cacheable="false" template="MageWorx_MultiFees::info/payment_fee_data.phtml"/>
+        </referenceContainer>
+        <referenceBlock name="checkout.root">
+            <arguments>
+                <argument name="jsLayout" xsi:type="array">
+                    <item name="components" xsi:type="array">
+                        <item name="checkout" xsi:type="array">
+                            <item name="children" xsi:type="array">
+
+                                <item name="steps" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="billing-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="payment" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="beforeMethods" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="payment_fee" xsi:type="array">
+                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                </item>
+                                                                <item name="mageworx-payment-fee-form-container" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">MageWorx_MultiFees/js/view/payment-fee</item>
+                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">MageWorx_MultiFees/checkout/payment/payment-fee</item>
+                                                                    </item>
+                                                                    <item name="children" xsi:type="array">
+                                                                        <item name="mageworx-payment-fee-form-fieldset" xsi:type="array">
+                                                                            <item name="component" xsi:type="string">uiComponent</item>
+                                                                            <item name="displayArea" xsi:type="string">mageworx-payment-fee-form-fields</item>
+                                                                            <item name="children" xsi:type="array">
+                                                                                <!-- We add field in LayoutProccessor class -->
+                                                                            </item>
+                                                                        </item>
+                                                                        <item name="errors" xsi:type="array">
+                                                                            <item name="sortOrder" xsi:type="string">0</item>
+                                                                            <item name="component" xsi:type="string">MageWorx_MultiFees/js/view/fee-messages</item>
+                                                                            <item name="displayArea" xsi:type="string">messages</item>
+                                                                        </item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                        <item name="additional-payment-validators" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="agreements-validator" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">MageWorx_MultiFees/js/view/fee-validation</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                        <item name="shipping-step" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="shippingAddress" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="shippingAdditional" xsi:type="array">
+                                                            <item name="component" xsi:type="string">uiComponent</item>
+                                                            <item name="displayArea" xsi:type="string">shippingAdditional</item>
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="shipping_fee" xsi:type="array">
+                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                </item>
+                                                                <item name="mageworx-shipping-fee-form-container" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">MageWorx_MultiFees/js/view/shipping-fee</item>
+                                                                    <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="template" xsi:type="string">MageWorx_MultiFees/checkout/shipping/shipping-fee</item>
+                                                                    </item>
+                                                                    <item name="children" xsi:type="array">
+                                                                        <item name="mageworx-shipping-fee-form-fieldset" xsi:type="array">
+                                                                            <item name="component" xsi:type="string">uiComponent</item>
+                                                                            <item name="displayArea" xsi:type="string">mageworx-shipping-fee-form-fields</item>
+                                                                            <item name="children" xsi:type="array">
+
+                                                                                <!-- We add field in LayoutProccessor class -->
+                                                                            </item>
+                                                                        </item>
+                                                                        <item name="errors" xsi:type="array">
+                                                                            <item name="sortOrder" xsi:type="string">0</item>
+                                                                            <item name="component" xsi:type="string">MageWorx_MultiFees/js/view/fee-messages</item>
+                                                                            <item name="displayArea" xsi:type="string">messages</item>
+                                                                        </item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+
+                                <item name="sidebar" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="summary" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="totals" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+
+                                                        <item name="mageworx_fee" xsi:type="array">
+                                                            <item name="sortOrder" xsi:type="string">35</item>
+                                                            <item name="component"  xsi:type="string">MageWorx_MultiFees/js/view/summary/fee</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="title" xsi:type="string" translate="true">Additional Fees</item>
+                                                            </item>
+                                                        </item>
+                                                        <item name="mageworx_fee_tax" xsi:type="array">
+                                                            <item name="sortOrder" xsi:type="string">36</item>
+                                                            <item name="component"  xsi:type="string">MageWorx_MultiFees/js/view/summary/fee-tax</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="title" xsi:type="string" translate="true">Additional Fees (Incl. Tax)</item>
+                                                            </item>
+                                                        </item>
+                                                        <item name="shipping" xsi:type="array">
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="mageworx_shipping_fee" xsi:type="array">
+                                                                    <item name="sortOrder" xsi:type="string">35</item>
+                                                                    <item name="component"  xsi:type="string">MageWorx_MultiFees/js/view/summary/shipping-fee</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="title" xsi:type="string" translate="true">Shipping Fees</item>
+                                                                    </item>
+                                                                </item>
+                                                                <item name="mageworx_shipping_fee_tax" xsi:type="array">
+                                                                    <item name="sortOrder" xsi:type="string">36</item>
+                                                                    <item name="component"  xsi:type="string">MageWorx_MultiFees/js/view/summary/shipping-fee-tax</item>
+                                                                    <item name="config" xsi:type="array">
+                                                                        <item name="title" xsi:type="string" translate="true">Shipping Fees (Incl. Tax)</item>
+                                                                    </item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                                <item name="itemsBefore" xsi:type="array">
+                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="mageworx-fee-form-container" xsi:type="array">
+                                                            <item name="component" xsi:type="string">MageWorx_MultiFees/js/view/mageworx-fee-form</item>
+                                                            <item name="provider" xsi:type="string">checkoutProvider</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="template" xsi:type="string">MageWorx_MultiFees/mageworx-fee-form</item>
+                                                            </item>
+                                                            <item name="children" xsi:type="array">
+                                                                <item name="mageworx-fee-form-fieldset" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">uiComponent</item>
+                                                                    <item name="displayArea" xsi:type="string">mageworx-fee-form-fields</item>
+                                                                    <item name="children" xsi:type="array">
+
+                                                                    <!-- We add field in LayoutProccessor class -->
+                                                                    </item>
+                                                                </item>
+                                                                <item name="errors" xsi:type="array">
+                                                                    <item name="sortOrder" xsi:type="string">0</item>
+                                                                    <item name="component" xsi:type="string">MageWorx_MultiFees/js/view/fee-messages</item>
+                                                                    <item name="displayArea" xsi:type="string">messages</item>
+                                                                </item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
+                            </item>
+                        </item>
+                    </item>
+                </argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

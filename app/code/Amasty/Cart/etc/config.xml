@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Cart
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <amasty_cart>
+            <general>
+                <enable>1</enable>
+                <time>5</time>
+                <use_product_page>1</use_product_page>
+                <product_button>1</product_button>
+                <linkcompare>1</linkcompare>
+                <wishlist>1</wishlist>
+            </general>
+            <display>
+                <type_loading>1</type_loading>
+                <align>0</align>
+                <disp_count>1</disp_count>
+                <disp_sum>1</disp_sum>
+                <display_qty>1</display_qty>
+                <disp_checkout_button>1</disp_checkout_button>
+                <show_qty_product>0</show_qty_product>
+            </display>
+            <visual>
+                <background>FFFFFF</background>
+                <header_background>FF9416</header_background>
+                <text>000000</text>
+                <button_text>FFFFFF</button_text>
+                <left_button>BBBBBB</left_button>
+                <right_button>FF9416</right_button>
+            </visual>
+        </amasty_cart>
+    </default>
+</config>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <item name="mageworx_fee" instance="MageWorx\MultiFees\Model\Total\Quote\Fee" sort_order="420"/>
+            <item name="mageworx_fee_tax" instance="MageWorx\MultiFees\Model\Total\Quote\Fee\Tax" sort_order="620"/>
+        </group>
+    </section>
+    <section name="order_invoice">
+        <group name="totals">
+            <item name="mageworx_fee" instance="MageWorx\MultiFees\Model\Total\Invoice\Fee" sort_order="340"/>
+        </group>
+    </section>
+    <section name="order_creditmemo">
+        <group name="totals">
+            <item name="mageworx_fee" instance="MageWorx\MultiFees\Model\Total\Creditmemo\Fee" sort_order="390"/>
+        </group>
+    </section>
+</config>

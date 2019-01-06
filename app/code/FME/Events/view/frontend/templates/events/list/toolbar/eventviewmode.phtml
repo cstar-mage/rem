@@ -1,0 +1,36 @@
+<?php
+
+use FME\Events\Model\Event\EventList\EventToolbar;
+$helper = $this->helper('FME\Events\Helper\Data');
+
+?>
+<?php if ($block->isEnabledViewSwitcherEvent()): ?>
+<div class="modes">
+    <?php $_modes = $block->getModesEvent(); ?>
+    <?php if ($_modes && count($_modes) > 1): ?>
+
+    <?php foreach ($block->getModesEvent() as $_code => $_label): ?>
+
+        <?php if ($block->isModeActive($_code)): ?>
+            <strong title="<?php echo $_label ?>"
+                class="modes-mode active mode-<?php echo strtolower($_code); ?>"
+                data-value="<?php echo strtolower($_code); ?>">
+                <span><?php echo $_label ?></span>
+
+            </strong>
+        <?php else: ?>
+            <a class="modes-mode mode-<?php echo strtolower($_code); ?>"
+               title="<?php echo $_label ?>"
+               href="#"
+               data-role="mode-switcher"
+               data-value="<?php echo strtolower($_code); ?>"
+               id="mode-<?php echo strtolower($_code); ?>"
+               aria-labelledby="modes-label mode-<?php echo strtolower($_code); ?>">
+                <span><?php echo $_label ?></span>
+            </a>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <span class="modes-mode">&nbsp;&nbsp;&nbsp;<a href="<?php  echo $this->getUrl().$helper->getEventFinalDetailIdentifier('calendar'); ?>"><strong><?php  echo __('Calendar') ?></strong></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <?php endif; ?>
+</div>
+<?php endif; ?>

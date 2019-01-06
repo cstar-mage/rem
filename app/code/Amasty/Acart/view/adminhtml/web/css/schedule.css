@@ -1,0 +1,71 @@
+.amasty-acart-coupon-main label,
+.amasty-acart-coupon-extra label,
+.amasty-acart-delivery-time label{
+    display: inline-block;
+    width: 40%;
+    text-align: left;
+    padding-right: 1rem;
+}
+
+.amasty-acart-delivery-time-row label{
+    display: inline-block;
+}
+
+.amasty-acart-coupon-main label.mage-error,
+.amasty-acart-coupon-extra label.mage-error{
+    width: inherit;
+}
+
+.amasty-acart-coupon input,
+.amasty-acart-delivery-time input,
+.amasty-acart-coupon select,
+.amasty-acart-delivery-time select{
+    width: 60%;
+}
+
+/*.amasty-acart-coupon label{*/
+    /*width: 20%;*/
+/*}*/
+
+.amasty-acart-coupon-main>div,
+.amasty-acart-coupon-extra>div,
+div.amasty-acart-delivery-time-row{
+    margin-bottom: 0.5rem;
+}
+
+.admin__control-table th.amasty-acart-coupon-header,
+.admin__control-table th.amasty-acart-delivery-time-header{
+    text-align: left;
+}
+
+.amasty-acart-coupon-hide{
+    text-align: center;
+}
+
+.amasty-acart-coupon-cart-rule{
+    margin-top: 0.5rem;
+}
+
+.amasty-acart-coupon-cart-rule select{
+    width: 100%;
+}
+
+.amasty-acart-delivery-template select{
+    width: 100%;
+}
+
+.amasty-acart-coupon{
+    width: 60%;
+}
+
+td.amasty-acart-coupon{
+    text-align: right;
+}
+
+td.amasty-acart-delivery-time {
+    text-align: right;
+}
+
+.amasty-acart-use-shopping-cart-rule {
+    float: left;
+}

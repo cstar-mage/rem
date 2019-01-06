@@ -1,0 +1,11 @@
+<?php
+
+use FME\Events\Model\Event\EventList\EventToolbar;
+$helper = $this->helper('FME\Events\Helper\Data');
+
+?>
+<div class="modes">
+    <?php $_modes = $block->getModesEvent(); ?>    
+    <strong class="modes-label" id="modes-label"><?php echo __('View as') ?></strong>
+    <span class="modes-mode">&nbsp;&nbsp;&nbsp;<a href="<?php echo $this->getUrl().$helper->getEventFinalIdentifier(); ?>"><b><?php echo __('Grid') ?></b></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>  
+</div>

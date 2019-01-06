@@ -1,0 +1,42 @@
+<?php
+
+ $popupblockid          =  $this->helper('Vsourz\Ageverification\Helper\Data')->getBlockId();
+ $disagreepopupblockid  =  $this->helper('Vsourz\Ageverification\Helper\Data')->getDissagreeBlockId();
+ $cmsPage               =  $this->helper('Vsourz\Ageverification\Helper\Data')->showPopUp();
+ $popup_height          =  $this->helper('Vsourz\Ageverification\Helper\Data')->getHeight();
+ $popup_width           =  $this->helper('Vsourz\Ageverification\Helper\Data')->getWidth();
+ $popup_coockie         =  $this->helper('Vsourz\Ageverification\Helper\Data')->getCookieExpire();
+ $popup_coockie         =  floor($popup_coockie);
+ $blocktitle            =  $this->helper('Vsourz\Ageverification\Helper\Data')->getBlockTitle();
+ $agreebtn              =  $this->helper('Vsourz\Ageverification\Helper\Data')->getAgree();
+ $disagreebtn           =  $this->helper('Vsourz\Ageverification\Helper\Data')->getDisagree();
+
+ if($cmsPage == "Y"){ ?>
+                 <div class="outer-bg">
+                <div id="popup" class="pop-cont age-pop-up ageconf">
+                    <div class="verify">
+                     <p class="title"><?php //echo $blocktitle; ?></p>
+
+                        <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($popupblockid)->toHtml(); ?>
+                                <div class="buttons-set"><a id="enter" class="button valid-age" title="<?php echo $agreebtn; ?>" href="#"><?php echo $agreebtn; ?></a> <a id="no" class="button not-valid-age" title="<?php echo $disagreebtn; ?>" href="#"><?php echo $disagreebtn; ?></a></div>
+                    </div>
+                </div>
+
+                <div id="popup" class="not-verify age-pop-up">
+                        <?php echo $block->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId($disagreepopupblockid)->toHtml(); ?>
+                </div>
+                </div>
+
+<?php } ?>
+
+<script type="text/x-magento-init">
+
+    {
+        "*": {
+            "Vsourz_Ageverification/js/ageverification":{"height":"<?php echo $popup_height;?>","width":"<?php echo $popup_width;?>","coockieexpire":"<?php echo $popup_coockie;?>"}
+        }
+    }
+
+</script>
+
+

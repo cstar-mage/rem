@@ -1,0 +1,96 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+?>
+<?php
+    /** @var \Amasty\ShopbyBase\Model\FilterSetting $filterSetting */
+    /** @var \Amasty\Shopby\Block\Navigation\FilterRenderer $block */
+
+    $filterUniqId = $block->escapeId(uniqid());
+    $filterCode = $block->escapeHtml($filterSetting->getFilterCode());
+?>
+
+<?php if ($filterSetting->isShowSearchBox()) : ?>
+    <div class="amshopby-search-box">
+        <input type="text"
+               class="am_shopby_filter_search_box_<?= $filterCode;?>"
+               placeholder="<?= $block->escapeHtml(__("Search"))?>">
+    </div>
+<?php endif; ?>
+
+<ol class="items am_shopby_filter_items_<?= $filterCode; ?> amshopby-category-labels-folding"
+    <?php if ($filterSetting->getEnableOverflowScroll() > 0) : ?>
+        style="max-height:<?= $filterSetting->getEnableOverflowScroll() ?>px;
+                overflow-y: auto;
+                overflow-x: hidden;"
+    <?php endif; ?>>
+    <form data-amshopby-filter="<?= $filterCode; ?>" data-amshopby-filter-request-var="<?= $block->getFilter()->getRequestVar(); ?>">
+        <?= $categoryTreeHtml; ?>
+    </form>
+</ol>
+
+<?php
+if ($filterSetting->getSubcategoriesExpand() == \Amasty\Shopby\Model\Source\SubcategoriesExpand::BY_CLICK) :?>
+    <script>
+        require(["jquery", "jquery/ui"], function ($) {
+            var collapseSelector = "<?= ($block->isTopNav() ? '.amasty-catalog-topnav' : '.sidebar') ?> .amshopby-category-collapse-icon";
+            $(collapseSelector).nextAll('ol').each(function(){
+                if($(this).find('input[checked]').length == 0) {
+                    if ($(this).siblings(".amshopby-filter-parent")
+                            .find('input[name^="amshopby[cat]"]').first().prop("checked")) {
+                        return true;
+                    }
+                    $(this).hide();
+                } else {
+                    $(this).prevAll('.amshopby-category-collapse-icon').toggleClass('_active');
+                }
+            });
+            $(collapseSelector).click(function(e){
+                $(this).nextAll('ol').toggle();
+                $(this).toggleClass('_active');
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        });
+    </script>
+    <?php
+endif;
+?>
+<?php if ($filterSetting->isShowSearchBox()) : ?>
+    <script type="text/x-magento-init">
+            {
+                ".am_shopby_filter_search_box_<?= $filterCode?>": {
+                    "amShopbyFilterSearch": {
+                        "highlightTemplate": "<span class='amshopby-hightlighted'>$&</span>",
+                        "itemsSelector": ".am_shopby_filter_items_<?= $filterCode;?>"
+                    }
+                }
+            }
+    </script>
+<?php endif; ?>
+
+<?php if ($filterSetting->getNumberUnfoldedOptions()) : ?>
+    <button class="amshopby-more-button" style="display: none;">
+        <a class="am_shopby_filter_items_<?= $filterCode?>_show_more"
+           data-text-more="<?= $block->escapeHtml(__("More"))?>"
+           data-text-less="<?= $block->escapeHtml(__("Less"))?>"
+           href="javascript:void(0)"
+           data-is-hide="false"
+           title="<?php echo __("Less")?>">
+            <?= $block->escapeHtml(__("Less"))?>
+        </a>
+    </button>
+    <script type="text/x-magento-init">
+            {
+                ".am_shopby_filter_items_<?= $filterCode?>": {
+                    "amShopbyFilterHideMoreOptions": {
+                        "numberUnfoldedOptions": <?= $block->escapeHtml($filterSetting->getNumberUnfoldedOptions())?>,
+                        "buttonSelector": ".am_shopby_filter_items_<?= $filterCode?>_show_more"
+                    }
+                }
+            }
+    </script>
+<?php endif; ?>

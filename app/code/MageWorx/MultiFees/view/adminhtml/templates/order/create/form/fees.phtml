@@ -1,0 +1,120 @@
+<?php
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+
+<?php
+/** @var $block MageWorx\MultiFees\Block\Adminhtml\Order\Create\Form\Fee */
+?>
+<?php if ($block->getIsEnable()): ?>
+
+    <section class="admin__page-section mageworx-fee-section" id="order-form_fees">
+        <div class="admin__page-section-title <?php /* @escapeNotVerified */ echo $block->getHeaderCssClass() ?>" data-mage-init='{"collapsible":{"openedState": "active", "saveState": true}}'>
+            <span class="title block-fee-heading" role="heading" aria-level="2"><?php /* @escapeNotVerified */ echo $block->getHeaderText() ?></span>
+            <div class="actions"></div>
+        </div>
+        <div id="form_fees_fieds" class="admin__page-section-content"  data-role="content" aria-labelledby="block-fee-heading">
+            <div class="form_fees_block"><?php echo $block->getFormHtml() ?></div>
+            <div class="mageworx_shipping_fee_block"></div>
+        </div>
+        <script>
+            require([
+                "jquery",
+                'Magento_Sales/order/create/scripts',
+                'mage/utils/wrapper'
+            ], function($, script, Wrapper) {
+
+                function updateTotal(point) {
+                    order.loadArea(
+                        ['form_fees'],
+                        true,
+                        {}
+                    );
+                    order.itemsUpdate();
+                }
+
+                $(document).ready(function() {
+                    $(".multifees_field_shipping").closest('.admin__field').appendTo(".mageworx_shipping_fee_block");
+
+                    // @todo Unnecessary data like fee type. Remove?
+                    $('.multifees_field').on('change', function () {
+                        var data = multifeesSelect('.multifees_field, .multifees_field_shipping');
+                        data['fee_type'] = <?php echo \MageWorx\MultiFees\Model\AbstractFee::CART_TYPE ?>;
+                        order.loadArea(['form_fees', 'shipping_method', 'totals', 'billing_method'], true, data);
+                    });
+
+                    $('.multifees_field_shipping').on('change', function () {
+                        var data = multifeesSelect('.multifees_field_shipping, .multifees_field');
+                        data['fee_type'] = <?php echo \MageWorx\MultiFees\Model\AbstractFee::SHIPPING_TYPE ?>;
+                        order.loadArea(['form_fees', 'shipping_method', 'totals', 'billing_method'], true, data);
+                    });
+
+                    $('.multifees_field_payment').on('change', function () {
+                        var data = multifeesSelect('.multifees_field_payment, .multifees_field');
+                        data['fee_type'] = <?php echo \MageWorx\MultiFees\Model\AbstractFee::PAYMENT_TYPE ?>;
+                        order.loadArea(['form_fees', 'shipping_method', 'totals', 'billing_method'], true, data);
+                    });
+
+                    var wrapperTimer = setInterval (
+                        function () {
+                            if (typeof order != 'undefined') {
+                                order.loadArea = Wrapper.wrap(
+                                    order.loadArea,
+                                    function (originalAction) {
+                                        var args = _.toArray(arguments),
+                                            _super = args[0],
+                                            areas = args[1] ? args[1] : [],
+                                            indicator = args[2] ? args[2] : true,
+                                            data = args[3] ? args[3] : [];
+
+                                        if ($.inArray('form_fees', areas) == -1) {
+                                            areas.push('form_fees');
+                                        }
+
+                                        var multifeesData = multifeesSelect('.multifees_field_payment, .multifees_field');
+                                        data = _.extend(data, multifeesData);
+
+                                        return _super(areas, indicator, data);
+                                    }
+                                );
+                                
+                                clearInterval(wrapperTimer);
+                            }
+                        },
+                        500
+                    );
+                });
+
+                function multifeesSelect(select) {
+                    var data = {};
+                    var fields = $(select);
+
+                    for (var i = 0; i < fields.length; i++) {
+                        var el = fields[i];
+                        if (fields[i].value) {
+                            if (!data[fields[i].name]) data[fields[i].name] = [];
+                            if (fields[i].type == 'select-multiple') {
+                                for (var j = 0; j < fields[i].length; j++) {
+                                    if (fields[i][j].selected == true) {
+                                        data[fields[i].name].push(fields[i][j].value);
+                                    }
+                                }
+                            }
+                            if (fields[i].type == 'checkbox' || fields[i].type == 'radio') {
+                                if (fields[i].checked == true) {
+                                    data[fields[i].name].push(fields[i].value);
+                                }
+                            } else {
+                                data[fields[i].name].push(fields[i].value);
+                            }
+                        }
+                    }
+                    return data;
+                }
+            });
+
+        </script>
+    </section>
+<?php endif; ?>

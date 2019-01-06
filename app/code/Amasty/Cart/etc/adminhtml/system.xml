@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Cart
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>       
+        <section id="amasty_cart" translate="label" type="text" sortOrder="11003" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+            <class>separator-top</class>
+            <label>Ajax Shopping Cart</label>
+            <tab>amasty</tab>
+            <resource>Amasty_Cart::config</resource>
+            <group id="amasty_information" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Information</label>
+                <frontend_model>Amasty\Cart\Block\Adminhtml\System\Config\Information</frontend_model>
+            </group>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>General</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable Ajax Shopping Cart</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="time" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Dialog Close Delay (in seconds)</label>
+                    <comment>If set to 0, confirmation dialog will not hide automatically.</comment>
+                </field>
+                <field id="use_product_page" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Use Ajax Shopping Cart on Product View Pages</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <field id="product_button" translate="label comment" type="select" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Continue Button Action on Product View Pages</label>
+                    <source_model>Amasty\Cart\Model\Source\Button</source_model>
+                    <comment>If you have "Go to category" enabled and the client went to the product page not from the category page - after clicking the button he/she will be redirected to the category, the current product is assigned in</comment>
+                </field>
+                <field id="display_options" translate="label comment" type="select" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Custom Options Display Mode</label>
+                    <comment>If the 'Only If There Are Required Options' mode is on and a selected product has at least one required option, all custom options including the required ones are shown.</comment>
+                    <source_model>Amasty\Cart\Model\Source\Option</source_model>
+                </field>
+            </group>
+            <group id="display" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Display Settings</label>
+                <field id="type_loading" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Enable flying image effect</label>
+                    <comment>When set to 'Yes', the image of the product added to cart 'flies' to the 'Top  Cart' block in the top menu. Looks nice.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="align" translate="label comment" type="select" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Dialog Box Align</label>
+                    <source_model>Amasty\Cart\Model\Source\Align</source_model>
+                </field>
+                <field id="disp_product" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Product Image in Dialog</label>
+                   <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="disp_configurable_image" translate="label comment" type="select" sortOrder="35" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Image to Show for Configurable Products</label>
+                    <source_model>Amasty\Cart\Model\Source\Configurable</source_model>
+                    <depends>
+                        <field id="disp_product">1</field>
+                    </depends>
+                </field>
+                <field id="disp_count" translate="label comment" type="select" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display Total Count of Products in Cart</label>
+                   <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="disp_sum" translate="label comment" type="select" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                   <label>Display Total Amount in Cart</label>
+                   <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="disp_checkout_button" translate="label comment" type="select" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display 'Go to Checkout' Button</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="show_qty_product" translate="label" type="select" sortOrder="70" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Display the Product Qty Added to the Cart on the Product Listing</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="selling" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Selling Options</label>
+                <field id="block_type" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Choose the Product Block Type to Display in the Confirmation Dialog</label>
+                    <source_model>Amasty\Cart\Model\Source\BlockType</source_model>
+                </field>
+            </group>
+            <group id="visual" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>Visual Options</label>
+                <field id="background" translate="label comment" type="text" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Background Color</label>
+                    <validate>color</validate>
+                </field>
+                <field id="header_background" translate="label comment" type="text" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Header Color</label>
+                    <validate>color</validate>
+                </field>
+                <field id="text" translate="label comment" type="text" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Text Color</label>
+                    <validate>color</validate>
+                </field>
+                <field id="button_text" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Button Text Color</label>
+                    <validate>color</validate>
+                </field>
+                <field id="left_button" translate="label comment" type="text" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Left Button Color</label>
+                    <validate>color</validate>
+                </field>
+                <field id="right_button" translate="label comment" type="text" sortOrder="60" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Right Button Color</label>
+                    <validate>color</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

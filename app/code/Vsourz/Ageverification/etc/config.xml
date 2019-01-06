@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ageverification>
+            <general>
+                <enabled>1</enabled>
+            </general>
+        </ageverification>
+         <ageverification>
+            <general>
+                <popup_width>auto</popup_width>
+            </general>
+        </ageverification>
+        <ageverification>
+            <general>
+                <popup_height>auto</popup_height>
+            </general>
+        </ageverification>
+        <ageverification>
+            <general>
+                <cookie_interval>24</cookie_interval>
+            </general>
+        </ageverification>
+        <ageverification>
+            <general>
+                <popup_block>vsourz-age-gate</popup_block>
+            </general>
+        </ageverification>
+        <ageverification>
+            <general>
+                <notverifyblock>vsourz-age-gate-disagree</notverifyblock>
+            </general>
+        </ageverification>
+        <ageverification>
+            <general>
+                <pages>home</pages>
+            </general>
+        </ageverification>
+        <!--<ageverification>
+            <general>
+                <load_jquery_library>0</load_jquery_library>
+            </general>
+        </ageverification> -->
+        <ageverification>
+            <general>
+                <agree>18+ Enter</agree>
+            </general>
+        </ageverification>
+        <ageverification>
+            <general>
+                <disagree>Under 18</disagree>
+            </general>
+        </ageverification>
+    </default>
+</config>

@@ -1,0 +1,49 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xnotif
+ */
+?>
+
+<?php
+    /** @var Amasty\Xnotif\Block\AbstractBlock $block */
+    $subscriptions = $block->getSubscriptions();
+?>
+<?php if ($subscriptions->getSize()) : ?>
+    <table class="data-table" id="my-subscriptions-table">
+        <thead>
+        <tr>
+            <th width="50"><?= /* @escapeNotVerified */ __('Image') ?></th>
+            <th><?= /* @escapeNotVerified */ __('Product') ?></th>
+            <th><?= /* @escapeNotVerified */ __('Subscribed On') ?></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($subscriptions as $subscription) :?>
+            <?php $product = $block->getProduct($subscription->getEntityId());?>
+            <tr>
+                <td>
+                    <a href="<?php echo $block->getUrlProduct($product) ?>">
+                        <img src="<?= $block->getImageSrc($product); ?>" width="45" height="45"/>
+                    </a>
+                </td>
+                <td>
+                    <a href="<?php echo $block->getUrlProduct($product) ?>">
+                        <?php echo $subscription->getName() ?>
+                    </a>
+                </td>
+                <td><span class="nobr"><?php echo $block->formatDate($subscription->getAddDate()) ?></span></td>
+                <td>
+                    <a href="<?php echo $block->getRemoveUrl($subscription) ?>" title="<?= __('Remove This Item') ?>"
+                       onclick="return confirm('<?php echo $block->getConfirmationText() ?>');"
+                       class="btn-remove btn-remove2"><?= __('Remove This Item') ?></a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php else : ?>
+    <div class="message info empty"><span><?= __('There are no active subscriptions.') ?></span></div>
+<?php endif ?>

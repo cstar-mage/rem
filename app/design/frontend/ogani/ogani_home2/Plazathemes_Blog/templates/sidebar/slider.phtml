@@ -1,0 +1,116 @@
+<?php
+/**
+ * Copyright © 2015 PlazaThemes.com. All rights reserved.
+
+ * @author PlazaThemes Team <contact@plazathemes.com>
+ */
+?>
+<?php
+/**
+ * Blog sidebar recent posts template
+ *
+ * @var $block \Plazathemes\Blog\Block\Sidebar\Recent
+ */
+?>
+
+<?php
+	$enable = $this->getConfig('enable_frontend');
+	$auto = $this->getConfig('auto');
+	$speed = $this->getConfig('speed');
+	$pagination = $this->getConfig('pagination');
+	$show_next_back = $this->getConfig('show_next_back');
+	$show_navigation_control = $this->getConfig('show_navigation_control');
+	$title = $this->getConfig('title');
+	if($show_next_back)
+		$show_next_back = 'true';
+	else
+		$show_next_back = 'false';
+	$show_navigation_control = $this->getConfig('show_navigation_control');
+	if($show_navigation_control)
+		$show_navigation_control = 'true';
+	else
+		$show_navigation_control = 'false';
+	$_postCollection = $block->getPostCollection();
+	$rows = 1;
+	$i=0;
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	$aw_block = $objectManager->create('Aheadworks\Blog\Block\Sidebar\Recent');
+	$aw_posts = $aw_block->getPosts();
+	
+?>
+<?php if (count($aw_posts) && $enable) { ?>
+<div class="widget box-section block-recent-posts" data-bind="scope: 'recemt-posts'">
+		<div class='title-blogs'>
+			<h3><?php echo __($title) ?></h3>
+		</div>
+		<div class="row">
+			<div class="ptowl">
+				<?php foreach ($aw_posts as $_post) {  ?>
+					<?php if($i++%$rows==0) { ?> <div class="item"> <?php } ?>
+					
+						<div class="item-inner">
+							<div class="blog-image">
+								<a class="image" href="<?php echo $aw_block->escapeXssInUrl($aw_block->getPostUrl($_post)) ?>">
+								<?php if($_post->getFeaturedImageFile()){ ?>
+								<img src="<?php echo $this->getMediaFolder().$_post->getFeaturedImageFile() ?>" alt="blog-image"/>
+								<?php }else{ ?>
+									<img src="<?php echo $this->getMediaFolder().'remedy-verify.jpg'; ?>" alt="blog-image"/>
+								<?php } ?>
+								</a>
+							</div>
+							<div class="blog-content">
+								<h3 class="title"><a href="<?php echo $aw_block->escapeXssInUrl($aw_block->getPostUrl($_post)) ?>"><?php echo $block->escapeHtml($_post->getTitle()) ?></a></h3> 
+								<p class="short-des"><?php echo $_post->getShortContent() ?></p>
+								<p class="long-des"><?php if (strlen($_post->getContent()) > 60){
+                                                          $str = substr($_post->getContent(), 0, 57) . '...';
+                                                          echo $str; }else{ echo $_post->getContent(); } ?></p>
+								<div class="time-conment">
+									<?php 
+										$date = $_post->getPublishDate();
+									?>
+									<span class="date"><?php echo __(date("d", strtotime($date))) ?></span><span class="month"><?php echo __(date("F", strtotime($date))) ?></span><span class="separator">.</span><span class="year"><?php echo __(date("Y", strtotime($date))) ?></span>
+								</div>
+								<!--<a class="readmore" href="<?php //echo $_post->getPostUrl() ?>">
+									<?php //echo __('Read more') ?>
+								</a>-->
+							</div>	
+						</div>
+				    <?php if($i%$rows==0 || $i == count($_postCollection)) { ?> </div> <?php }?>
+					
+				<?php } ?>
+			</div>
+		</div>
+		<a href="<?php echo "blogs" ?>" class="viewall"><button class = "view-more" type = "button">View More</button></a>
+</div>
+<script type="text/javascript">
+require([
+  "jquery",
+  "owlcarousel/minjs"
+ ], function($,owlCarousel){
+		$(document).ready(function(){
+			$(".block-recent-posts .ptowl").owlCarousel({
+				<?php
+					if(($auto== 'true') && $speed):
+				?>
+				autoPlay : <?php echo $speed; ?>,
+				<?php
+					endif;
+				?>
+				items : 3,
+				itemsDesktop : [1199,3],
+				itemsDesktopSmall : [992,3],
+				itemsTablet: [768,1],
+				itemsMobile : [479,1],
+				slideSpeed : <?php echo $pagination; ?>,
+				paginationSpeed : <?php echo $pagination; ?>,
+				rewindSpeed : <?php echo $pagination; ?>,
+				addClassActive: true,
+				navigation : false,
+				stopOnHover : true,
+				pagination : false,
+				scrollPerPage:true,
+			});
+		});
+	});
+</script>
+<?php } ?>

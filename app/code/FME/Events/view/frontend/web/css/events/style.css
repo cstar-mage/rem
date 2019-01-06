@@ -1,0 +1,427 @@
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+margin: 0px;
+padding: 0px;
+border: 0;
+/*font-size: 100%;*/
+/*font: inherit;*/
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+display: block;
+}
+
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after,
+q:before, q:after { content: ''; content: none; }
+ins { background-color: #ff9; color: #000; text-decoration: none; }
+mark { background-color: #ff9; color: #000; font-style: italic; font-weight: bold; }
+del { text-decoration: line-through; }
+abbr[title], dfn[title] { border-bottom: 1px dotted; cursor: help; }
+table { border-collapse: collapse; border-spacing: 0; }
+hr { display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0; }
+input, select { vertical-align: middle; }
+
+body {
+background-color:#fff;
+/*background-size:cover;*/
+font-family:'Open Sans', sans-serif;
+font-size:14px;
+color:#494949;
+margin:0px;
+padding:0px;
+}
+
+a { color:#494949; text-decoration: none;-webkit-transition: background-color 0.4s ease 0s, border 0s ease 0s, color 0.4s ease 0s, opacity 0.4s ease-in-out 0s; -moz-transition: background-color 0.4s ease 0s, border 0s ease 0s, color 0.4s ease 0s, opacity 0.4s ease-in-out 0s; -o-transition: background-color 0.4s ease 0s, border 0s ease 0s, color 0.4s ease 0s, opacity 0.4s ease-in-out 0s; transition: background-color 0.4s ease 0s, border 0s ease 0s, color 0.4s ease 0s, opacity 0.4s ease-in-out 0s;}
+
+a img { border:0px; }
+
+select, input, textarea, button { font:99% sans-serif; }
+pre, code, kbd, samp { font-family: monospace, sans-serif; }
+
+/*html { overflow-y: scroll; }*/
+a:hover, a:active { outline: none; }
+ul, ol {  }
+ol { list-style-type: decimal; }
+nav ul, nav li { margin: 0; list-style:none; list-style-image: none; }
+small { font-size: 85%; }
+strong, th { font-weight: bold; }
+/*td { vertical-align: top; }*/
+
+sub, sup { font-size: 75%; line-height: 0; position: relative; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 15px; }
+textarea { overflow: auto; }
+.ie6 legend, .ie7 legend { margin-left: -7px; }
+input[type="radio"] { vertical-align: text-bottom; }
+input[type="checkbox"] { vertical-align: bottom; }
+.ie7 input[type="checkbox"] { vertical-align: baseline; }
+.ie6 input { vertical-align: text-bottom; }
+label, input[type="button"], input[type="submit"], input[type="image"], button { cursor: pointer;font-weight: bold; }
+button, input, select, textarea { margin: 0; }
+input:valid, textarea:valid   {  }
+input:invalid, textarea:invalid { border-radius: 1px; -moz-box-shadow: 0px 0px 5px red; -webkit-box-shadow: 0px 0px 5px red; box-shadow: 0px 0px 5px red; }
+.no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: #fff; }
+
+::-moz-selection{ background: #427fbe; color:#FFF; text-shadow: none; }
+::selection { background:#427fbe; color:#7e7e7e; text-shadow: none; }
+
+button {  width: auto; overflow: visible; }
+.ie7 img { -ms-interpolation-mode: bicubic; }
+
+body, select, input, textarea {  color: #5a5a5a; }
+h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+a, a:active, a:visited { color: #427fbe; }
+a:hover { color:#427fbe; }
+.clear { clear:both; width:100%}
+
+/*
+=======================================================================
+Wrapper
+=======================================================================
+*/
+
+#wrapper { width:100%; }
+
+
+/*
+=======================================================================
+Clear 
+=======================================================================
+*/
+
+.clearfix:before,
+.clearfix:after { content: " "; display: table; }
+
+
+/*
+=======================================================================
+Clear 
+=======================================================================
+*/
+
+.clearfix:before,
+.clearfix:after { content: " "; display: table; }
+.clearfix:after { clear: both; }
+
+
+
+/*Events Manager*/
+
+.event_manager { width:100%; padding-top:20px; }
+
+.event_manager .inner_container { max-width:100%; padding:0 15px; }
+
+.event_manager .page_title { width:100%; clear:both; padding-bottom:0px; }
+
+.event_manager .page_title h1 { font-size:30px; font-weight:600; margin-bottom: 22px;!important }
+
+/*ToolBar*/
+.tb-bottom { margin-bottom: 5px;!important; }
+.event_manager .toolbar { margin-bottom:0px;!important width:100%; box-sizing:border-box; padding:8px 15px; background:#f0f0f0; border-radius:1px; }
+
+.event_manager .toolbar .calendar { display:inline-block; font-size:13px; font-weight:400; text-transform:uppercase; padding-top:12px; }
+
+.event_manager .toolbar .calendar img { margin-bottom:-2px; margin-right:5px; }
+
+.event_manager .toolbar .calendar a { color:#494949 }
+
+.event_manager .toolbar .view_mode { display:inline-block; font-size:13px; font-weight:400; text-transform:uppercase; padding-left:30px; }
+
+.event_manager .toolbar .view_mode img { margin-left:10px; margin-bottom:-2px; }
+
+.event_manager .toolbar .sort_by { float:right; display:inline-block; text-align:right; font-size:13px; font-weight:400; text-transform:uppercase; }
+
+.event_manager .toolbar .sort_by span { display:inline-block; float:left; margin-top:11px; }
+
+.event_manager .toolbar .sort_by img { margin-left:15px; }
+
+/*.event_manager .toolbar .limiter { display: none; }*/
+.order-products-toolbar.toolbar.bottom .pager .limiter { display: block; }
+.toolbar .pages {
+    display: inline;
+    margin-bottom: 25px;
+}
+/*Products Grid*/
+
+.event_manager .product_grid { width:100%; padding-top:30px; }
+
+
+.event_manager .product_grid ul { list-style:none; padding:0px; margin:0px; text-align:left; }
+
+.event_manager .product_grid ul li {height:435px; width:31%; padding:5px; box-sizing:border-box; background:#fff; display:inline-block; vertical-align:top; margin:12px 8px; text-align:left; border:#fff 1px solid; -webkit-box-shadow: 0 0 5px #fff; -moz-box-shadow: 0px 0px 5px #fff; box-shadow: 0px 0px 5px #fff; }
+
+.event_manager .product_grid.list_view_height ul li {  height:auto; }
+
+.event_manager .product_grid ul li.list { width:99%; text-align:left; box-sizing:border-box; margin-bottom:20px; }
+
+.event_manager .product_grid ul li:hover { border:#ebebeb 1px solid; -webkit-box-shadow: 0 0 5px #999999; -moz-box-shadow: 0px 0px 5px #999999; box-shadow: 0px 0px 5px #999999; }
+
+.event_manager .product_grid ul li:hover.list { border:#ebebeb 1px solid; }
+
+.event_manager .product_grid ul li .event_block { width:100%; }
+
+.event_manager .product_grid ul li .event_block .event_title { width:100%; background:#f0f0f0; padding:18px 15px; box-sizing:border-box; }
+
+.event_manager .product_grid ul li .event_block .event_title h2 { font-size:16px; font-weight:600; line-height:24px; }
+
+.event_manager .product_grid ul li .event_block .event_title h2 a { color:#494949 }
+
+.event_manager .product_grid ul li:hover .event_block .event_title h2 a { color:#1979c3 }
+
+.event_manager .product_grid ul li .event_block .event_thumbnail { width:100%; text-align:center; padding-top:5px; }
+
+.event_manager .product_grid ul li .event_block .event_thumbnail img { max-width:100%; height:auto; }
+
+.event_manager .product_grid ul li.list .event_block .event_thumbnail { width:20%; text-align:left; padding-top:5px; float:left; }
+
+.event_manager .product_grid ul li .event_block .event_detail { width:100%; padding:10px; box-sizing:border-box; }
+
+.event_manager .product_grid ul li.list .event_block .event_detail { width:76%; float:left; margin-left:20px; }
+
+.event_manager .product_grid ul li .event_block .event_detail p { font-size:13px; font-weight:400; line-height:24px; padding:0px; margin:0px; }
+
+.event_manager .product_grid ul li .event_block .event_detail p span { font-weight:700; }
+
+.event_manager .product_grid ul li .event_block .event_detail .learn_more { display:none; padding:10px 0; padding-bottom:0px; }
+
+.event_manager .product_grid ul li .event_block .event_detail .learn_more a { font-size:13px; color:#1979c3; line-height:30px; }
+
+.event_manager .product_grid ul li:hover .event_block .event_detail .learn_more { display:block; }
+
+.event_manager .product_grid ul li.list .event_block .event_detail .learn_more { display:block; padding:10px 0; padding-bottom:0px; }
+
+
+/*Detail*/
+
+.event_manager .info_bar { width:100%; box-sizing:border-box; padding:8px 15px; background:#f0f0f0; border-radius:1px; }
+
+.event_manager .info_bar p { font-size:14px; font-weight:400; line-height:24px; padding:0px; margin:0px; }
+
+.event_manager .info_bar p span { font-weight:700; }
+
+.event_manager .container { width:100%; margin:0px; padding:0px; }
+
+.event_manager .detail_thumbnail { width:22%; float:left; }
+
+.event_manager .detail_thumbnail img { max-width:100%; height:auto; }
+
+.event_manager .detail_left_col { width:76%; float:right; background:#f0f0f0; padding:15px; box-sizing:border-box; }
+
+.event_manager .detail_left_col .event_info { width:72%; float:left; }
+
+.event_manager .detail_left_col .event_info h2 { font-size:16px; font-weight:600; text-transform:uppercase; margin-top:5px; margin-bottom:20px; }
+
+.event_manager .detail_left_col .event_info .event-info-field { width:100%; clear:both; margin:2px 0; }
+
+.event_manager .detail_left_col .event_info .event-info-field .event-info-label { width:25%; float:left; padding:10px 0px; box-sizing:border-box }
+
+.event_manager .detail_left_col .event_info .event-info-field .event-info-content { width:72%; float:right; padding:10px 15px; background:#fff; box-sizing:border-box }
+
+/*Tickets*/
+
+.event_manager .detail_left_col .buy_tickets { width:25%; float:right; background:#fff; padding:10px; box-sizing:border-box; }
+
+.event_manager .detail_left_col .buy_tickets a { display:block; background:#f8f8f8; border:#f0f0f0 2px solid; text-align:center; font-size:18px; font-weight:600; color:#1979c3; text-transform:uppercase; padding:60px 10px }
+
+.event_manager .detail_left_col .buy_tickets a:hover { background:#fff; color:#494949; }
+
+/*Content*/
+
+.event_manager .content { width:100%; padding:20px 0; clear:both }
+
+.event_manager .content h2 { font-size:20px; font-weight:600; padding:10px 0; }
+
+.event_manager .content h3 { font-size:18px; font-weight:600; padding:10px 0; }
+
+.event_manager .content h4 { font-size:16px; font-weight:600; padding:10px 0; }
+
+.event_manager .content p { font-size:14px; line-height:24px; padding:10px 0 }
+
+.event_manager .content ul { list-style:none; padding:0px; margin:20px 40px; }
+
+.event_manager .content ul li { list-style:circle; font-size:14px; line-height:24px; padding:2px 5px }
+
+/*Media Gallery Slider*/
+
+.event_manager .media_gallery_slider { width:100%;box-shadow:none;!important;}
+
+.event_manager .media_gallery_slider h2 { font-size:22px; font-weight:600; margin-bottom:20px; }
+
+.event_manager .media_gallery_slider h2 a { float:right; margin-left:8px; }
+
+.event_manager .media_gallery_slider .container-carousel { width:100%; background:#f0f0f0; padding:30px 20px; box-sizing:border-box; position:relative; }
+
+.event_manager .media_gallery_slider .container-carousel ul { list-style:none; padding:0px; margin:0px; text-align:center; }
+
+.event_manager .media_gallery_slider .container-carousel ul li { width:18%; display:inline-block; vertical-align:top; margin:0 10px; }
+
+.event_manager .media_gallery_slider .container-carousel ul li:first-child { margin-left:0px; }
+
+.event_manager .media_gallery_slider .container-carousel ul li:last-child { margin-right:0px; }
+
+.event_manager .media_gallery_slider .container-carousel ul li img { max-width:100%; height:auto; border:#fff 3px solid; }
+
+
+
+
+
+.event_manager .events_venue { padding:20px 0 }
+
+.event_manager .events_venue ul { list-style:none; padding:0px; margin:0px; display:flex;margin-bottom: -24px; }
+
+.event_manager .events_venue > ul li { display:block; flex: 1 1 0; -webkit-flex: 1;  /* Safari 6.1+ */ -ms-flex: 1;  /* IE 10 */ margin-right:30px; }
+.event_manager .events_venue > ul li:last-child { margin-right:0px; }
+
+.event_manager .events_venue > ul li h2 { font-size:22px; font-weight:600; margin-bottom:20px; }
+
+.event_manager .events_venue > ul li .video { width:100%; height:86%; background:#f0f0f0; padding:15px; box-sizing:border-box; }
+
+.event_manager .events_venue > ul li img { max-width:100%; height:auto; }
+
+.event_manager .events_venue > ul li .map { width:100%; background:#f0f0f0; padding:10px; box-sizing:border-box; }
+
+
+
+
+.event_manager .event_social_wdgt { width:100%; background:#f0f0f0; padding:43px 20px; padding-bottom:35px; margin-top:35px; text-align:center; box-sizing:border-box; }
+
+.event_manager .event_social_wdgt img { max-width:100%; height:auto; }
+
+
+
+
+
+/*PopUp Style*/
+
+.holder { width:50%; margin:0 auto; }
+
+.events_popup { width:100%; position:relative; background:#fff; border-radius:5px; padding:20px; box-sizing:border-box; }
+
+.events_popup .page_title { text-align:center; margin-bottom:30px; }
+
+.events_popup .page_title h1 { font-size:24px; font-weight:600; }
+
+.events_popup ul { list-style:none; padding:0px; margin:0px; text-align:left; }
+
+.events_popup ul li { width:100%; display:block; border:#ebebeb 1px solid; padding:20px; clear:both; box-sizing:border-box }
+
+.events_popup ul li:hover { border:#ebebeb 1px solid; -webkit-box-shadow: 0 0 5px #999999; -moz-box-shadow: 0px 0px 5px #999999; box-shadow: 0px 0px 5px #999999; }
+
+.events_popup > ul li h2 { font-size:18px; font-weight:400; margin-bottom:20px }
+
+.events_popup > ul li .thumbnail { width:10%; margin-top:12px; float:left; margin-right:20px; }
+
+.events_popup > ul li .thumbnail img { max-width:100%; height:auto; }
+
+.events_popup > ul li .price { font-size:18px; font-weight:600; color:#1979c3; width:20%; float:left; padding-top:18px; }
+
+.events_popup > ul li .qty { width:12%; float:left; font-size:13px; padding:3px 10px }
+
+.events_popup > ul li .qty .title {  }
+
+.events_popup > ul li .qty .qty_field { width:100%; padding:8px 0; border:#ebebeb 1px solid; text-align:center; margin-top:10px; }
+
+.events_popup > ul li .field { width:12%; float:left; padding:0px 10px; font-size:13px; }
+
+.events_popup > ul li .field .title {  }
+
+.events_popup > ul li .field_input { width:100%; padding:8px; border:#ebebeb 1px solid; box-sizing:border-box; margin-top:10px; clear:both; }
+
+.events_popup > ul li button { margin-top:20px; background:#1979c3; border:0px; padding:8px 12px; font-size:14px; color:#fff; border-radius:2px; font-weight:600; text-transform:uppercase; float:right; margin-top:28px; }
+
+
+/*Responsive*/
+
+@media (min-width: 200px) and (max-width: 450px) {
+    
+ .event_manager .page_title h1 { font-size:22px;margin-bottom: -17px; }
+ .event_manager .product_grid ul li { width:100%;height:auto; margin:12px 0px; }
+ .event_manager .toolbar .sort_by { display:none }
+
+ .event_manager .toolbar .calendar { padding-top:0px; }
+ .event_manager .detail_thumbnail { width:100%; float:none; }
+ .event_manager .detail_left_col { width:100%; float:none; }
+ .event_manager .detail_left_col .event_info { width:100%; float:none; }
+ .event_manager .detail_left_col .event_info h2 { font-size:15px; margin-bottom:10px; }
+ .event_manager .detail_left_col .event_info .event-info-field .event-info-label { width:100%; float:none; }
+ .event_manager .detail_left_col .event_info .event-info-field .event-info-content { width:100%; float:none; }
+ .event_manager .detail_left_col .buy_tickets { width:100%; float:none; margin-top:30px; }
+ .event_manager .media_gallery_slider h2 { font-size:18px; }
+ .event_manager .events_venue > ul li h2 { font-size:18px; }
+ .event_manager .events_venue > ul { display: block; }
+ .event_manager .events_venue > ul li { display: block; flex: 1 1 0; margin-bottom:20px; }
+ .holder { width:90%; }
+ .events_popup ul { display:block; }
+ .events_popup > ul li { display:block; margin-right:0px; margin-bottom:20px; }
+ .event_manager .product_grid ul li .event_block .event_detail .learn_more { display:block;}
+
+
+}
+
+@media (min-width: 450px) and (max-width: 650px) {
+    
+ .event_manager .product_grid ul li { width:47%;height:auto; margin:12px 4px; }
+ .event_manager .toolbar .sort_by { display:none }
+ .event_manager .toolbar .calendar { padding-top:0px; }
+  .event_manager .detail_thumbnail { width:100%; float:none; }
+ .event_manager .detail_left_col { width:100%; float:none; }
+ .event_manager .detail_left_col .event_info { width:100%; float:none; }
+ .event_manager .detail_left_col .event_info h2 { font-size:15px; margin-bottom:10px; }
+ .event_manager .detail_left_col .event_info .event-info-field .event-info-label { width:100%; float:none; }
+ .event_manager .detail_left_col .event_info .event-info-field .event-info-content { width:100%; float:none; }
+ .event_manager .detail_left_col .buy_tickets { width:100%; float:none; margin-top:30px; }
+ .event_manager .media_gallery_slider h2 { font-size:18px; }
+ .event_manager .events_venue > ul li h2 { font-size:18px; }
+ .event_manager .events_venue > ul { display: block; }
+ .event_manager .events_venue > ul li { display: block; flex: 1 1 0; margin-bottom:20px; }
+  .holder { width:90%; }
+ .events_popup ul { display:block; }
+ .events_popup > ul li { display:block; margin-right:0px; margin-bottom:20px; }
+     .event_manager .product_grid ul li .event_block .event_detail .learn_more { display:block;}
+
+
+
+}
+
+@media (min-width: 650px) and (max-width: 800px) {
+    
+ .event_manager .product_grid ul li { width:31%;height: auto; margin:12px 4px; }
+  .event_manager .detail_thumbnail { width:100%; float:none; }
+ .event_manager .detail_left_col { width:100%; float:none; }
+ .event_manager .detail_left_col .event_info { width:100%; float:none; }
+ .event_manager .detail_left_col .event_info h2 { font-size:15px; margin-bottom:10px; }
+ .event_manager .detail_left_col .event_info .event-info-field .event-info-label { width:100%; float:none; }
+ .event_manager .detail_left_col .event_info .event-info-field .event-info-content { width:100%; float:none; }
+ .event_manager .detail_left_col .buy_tickets { width:100%; float:none; margin-top:30px; }
+ .event_manager .media_gallery_slider h2 { font-size:18px; }
+ .event_manager .events_venue > ul li h2 { font-size:18px; }
+ .event_manager .events_venue > ul { display: block; }
+ .event_manager .events_venue > ul li { display: block; flex: 1 1 0; margin-bottom:20px; }
+     .event_manager .product_grid ul li .event_block .event_detail .learn_more { display:block;}
+
+
+}
+
+@media (min-width: 800px) and (max-width: 1000px) {
+    
+ .event_manager .product_grid ul li { width:23%; margin:12px 6px; }
+    
+}
+@media (min-width: 200px) and (max-width: 778px) {
+    
+ .event-index-detail .columns  { flex: unset;display: block; }
+    
+}
+
+

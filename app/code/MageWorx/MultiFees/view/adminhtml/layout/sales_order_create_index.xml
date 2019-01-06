@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="MageWorx_MultiFees::css/style.css"/>
+    </head>
+    <update handle="sales_order_create_customer_block"/>
+    <update handle="sales_order_create_item_price"/>
+    <body>
+        <referenceBlock name="items_grid">
+            <block class="MageWorx\MultiFees\Block\Adminhtml\Order\Create\Form\Fee" template="order/create/form/fees.phtml" name="form_fees"/>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,24 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Quickview
+ */
+?>
+<script>
+    require([
+        'jquery',
+        'Amasty_Quickview/js/amquickview'
+    ], function ($) {
+		$( document ).ready(function() {
+			$('div.products-related .product-item, div.products-crosssell .product-item').each(function( key, element ) {
+				$(element).amQuickview(<?php echo $this->javascriptParams(); ?>);
+			});
+			$('div.owl-wrapper div.owl-item').each(function( index, element ) {
+				$(element).children('.products-grid').children('.item-inner').amQuickview(<?php echo $this->javascriptParams(); ?>);
+			});
+		});
+    });
+</script>
+ 
+

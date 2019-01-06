@@ -1,0 +1,194 @@
+<?php
+/**
+ * Copyright © 2015 PlazaThemes.com. All rights reserved.
+
+ * @author PlazaThemes Team <contact@plazathemes.com>
+ */
+ 
+if($this->getConfig('enable_frontend')):
+$testimonials = $this->getTestimonial();
+?>
+
+	<?php
+	$_helper = $this->helper('Magento\Catalog\Helper\Output');
+	$auto = $this->getConfig('auto');
+	if($auto)
+		$auto = 'true';
+	else
+		$auto = 'false';
+	$qty = $this->getConfig('qty');
+	$default = $this->getConfig('default');
+	$desktop = $this->getConfig('desktop');
+	$desktop_small = $this->getConfig('desktop_small');
+	$tablet = $this->getConfig('tablet');
+	$mobile = $this->getConfig('mobile');
+	$rows = $this->getConfig('rows');
+	$show_description = $this->getConfig('show_description');
+	$show_next_back = $this->getConfig('show_next_back');
+	$pagination = $this->getConfig('pagination');
+	$speed = $this->getConfig('speed');
+	if($show_next_back)
+		$show_next_back = 'true';
+	else
+		$show_next_back = 'false';
+	$show_navigation_control = $this->getConfig('show_navigation_control');
+	if($show_navigation_control)
+		$show_navigation_control = 'true';
+	else
+		$show_navigation_control = 'false';
+		
+		
+		
+		$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	    $tm_block = $objectManager->create('FME\Events\Block\Event');
+	    $helper = $objectManager->create('FME\Events\Helper\Data');
+		$_productCollection = $tm_block->getFrontEvents();
+		//print_r($_productCollection->getData());
+	?>
+<div class="title-events">
+	<h3>Events</h3>
+</div>
+<div class="testimo-slider">
+<!--<div class='ma-title'>
+	<h2><span><?php //echo $this->getConfig('title') ?></span></h2>
+	<p class="des"><?php //echo $des;?> </p>
+</div>-->
+<div class="pt-testimonial-container">
+	<?php $i = 0; ?>
+<!--
+	<div class="owl-container">	
+	   <ul class="ptowl"> 
+-->
+		   <?php //print_r($_productCollection->getFirstItem()->getData())?>
+<div class = "parent_div">
+<div class="pt-testimonial-left">
+	<div class="content-left">
+	<?php $firstItem = $_productCollection->getFirstItem(); ?>
+	<?php  $firstUrl = $firstItem->getEventUrlPrefix(); ?>
+	 <?php $firstProductImage = $tm_block->getCurrentImage($firstItem->getId());
+            $first_url_image = $tm_block->getMediaUrl().'tmp/events/event/media/'.$firstProductImage;
+            ?>
+         <div class = "image-sec">
+		<a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($firstUrl); ?>" class="image">
+			<img alt="<?php echo $firstItem->getEventName() ?>" src="<?php echo $first_url_image; ?>"/>
+		</a>
+		</div>
+		<div class = "content-sec">
+		<div class="des"><a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($firstUrl); ?>" class="name"><?php if($firstItem->getEventName() && $show_description) echo __($firstItem->getEventName()); ?></a></div> 
+		<div class="info">
+			<a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($firstUrl); ?>" class="name"><?php echo "<p class = 'event_venue'> Venue: ".$firstItem->getEventVenue();?> </p></a>
+<!--
+			<span class="event_date"><?php echo $firstItem->getEventStartDate(); ?></span>
+-->
+		</div>
+		<a href="<?php echo "event.html" ?>" class="viewall"><button class = "view-more" type = "button">View More</button></a>
+		</div>
+		
+		<!--<div class="email"><?php //echo $testimonial['email']; ?></div>-->
+		<div class="time-conment">
+			<?php 
+				$date = $firstItem->getEventStartDate();
+			?>
+			<span class="date"><?php echo __(date("d", strtotime($date))) ?></span><span class="month"><?php echo __(date("F", strtotime($date))) ?></span><span class="separator">.</span><span class="year"><?php echo __(date("Y", strtotime($date))) ?></span>
+		</div>
+		
+	</div>
+	</div>
+	<div class="pt-testimonial-right">	   
+		<?php $i=0; foreach ($_productCollection as $testimonial): ?>	
+		<?php  $firstUrl = $testimonial->getEventUrlPrefix(); ?>
+		
+		
+		<?php $i++;
+		if($i>3){
+			break;
+			}  $url = $testimonial->getEventUrlPrefix(); ?>
+            <?php $_productNameStripped = $tm_block->stripTags($testimonial->getEventName(), null, true);?>
+            <?php $productImage = $tm_block->getCurrentImage($testimonial->getId());
+            $url_image = $tm_block->getMediaUrl().'tmp/events/event/media/'.$productImage;
+            ?>
+            
+            
+            
+			<?php // $url_image = $this->getMediaFolder().$testimonial['avatar']; ?>
+			
+			<?php if($i < $qty): ?>
+				<?php if($i%$rows == 0): ?>
+<!--
+					<li>
+-->
+				<?php endif; ?>
+						<div class="content-right">
+							<div class = "image-sec">
+							<a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($url); ?>" class="image">
+								<img alt="<?php echo $testimonial['event_name'] ?>" src="<?php echo $url_image; ?>"/>
+							</a>
+							</div><div class = "content-sec">
+							<div class="des"><a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($firstUrl); ?>" class="name"><?php if($testimonial['event_name'] && $show_description) echo __($testimonial['event_name']); ?></a></div> 
+							<div class="info">
+								<a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($firstUrl); ?>" class="name"><?php echo "<p class = 'event_venue'> Venue: ".$testimonial['event_venue']; ?> </p></a>
+								<?php
+									$fromDate =new Zend_Date(strtotime($testimonial->getEventStartDate()));
+									$toDate = new Zend_Date(strtotime($testimonial->getEventEndDate()));
+									$date = $testimonial->getEventStartDate();
+								?>					
+								<div class="event_date"><?php echo date("Y", strtotime($date)).' '.date("F", strtotime($date)).' '.date("d", strtotime($date)); ?></div>
+							</div>
+							</div>
+							
+							<!--<div class="email"><?php //echo $testimonial['email']; ?></div>-->
+						</div>
+						
+				<?php if($i%$rows == ($rows - 1)): ?>
+<!--
+					</li>  
+-->
+				<?php endif; ?>    
+			<?php endif; ?>
+			<?php $i++; ?> 
+		<?php endforeach; ?>
+			<?php if($i%$rows != $rows): ?>
+				
+			<?php endif; ?>  
+<!--
+		</ul>
+-->
+	</div>
+	</div>
+	</div>
+	</div>
+	
+	</div>
+
+<script type="text/javascript">
+require([
+  "jquery",
+  "owlcarousel/minjs"
+ ], function($,owlCarousel){
+		$(document).ready(function(){
+			$(".pt-testimonial-container .ptowl").owlCarousel({
+				<?php
+					if(($auto== 'true') && $speed):
+				?>
+				autoPlay : <?php echo $speed; ?>,
+				<?php
+					endif;
+				?>
+				items : 3,
+				itemsDesktop : [1199,3],
+				itemsDesktopSmall : [992,2],
+				itemsTablet: [768,2],
+				itemsMobile : [479,1],
+				slideSpeed : <?php echo $pagination; ?>,
+				paginationSpeed : <?php echo $pagination; ?>,
+				rewindSpeed : <?php echo $pagination; ?>,
+				addClassActive: true,
+				navigation : <?php echo $show_next_back; ?>,
+				stopOnHover : true,
+				pagination : <?php echo $show_navigation_control; ?>,
+				scrollPerPage:true,
+			});
+		});
+	});
+</script>
+<?php endif; ?>

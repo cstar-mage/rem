@@ -1,0 +1,17 @@
+.smslabel{
+    width:10%; 
+    float:left;
+}
+.smsfield{
+    padding-top:10px;
+}
+.smstextrender{
+    margin-top:10px; 
+    margin-bottom: 10px;
+}
+.smstextrenderdata{
+    margin-left:10%;
+}
+.sms_btn{
+    margin-left:10%;
+}

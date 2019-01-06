@@ -1,0 +1,125 @@
+    <div><h2>Send SMS To Customer</h2></div>
+    
+    <div class="smsfield">
+        <div class="smslabel">
+            <span><b>SMS Text : </b></span>
+        </div>
+        <div>
+            <textarea rows="5" cols="45" id="message_text" name="message_text" class="required-entry"></textarea>
+        </div>
+    </div>
+    <div class="smstextrender">
+        <div class="smstextrenderdata">
+            <a href="javascript:void(0)" id="customer_email" data->Customer Email,</a>
+            <a href="javascript:void(0)" id="customer_firstname" data->Customer FirstName,</a>
+            <a href="javascript:void(0)" id="customer_lastname" data->Customer LastName,</a>
+        </div>
+    </div>
+    <div class="sms_btn">
+        <div id="modal">
+            <button class="action tocart primary modalRun" type="submit" id="send_sms" >
+                <span>Send SMS</span>
+            </button>
+        </div>
+    </div>
+<br/>
+<div id ="popup-mpdal"></div>
+
+<?php 
+$smsData = $block->getSmsData();
+?>   
+<div class="edit-order-comments" id="order_history_block">
+        <ul class="note-list" id="order_Comment">
+            <?php  
+            foreach ($smsData as $key => $value) 
+            {
+            ?>
+                <li class="note-list-item">       
+                        <b>Send SMS</b>
+                        <?php $date = date_create($value["updated_at"]); ?>
+                        <span><?php echo date_format($date, 'F j, Y g:i:s A'); ?></span>
+                        <div class="note-list-comment"><?php echo $value["sms_content"]; ?></div>
+                </li>
+            <?php
+            }
+            ?>
+        </ul>
+</div>
+
+
+<script>
+    require(['jquery','Magento_Ui/js/modal/modal'], function ($,modal) {
+        var options = {
+            type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'SMS sent successfully..',
+                buttons: [{
+                    text: $.mage.__('Ok'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+        var option = {
+            type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Please enter text to send SMS.',
+                buttons: [{
+                    text: $.mage.__('Ok'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+        jQuery('document').ready(function () {
+            jQuery("#send_sms").click('button.modalRun',function () {
+                var msg_text = jQuery("#message_text").val();
+                if (msg_text != "")
+                {
+                    jQuery("#send_sms").prop("disabled", true);
+                    request = $.ajax({
+                        url: "<?php echo $block->getPostformUrl(); ?>",
+                        type: "post",
+                        data: {"message_text": msg_text, "customerId":<?php echo $block->getPostData() ?>,"sendcustomer":0}
+                    });
+
+                    request.done(function (response, textStatus, jqXHR) {
+                        jQuery("#send_sms").prop("disabled", false);
+                        var popup = modal(options, $('#popup-mpdal'));
+                        $('#popup-mpdal').modal('openModal');
+                        $("#order_Comment").prepend('<li class="note-list-item" style="list-style-type:none; margin-bottom:10px;"><b>Send SMS </b><span>'+response.datetime+'</span><div>'+response.smstext+'</div></li>');
+                    });
+                }
+                else
+                {
+                    var popup = modal(option, $('#popup-mpdal'));
+                    $('#popup-mpdal').modal('openModal');
+                }
+            });
+
+            
+            jQuery("#customer_email").click(function () {
+                var caretPos = document.getElementById("message_text").selectionStart;
+                var textAreaTxt = jQuery("#message_text").val();
+                var txtToAdd = "{{var customer_email}}";
+                jQuery("#message_text").val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));  
+            });
+            jQuery("#customer_firstname").click(function () {
+                var caretPos = document.getElementById("message_text").selectionStart;
+                var textAreaTxt = jQuery("#message_text").val();
+                var txtToAdd = "{{var customer_firstname}}";
+                jQuery("#message_text").val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));  
+            });
+            jQuery("#customer_lastname").click(function () {
+                var caretPos = document.getElementById("message_text").selectionStart;
+                var textAreaTxt = jQuery("#message_text").val();
+                var txtToAdd = "{{var customer_lastname}}";
+                jQuery("#message_text").val(textAreaTxt.substring(0, caretPos) + txtToAdd + textAreaTxt.substring(caretPos));  
+            });
+        });
+    });
+</script>

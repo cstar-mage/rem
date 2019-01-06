@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="FME_Events::css/events/owl.carousel.css" /> 
+        <css src="FME_Events::css/events/shadowbox.css" />
+        <css src="FME_Events::css/events/media.css" />   
+        <css src="FME_Events::css/events/jquery.fancybox.css" />
+        <css src="FME_Events::css/events/style.css" />
+	</head>
+    <body>
+     <referenceBlock name="page.main.title" display="false"/>   
+        <referenceContainer name="content">            
+            <block  class="FME\Events\Block\Detail" name="detail.event" template="FME_Events::events/detail.phtml"/>  
+        </referenceContainer>       
+    </body>
+</page>

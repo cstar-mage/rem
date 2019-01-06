@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="mageworx" sortOrder="2001">
+            <label>MageWorx</label>
+        </tab>
+        <section id="mageworx_multifees" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Multi Fees</label>
+            <tab>mageworx</tab>
+            <resource>MageWorx_MultiFees::config_multifees</resource>
+            <group id="main" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>MageWorx MultiFees</label>
+                <field id="enable_cart" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Enable Fees]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="apply_fee_on_click" translate="label comment" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Apply Fee on Click]]></label>
+                    <comment><![CDATA[Is a fee should be applied when the corresponding fee clicked (Yes) or by pressing the button "Apply Fee" (No)]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <!--For shipping fee - for the future realize-->
+                <!--<field id="include_fee_in_shipping_price" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">-->
+                    <!--<label><![CDATA[Include Fee in Shipping Price]]></label>-->
+                    <!--<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>-->
+                <!--</field>-->
+                <field id="tax_calculation_includes_tax" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label><![CDATA[Calculation Settings]]></label>
+                    <source_model>Magento\Tax\Model\System\Config\Source\PriceType</source_model>
+                    <comment><![CDATA[Whether multi fees prices include tax.]]></comment>
+                </field>
+                <field id="display_tax_in_block" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Display Prices in Additional Fees Block]]></label>
+                    <source_model>Magento\Tax\Model\System\Config\Source\Tax\Display\Type</source_model>
+                </field>
+                <field id="display_tax_in_cart" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Display Additional Fees Amount in Cart Total]]></label>
+                    <source_model>Magento\Tax\Model\System\Config\Source\Tax\Display\Type</source_model>
+                </field>
+                <field id="display_tax_in_sales" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Display Additional Fees Amount in Orders, Invoices, Credit Memos]]></label>
+                    <source_model>Magento\Tax\Model\System\Config\Source\Tax\Display\Type</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

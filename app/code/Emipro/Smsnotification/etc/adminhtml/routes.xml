@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * {{Emipro}}_{{Smsnotification}} extension
+ *                     NOTICE OF LICENSE
+ * 
+ *                     This source file is subject to the MIT License
+ *                     that is bundled with this package in the file LICENSE.txt.
+ *                     It is also available through the world-wide-web at this URL:
+ *                     http://opensource.org/licenses/mit-license.php
+ * 
+ *                     @category  Emipro
+ *                     @package   Emipro_Smsnotification
+ *                     @copyright Copyright (c) 2015
+ *                     @license   http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../lib/internal/Magento/Framework/App/etc/routes.xsd">
+    <router id="admin">
+        <route id="emipro_smsnotification" frontName="emipro_smsnotification">
+            <module name="Emipro_Smsnotification" before="Magento_Backend"/>
+        </route>
+    </router>
+</config>

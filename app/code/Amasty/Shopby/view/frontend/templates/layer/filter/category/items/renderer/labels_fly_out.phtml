@@ -1,0 +1,110 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Shopby
+ */
+?>
+<?php 
+    /** @var \Amasty\Shopby\Model\Layer\Filter\Item $filterItem */
+    /** @var \Amasty\Shopby\Block\Navigation\FilterRenderer\Category $block */
+    /** @var \Amasty\Shopby\Model\Layer\Filter\CategoryItems $filterItems */
+    $filterItems = $block->getFilter()->getItems();
+    $filterSetting = $block->getFilterSetting();
+    $categoryHelper = $block->getCategoryHelper();
+?> 
+<?php foreach ($filterItems->getItems($block->getPath()) as $filterItem) : ?>
+    <?php $uniqId = uniqid(); ?>
+    <li class="item" data-label="<?= $block->escapeHtml($filterItem->getLabel())?>">
+        <div>
+            <?php if ($filterItem->getCount() > 0) : ?>
+                <?php $checked =  $block->checkedFilter($filterItem) ? ' checked' : ''; ?>
+                <a
+                    class="am_shopby_filter_item_<?= $block->escapeId($uniqId)?>"
+                    href="<?= $block->escapeUrl($filterItem->getUrl()) ?>"
+                >
+                    <input
+                        name="amshopby[<?= /* @escapeNotVerified */ $block->getFilter()->getRequestVar();?>][]"
+                        value="<?= $filterItem->getValueString();?>"
+                        type="<?= $block->getInputType();?>"
+                        <?= $checked ?>
+                    />
+                    <?php if ($block->getFilter()->useLabelsOnly()) : ?>
+                        <span class="label"><?= $filterItem->getLabel() ?></span>
+                    <?php elseif ($block->getFilter()->useLabelsAndImages()): ?>
+                        <span class="category-filter-image">
+                            <img src="<?= $categoryHelper->getCategoryImageUrl($filterItem->getValue()) ?>"
+                                 title="<?= $filterItem->getLabel() ?>"
+                                 height="<?= $categoryHelper->getCategoryFilterImageSize(); ?>"
+                                 width="<?= $categoryHelper->getCategoryFilterImageSize(); ?>" />
+                        </span>
+                        <span class="label"><?= $filterItem->getLabel() ?></span>
+                    <?php else : ?>
+                        <span class="category-filter-image">
+                            <img src="<?= $categoryHelper->getCategoryImageUrl($filterItem->getValue()) ?>"
+                                 title="<?= $filterItem->getLabel() ?>"
+                                 height="<?= $categoryHelper->getCategoryFilterImageSize(); ?>"
+                                 width="<?= $categoryHelper->getCategoryFilterImageSize(); ?>"/>
+                        </span>
+                    <?php endif; ?>
+                    <?php if ($block->getFilterSetting()->isShowProductQuantities()) : ?>
+                        <span class="count"><?= $filterItem->getCount()?>
+                            <span class="filter-count-label">
+                                <?php if ($filterItem->getCount() == 1) :?>
+                                    <?= $block->escapeHtml(__('item'))?>
+                                <?php else :?>
+                                    <?= $block->escapeHtml(__('items')) ?>
+                                <?php endif;?>
+                            </span>
+                        </span>
+                    <?php endif; ?>
+                </a>
+            <?php else :?>
+                <?php if ($block->getFilter()->useLabelsOnly()) : ?>
+                    <span class="label"><?= $filterItem->getLabel() ?></span>
+                <?php elseif ($block->getFilter()->useLabelsAndImages()) : ?>
+                    <span class="category-filter-image">
+                        <img src="<?= $categoryHelper->getCategoryImageUrl($filterItem->getValue()) ?>"
+                             title="<?= $filterItem->getLabel() ?>"
+                             height="<?= $categoryHelper->getCategoryFilterImageSize(); ?>"
+                             width="<?= $categoryHelper->getCategoryFilterImageSize(); ?>" />
+                    </span>
+                    <span class="label"><?= $filterItem->getLabel() ?></span>
+                <?php else : ?>
+                    <span class="category-filter-image">
+                        <img src="<?= $categoryHelper->getCategoryImageUrl($filterItem->getValue()) ?>"
+                             title="<?= $filterItem->getLabel() ?>"
+                             height="<?= $categoryHelper->getCategoryFilterImageSize(); ?>"
+                             width="<?= $categoryHelper->getCategoryFilterImageSize(); ?>"/>
+                    </span>
+                <?php endif; ?>
+                <?php if ($block->getFilterSetting()->isShowProductQuantities()) : ?>
+                    <span class="count"><?= $filterItem->getCount()?>
+                        <span class="filter-count-label">
+                            <?php if ($filterItem->getCount() == 1) :?>
+                                <?= $block->escapeHtml(__('item')) ?>
+                            <?php else :?>
+                                <?= $block->escapeHtml(__('items')) ?>
+                            <?php endif;?>
+                        </span>
+                    </span>
+                <?php endif; ?>
+            <?php endif; ?>
+            <script type="text/x-magento-init">
+                {
+                    ".am_shopby_filter_item_<?= $block->escapeId($uniqId)?>": {
+                        "amShopbyFilterItemDefault": {
+                            "collectFilters": <?= /* @escapeNotVerified */ $block->collectFilters();?>
+                        }
+                    }
+                }
+            </script>
+        </div>
+        <?php $currentPath = ($block->getPath() ? : $filterItems->getStartPath()) . '/'.  $filterItem->getValueString(); ?>
+        <?php if ($filterItems->getItemsCount($currentPath)): ?>
+            <ul class="items items-children level-<?= $block->getLevel(); ?>">
+                <?= $block->renderChildrenItems($currentPath); ?>
+            </ul>
+        <?php endif; ?>
+    </li>
+<?php endforeach; ?>

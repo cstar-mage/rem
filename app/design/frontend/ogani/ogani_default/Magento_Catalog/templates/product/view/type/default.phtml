@@ -1,0 +1,54 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php /* @var $block \Magento\Catalog\Block\Product\View\AbstractView */?>
+<?php $_product = $block->getProduct() ?>
+
+<?php if ($block->displayProductStockStatus()): ?>
+    <?php if ($_product->isAvailable()): ?>
+        <div class="stock available" title="<?= /* @escapeNotVerified */ __('Availability') ?>">
+            <span class='avail_text'><?= /* @escapeNotVerified */ __('Availability:') ?></span>
+            <span><?= /* @escapeNotVerified */ __('In stock') ?></span>
+        </div>
+    <?php else: ?>
+        <div class="stock unavailable" title="<?= /* @escapeNotVerified */ __('Availability') ?>">
+            <span class='avail_text'><?= /* @escapeNotVerified */ __('Availability:') ?></span>
+            <span><?= /* @escapeNotVerified */ __('Out of stock') ?></span>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+
+<?php
+
+$id = $_product->getId();
+    /**
+     * @var \Magento\Catalog\Model\Product\Interceptor $product
+     */
+    //Get Object Manager Instance
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    //Load product by product id
+    $productObj = $objectManager->create('Magento\Catalog\Model\Product')->load($id);
+    $productcollection = $objectManager->create('\Magento\Reports\Model\ResourceModel\Product\Collection');
+    $productcollection->setProductAttributeSetId($productObj->getAttributeSetId());
+    $prodData = $productcollection->addViewsCount()->getData();
+
+    if (count($prodData) > 0) {
+        foreach ($prodData as $product) {
+            if ($product['entity_id'] == $id) {
+                $view_count = (int) $product['views'];
+            }
+        }
+    }
+    else {
+		$view_count = 0;
+	}
+	?>
+	<div class='product_view_count'>
+		<span><?php echo $view_count.' Views'; ?></span>
+	</div>

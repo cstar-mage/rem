@@ -1,0 +1,50 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Label
+ */
+?>
+<?php
+/** @var \Amasty\Label\Model\Labels  $label */
+/** @var \Amasty\Label\Block\Label  $block */
+$label = $block->getLabel();
+$key = $label->getId() . '-' . $label->getProduct()->getId() . '-'
+    . $label->getMode() . '-' . $block->getRandomKey();
+$text = $label->getText();
+$nativeText = strip_tags($text);
+?>
+<div class="amasty-label-container amasty-label-container-<?php echo $key;?>"
+     style="display: none; <?php  echo $label->getStyle();?>">
+    <div class="amasty-label-text"  style="<?php echo $label->getValue('text_style');?>">
+        <?php echo $text;?>
+    </div>
+    <?php if ($block->getImageScr()) :?>
+       <img class="amasty-label-image"
+            id="amasty-label-image-<?php echo $key;?>"
+            src="<?php  echo $block->getImageScr()?>"
+            style="opacity: 1 !important;"
+            title="<?php echo $nativeText?>"
+            alt="<?php echo $nativeText?>"
+       >
+    <?php endif;?>
+</div>
+<script>
+   require([
+      'jquery',
+      'Amasty_Label/js/label',
+       'domReady!'
+   ], function ($) {
+      var element = $('.amasty-label-container-<?php echo $key;?>');
+
+       element.amShowLabel({
+            position: "<?php echo $label->getCssClass()?>",
+            size: "<?php echo $label->getValue('image_size')?>",
+            path: "<?php echo $block->getContainerPath()?>",
+            mode: "<?php echo $label->getMode()?>",
+            move: "<?php echo (int)$label->getShouldMove()?>",
+            product: "<?php echo (int)$label->getProduct()->getId()?>",
+            label: "<?php echo (int)$label->getId()?>"
+       });
+   });
+</script>

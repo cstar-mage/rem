@@ -1,0 +1,41 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Cart
+ */
+?>
+<?php
+/** @var \Amasty\Cart\Block\Config  $this */
+
+$hlr = $this->getHelper();
+?>
+<script>
+    require([
+        'jquery',
+        'Magento_Catalog/product/view/validation',
+        'Amasty_Cart/js/amcart',
+        'Amasty_Cart/js/amcartinfo'
+    ], function ($) {
+        window.amasty_cart_options = <?php echo $hlr->jsParam($this); ?>;
+        var selector = '#product_addtocart_form, form[data-role="tocart-form"]';
+        if ($(selector).length == 0) {
+            selector = '.action.tocart';
+        }
+        
+        $(selector).each(function( key, form ) {
+            form = $(form);
+            if(!form.attr('amcart-observed')) {
+                form.amCart(window.amasty_cart_options);
+                form.attr('amcart-observed', true);
+            }
+        });
+
+        <?php if ($hlr->isShowProductQty()) : ?>
+            var infoMessage = "<?= $this->escapeHtml($hlr->getInfoMessage()) ?>";
+            $('[data-block=\'minicart\']').amCartInfo({'infoMessage': infoMessage});
+        <?php endif; ?>
+    });
+</script>
+
+

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2016 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <update id="FME_Extensions::fmeextensions"
+             title="FME Extensions" translate="title" 
+             module="FME_Events" sortOrder="30"
+             resource="FME_Extensions::fmeextensions"/>
+
+        <add id="FME_Events::manage_sevents"
+             title="Event Manager" translate="title" 
+        	 module="FME_Events" sortOrder="1" 
+        	 parent="FME_Extensions::fmeextensions"    	
+        	 resource="FME_Events::main_menu"/>
+
+        <add id="FME_Events::manage_event"
+             title="Manage Events" 
+             module="FME_Events" sortOrder="2" 
+             parent="FME_Events::manage_sevents" 
+             action="events/event/"  
+             resource="FME_Events::manage_event" />
+
+        <add id="FME_Events::configuration"
+             title="Configurations"
+             module="FME_Events" sortOrder="4" 
+             parent="FME_Events::manage_sevents" 
+             action="adminhtml/system_config/edit/section/events"
+             resource="FME_Events::configuration" /> 
+    </menu>
+</config>
+
+ 

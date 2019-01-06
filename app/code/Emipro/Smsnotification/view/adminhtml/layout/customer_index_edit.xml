@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Emipro_Smsnotification::css/smsform.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <referenceBlock name="customer_form">
+                <block class="Emipro\Smsnotification\Block\Adminhtml\CustomerEdit\View" name="sendsms_customer_edit_view" template="view.phtml">
+                    <arguments>
+                        <argument name="tab_label" xsi:type="string" translate="true">Send Sms</argument>
+                        <argument name="sort_order" xsi:type="number">20</argument>
+                    </arguments>
+                    <block class="Emipro\Smsnotification\Block\Adminhtml\SendCustomer" name="sendcustomer" template="sendcustomer.phtml"/>
+                </block>
+            </referenceBlock>
+        </referenceContainer>
+    </body>
+</page>

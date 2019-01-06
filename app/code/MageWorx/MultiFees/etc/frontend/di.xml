@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="MageWorx\MultiFees\Block\Cart\Fee">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="feeFormAttributes" xsi:type="object">MageWorx\MultiFees\Block\LayoutProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\Block\Onepage">
+        <arguments>
+            <argument name="layoutProcessors" xsi:type="array">
+                <item name="feeFormAttributes" xsi:type="object">MageWorx\MultiFees\Block\LayoutProcessor</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- PayPal -->
+    <type name="Magento\Paypal\Model\Cart">
+        <plugin name="update_paypal_fee_order" type="MageWorx\MultiFees\Plugin\AddFeePaypal"/>
+    </type>
+    <!-- End -->
+
+</config>

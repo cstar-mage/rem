@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="MageWorx_MultiFees::multifees_wrapper"
+             title="MageWorx Multi Fees"
+             module="MageWorx_MultiFees"
+             sortOrder="50"
+             parent="Magento_Sales::sales"
+             resource="MageWorx_MultiFees::multifees_wrapper" />
+        <add id="MageWorx_MultiFees::multifees_cart"
+             title="Manage Cart Fees"
+             module="MageWorx_MultiFees"
+             sortOrder="75"
+             parent="MageWorx_MultiFees::multifees_wrapper"
+             action="mageworx_multifees/fee_cart/"
+             resource="MageWorx_MultiFees::multifees" />
+        <add id="MageWorx_MultiFees::multifees_shipping"
+             title="Manage Shipping Fees"
+             module="MageWorx_MultiFees"
+             sortOrder="85"
+             parent="MageWorx_MultiFees::multifees_wrapper"
+             action="mageworx_multifees/fee_shipping/"
+             resource="MageWorx_MultiFees::multifees" />
+        <add id="MageWorx_MultiFees::multifees_payment"
+             title="Manage Payment Fees"
+             module="MageWorx_MultiFees"
+             sortOrder="95"
+             parent="MageWorx_MultiFees::multifees_wrapper"
+             action="mageworx_multifees/fee_payment/"
+             resource="MageWorx_MultiFees::multifees" />
+    </menu>
+</config>

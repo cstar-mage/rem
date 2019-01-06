@@ -1,0 +1,335 @@
+<?php $calendarEventsCollection = $this->getEventsCoolectCalendar();
+$helper = $this->helper('FME\Events\Helper\Data');
+$date = new Zend_Date();
+    const repeat_daily         = '1';
+    const repeat_weekly        = '2';
+    const repeat_monthly       = '3';
+    const repeat_yearly        = '4';
+    const day_of_weekm         = [1];
+    const day_of_weekmt        = [1,2];
+    const day_of_weekmtw       = [1,2,3];
+    const day_of_weekmtwt      = [1,2,3,4];
+    const day_of_weekmtwtf     = [1,2,3,4,5];
+    const day_of_weekmtwtfs    = [1,2,3,4,5,6];
+    const day_of_weekmtwtfss   = [1,2,3,4,5,6,7];
+
+$currdatetime = $block->getCurrDateTime();
+
+$arrCurrDateTime = (array)$currdatetime;
+$arrCurrDateTime = $arrCurrDateTime['date'];    
+foreach ($calendarEventsCollection as $value) :
+    $value['url'] = $this->getUrl().$helper->getEventFinalDetailIdentifier($value['event_url_prefix']);       
+         if(strtotime($helper->getTimeAccordingToTimeZone($value['end'])) < strtotime($arrCurrDateTime)):        
+           continue;
+            endif; 
+   //get datetime Zend_Date Object
+    $rstartd =  new Zend_Date($value['start'], 'YYYY-MM-DD');
+    $rendd =  new Zend_Date($value['end'], 'YYYY-MM-DD');
+   //get date time 2017-09-18T07:55
+    $value['rstart']  =date("Y-m-d\TH:i", strtotime($value['start']));
+    $value['rend']  =date("Y-m-d\TH:i", strtotime($value['end']));
+   //get time only
+    $value['start']  = date("H:i:s", strtotime($value['start']));
+    $value['end']    = date("H:i:s", strtotime($value['end']));
+   //get date only
+    $value['range_start'] = date('Y-m-d', strtotime($rstartd->toString()));
+    $value['range_end'] = date('Y-m-d', strtotime($rendd->toString()));
+    $diff = $rendd->sub($rstartd)->toValue();
+    $days = ceil($diff/60/60/24) +1;
+    $value['diffday'] = $days;
+
+  //for non recurring remove the [dow] variable from the object
+    if ($value['is_recurring']==0) :
+        unset($value['dow']);
+    endif;//endif for non recurring
+    //weekly events starts here
+    if ($value['is_recurring']==1 && $value['recurring_by']==1) :
+            $value['ranges'] = [
+          [
+            'laps'  => $value['recurring_by'],
+            'startcal' => $value['rstart'],
+            'endcal'  =>   $value['rend']
+             ]
+            ];
+
+            if ($value['dow']=='1') {
+                $value['dow'] = day_of_weekm;
+            } elseif ($value['dow']=='2') {
+                $value['dow'] = day_of_weekmt;
+            } elseif ($value['dow']=='3') {
+                $value['dow'] = day_of_weekmtw;
+            } elseif ($value['dow']=='4') {
+                $value['dow'] = day_of_weekmtwt;
+            } elseif ($value['dow']=='5') {
+                $value['dow']==day_of_weekmtwtf;
+            } elseif ($value['dow']=='6') {
+                $value['dow']= day_of_weekmtwtfs;
+            } else {
+                $value['dow']= day_of_weekmtwtfss;
+            }
+    endif;//endif for weekly
+// Monthly section begins
+    if ($value['is_recurring']==1 && $value['recurring_by']==2) :
+//get the differnce of months between start & end date
+        $d1 = new DateTime($value['rstart']);
+        $d2 = new DateTime($value['rend']);
+        $numOfmonths=$d1->diff($d2)->m + ($d1->diff($d2)->y*12);
+        $varforarr = $numOfmonths;
+
+// assign the days you want to repeat
+        if ($value['dow']=='1') {
+            $value['dow'] = day_of_weekm;
+        } elseif ($value['dow']=='2') {
+            $value['dow'] = day_of_weekmt;
+        } elseif ($value['dow']=='3') {
+            $value['dow'] = day_of_weekmtw;
+        } elseif ($value['dow']=='4') {
+            $value['dow'] = day_of_weekmtwt;
+        } elseif ($value['dow']=='5') {
+            $value['dow']==day_of_weekmtwtf;
+        } elseif ($value['dow']=='6') {
+            $value['dow']= day_of_weekmtwtfs;
+        } else {
+            $value['dow']= day_of_weekmtwtfss;
+        }
+//traverse to get the multiple ranges for months 
+
+        for ($i=0; $i<=$numOfmonths; $i++) :
+//get the next month & add 7 days to it          
+            $monthIncremented = strtotime($value['range_start']);
+            $d1 = DateTime::createFromFormat('Y-m-d', $value['range_start']);
+            $monthToAdd = $i;
+            $year = $d1->format('Y');
+            $month = $d1->format('n');
+            $day = $d1->format('d');
+
+            $year += floor($monthToAdd/12);
+            $monthToAdd = $monthToAdd%12;
+            $month += $monthToAdd;
+            if ($month > 12) {
+                    $year ++;
+                    $month = $month % 12;
+                if ($month === 0) {
+                    $month = 12;
+                }
+            }
+
+            if (!checkdate($month, $day, $year)) {
+                    $d2 = DateTime::createFromFormat('Y-n-j', $year.'-'.$month.'-1');
+                    $d2->modify('last day of');
+            } else {
+                    $d2 = DateTime::createFromFormat('Y-n-d', $year.'-'.sprintf("%02d", $month).'-'.sprintf("%02d", $day));
+            }
+    
+            $date = $d2->format('Y-m-d');
+            $newdate = strtotime('+7 day', strtotime($date));
+            $newEndDynamicDate = date('Y-m-j', $newdate);
+            $value['ranges'] =
+            [
+            [
+           
+            'laps' => $value['recurring_by'],
+            'startcal' => $date,
+            'endcal' =>  $newEndDynamicDate
+             ]
+            ];
+      
+            $items[] = $value;
+        endfor;
+    endif;// end monthly
+ //yearly section begins
+    if ($value['is_recurring']==1 && $value['recurring_by']==3) :
+        $d1 = new DateTime($value['rstart']);
+        $d2 = new DateTime($value['rend']);
+
+        $numOfYears = $d2->diff($d1);
+        $numOfYears = $numOfYears->y;
+
+        $varforarr = $numOfYears;
+
+        if ($value['dow']=='1') {
+            $value['dow'] = day_of_weekm;
+        } elseif ($value['dow']=='2') {
+            $value['dow'] = day_of_weekmt;
+        } elseif ($value['dow']=='3') {
+            $value['dow'] = day_of_weekmtw;
+        } elseif ($value['dow']=='4') {
+             $value['dow'] = day_of_weekmtwt;
+        } elseif ($value['dow']=='5') {
+             $value['dow']==day_of_weekmtwtf;
+        } elseif ($value['dow']=='6') {
+             $value['dow']= day_of_weekmtwtfs;
+        } else {
+             $value['dow']= day_of_weekmtwtfss;
+        }
+      //traverse to get the next year and add the next week days
+        for ($i=0; $i<=$numOfYears; $i++) :
+             $yearsIncremented = strtotime($value['range_start']);
+             $yearsToAdd = $i;
+             $newTimestamp = strtotime("+$i years", $yearsIncremented);
+             $newstamp = date('Y-m-j', $newTimestamp);
+             $newdate = strtotime('+6 day', $newTimestamp);
+             $newEndDynamicDate = date('Y-m-j', $newdate);
+             //print_r($newEndDynamicDate);exit;
+             $value['ranges'] = [
+                 [
+                  'laps'  => $value['recurring_by'],
+                  'startcal' => $newstamp,
+                  'endcal' =>  $newEndDynamicDate
+                   ]
+                 ];
+                 $items[] = $value;
+        endfor;
+    endif;// endif yearly
+ //end yearly section
+//avoid the duplicates occuring from $value    
+    if (!($value['recurring_by']==2 or $value['recurring_by']==3)) :
+          $items[] =$value;
+    endif;
+?>
+<?php include_once($block->getTemplateFile('FME_Events::events/list/eventviewmode.phtml')) ?>
+<div id="calendar" class="class-calendar" name="calendar">
+</div> 
+ <div class="class-calendar" id="calendar">          
+      <div class="cal-evanto" eventoId="<?php echo $value['id']?>">      <div class="eventoDetails">
+                 <p class="eventHeading">
+                    <a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($value['event_url_prefix']) ?>"
+                           title="<?php echo $value['title']?>"><?php echo $value['title']?></a></p>
+                <div class="desc">
+                      <div class="cal-topics">
+                            <?php $sdate =new Zend_Date(strtotime($value['rstart']));
+                                $edate =new Zend_Date(strtotime($value['rend']));?>
+                                <label><?php echo __('Schedule:') ?> </label>
+                                <?php echo $helper->getTimeAccordingToTimeZone($sdate);?> <?php echo __('To:') ?> <?php echo $helper->getTimeAccordingToTimeZone($edate)?></div>
+                      <div class="cal-topics">
+                                <label><?php echo __('Location:') ?> </label>
+                                <?php echo $value['event_venue']?></div>
+                      <div class="cal-topics">
+                                <label><?php echo __('Details:') ?> </label>
+                                <?php echo substr($value['event_meta_description'], 0, 10)?></div>
+                        </div>
+                        <div class="">
+                            <a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($value['event_url_prefix']) ?>"
+                               title="<?php echo $value['title']?>"
+                               class="link-learn"><?php echo __('Learn More') ?></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<?php endforeach; ?>
+
+<?php $dbdata = json_encode($items);?>
+<script type='text/javascript'>            
+            require(['jquery','moment','fullcalendar', 'fancybox'], function($,moment){
+                var $j = $.noConflict();
+                $(document).ready(function() {
+                    var date = new Date();
+                    var d = date.getDate();
+                    var m = date.getMonth();
+                    var y = date.getFullYear();
+                    var calendar_mode = '';
+                    var switchMode = '1';
+                    var defaultMode = 'month';
+                    if (switchMode == '1') {
+                        calendar_mode = 'month,agendaWeek,agendaDay';
+                     }                     
+                var repeatFixer = <?php echo $dbdata;?>;
+$.each(repeatFixer, walker);
+function walker(key, value) { 
+    if (value !== null && typeof value === "object") {   
+        $.each(value, walker);      
+            if(value.laps == 1){            
+               
+               value.start = value.startcal;
+               value.end = value.endcal;              
+            }
+            if(value.laps == 2){
+                value.start = value.startcal;
+                value.end = value.endcal;                
+            } 
+            if(value.laps == 3){
+               
+                value.start = value.startcal;
+                value.end = value.endcal;               
+            }   
+     }
+ }
+$.each(repeatFixer, simplevents);
+function simplevents(key, value) {
+    if (value !== null && typeof value === "object") { 
+    if(value.is_recurring== 0 ){
+            value.start = value.range_start;
+            //value.end = value.range_end;
+            value.end = moment(value.range_end).add(1, 'days');                 
+        } 
+    }
+}
+
+function format(json_string, key_to_skip) {
+    return JSON.parse(json_string, function (key, value) {
+        if (key !== key_to_skip) {
+            return value;
+        }
+    });    
+}
+
+repeatFixer = format(JSON.stringify(repeatFixer),'laps');
+//document.write(JSON.stringify(repeatFixer));exit;
+ var repeatingEvents = repeatFixer;
+
+                var getEvents = function( start, end ){
+                    return repeatingEvents;
+                }                       
+                    $('#calendar').fullCalendar({
+                        defaultDate: moment(),
+                        editable: true,
+                        displayEventEnd:true,
+                        disableDragging: true,
+                        header: {
+                            left: 'prev,next today',
+                            center: 'title',
+                            right: calendar_mode
+                        },
+                        defaultView: defaultMode,
+                        eventTextColor: 'white',
+                        timeFormat: 'H:mm',
+                       // events:                       
+                       eventMouseover: popupEventDisplay,
+                        eventMouseout:  popupEventFade,
+                         eventRender: function(event, element, view)
+                         {  
+                            if(event.is_recurring == 1){
+                            console.log(event.start.format());
+
+                                return (event.ranges.filter(function(range){
+
+                                        return (event.start.isBefore(range.end) &&
+                                            event.start.isAfter(range.start));
+                                }).length)>0;
+                         }},
+                         events: function( start, end, timezone, callback ){
+                            var events = getEvents(start,end);
+                            callback(events);
+                        },
+
+                    });
+                    function popupEventDisplay(event, jsEvent, view ) { 
+                    var projectionTowardsLeft = $(window).width() - jsEvent.clientX;
+                        var popupWideDimension = $('.cal-evanto[eventoId="'+event.id+'"]').width();
+                        if (projectionTowardsLeft > popupWideDimension) {
+                            $('.cal-evanto[eventoId="'+event.id+'"]').css({left:jsEvent.clientX,top:jsEvent.clientY}).show();
+
+                        } else {
+                            var leftPos = $(window).width() - popupWideDimension;
+                            $('.cal-evanto[eventoId="'+event.id+'"]').css({left:leftPos,top:jsEvent.clientY}).show();
+                        }
+                    }
+                    function popupEventFade(event, jsEvent, view ) {
+                        $('.cal-evanto[eventoId="'+event.id+'"]').hide();
+                    }
+                    $('.cal-evanto').hover(function() {$(this).show()}, function() {$(this).hide()});
+                });
+            });
+        </script> 
+            
+    

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="MageWorx\MultiFees\Block\Adminhtml\Fee\Edit"
+                   name="mageworx_multifees_fee_shipping_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="MageWorx\MultiFees\Block\Adminhtml\Fee\Edit\ShippingFeeTabs"
+                   name="mageworx_multifees_fee_shipping_tabs">
+                <!-- Specific per Fee Type -->
+                <block class="MageWorx\MultiFees\Block\Adminhtml\Fee\Edit\Tab\Shipping\Main"
+                       name="mageworx_multifees_fee_shipping_edit_tab_main"
+                       as="main" />
+                <container label="Options"
+                           name="main_options">
+                    <block class="MageWorx\MultiFees\Block\Adminhtml\Fee\Edit\Tab\MainOptions"
+                           name="mageworx_multifees_fee_shipping_edit_tab_main_options"/>
+                    <block class="MageWorx\MultiFees\Block\Adminhtml\Fee\Edit\Options\Options"
+                           as="options"/>
+                </container>
+                <!-- Specific for the shipping fee -->
+                <block class="MageWorx\MultiFees\Block\Adminhtml\Fee\Edit\Tab\Shipping\ShippingMethods"
+                       name="mageworx_multifees_fee_shipping_edit_tab_shipping_methods"
+                       as="shipping_methods_tab"/>
+                <!-- Specific per Fee Type -->
+                <block class="MageWorx\MultiFees\Block\Adminhtml\Fee\Edit\Tab\Shipping\Conditions"
+                       name="mageworx_multifees_fee_shipping_edit_tab_conditions"
+                       as="conditions"/>
+                <block class="MageWorx\MultiFees\Block\Adminhtml\Fee\Edit\Options\Labels"
+                       as="labels"/>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="js">
+            <block class="Magento\Backend\Block\Template"
+                   name="attribute_edit_js"
+                   template="MageWorx_MultiFees::tab/js.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

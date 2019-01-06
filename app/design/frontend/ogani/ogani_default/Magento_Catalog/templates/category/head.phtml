@@ -1,0 +1,56 @@
+<?php
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+/**
+ * 
+ *
+ * @var $block Remedy\PromotedBrandProducts\Block\Promotional
+ */
+?>
+<div class=head-container>
+<?php
+    $_helper    = $this->helper('Magento\Catalog\Helper\Output');
+    $_category  = $block->getCurrentCategory();
+    $_prod = $_category->getProductCollection()->addAttributeToSelect('*');
+	$_productCount = count($_prod->getData());
+	$catId = (Int) $_category->getId();
+	if($catId > 2){
+		
+		?> <div class='category-name'><span class='category-name2'> <?php echo $_category->getName();?></span><span class="category-count"><?php echo "(".$_productCount." Products)";?><span></div> <?php
+		$sub = explode(',',$_category->getChildren());
+		$subcat = $_category->getChildren();
+		?><div class='sub-categories'><ul><?php
+		if(strlen($subcat)>0){
+			foreach($sub as $subCategories){
+				$_objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+				$categoryData = $_objectManager->create('Magento\Catalog\Model\Category')->load($subCategories);    
+				?><li data-category='<?php echo $categoryData->getName();?>'>
+				<?php echo $categoryData->getName();
+				?></li><?php
+			}
+		}
+		?></ul></div><?php
+	
+	} else {
+		
+		
+		?> <div class='category-name'><span class='category-name2'> <?php echo $_category->getName();?></span><span class="category-count"><?php echo "(".$block->getCount($_category->getName())." Products)";?><span></div> <?php
+
+	}
+?>
+</div>
+<script type="text/javascript">
+    require([
+        'jquery'
+    ], function ($) {
+		
+		$('.sub-categories li').click(function(event){
+			console.log('click');
+			name = $(this).attr("data-category");
+			$('.am_shopby_filter_items_attr_category_ids').find("[data-label='" + name + "']").children('a').trigger("click");
+		});
+    });
+</script>

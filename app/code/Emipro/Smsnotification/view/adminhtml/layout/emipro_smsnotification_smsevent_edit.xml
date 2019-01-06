@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * {{Emipro}}_{{Smsnotification}} extension
+ *                     NOTICE OF LICENSE
+ * 
+ *                     This source file is subject to the MIT License
+ *                     that is bundled with this package in the file LICENSE.txt.
+ *                     It is also available through the world-wide-web at this URL:
+ *                     http://opensource.org/licenses/mit-license.php
+ * 
+ *                     @category  Emipro
+ *                     @package   Emipro_Smsnotification
+ *                     @copyright Copyright (c) 2015
+ *                     @license   http://opensource.org/licenses/mit-license.php MIT License
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Emipro\Smsnotification\Block\Adminhtml\Smsevent\Edit" name="emipro_smsnotification_smsevent_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+    
+            <referenceContainer name="page.main.actions">
+                <block class="Magento\Backend\Block\Store\Switcher" name="store_switcher" template="Magento_Backend::store/switcher.phtml">
+                </block>
+        </referenceContainer>
+
+            <block class="Emipro\Smsnotification\Block\Adminhtml\Smsevent\Edit\Tabs" name="emipro_smsnotification_smsevent_tabs">
+                <block class="Emipro\Smsnotification\Block\Adminhtml\Smsevent\Edit\Tab\Smsevent" name="emipro_smsnotification_smsevent_edit_tab_smsevent"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">smsevent</argument>
+                    <argument name="block" xsi:type="string">emipro_smsnotification_smsevent_edit_tab_smsevent</argument>
+                </action>
+                <block class="Emipro\Smsnotification\Block\Adminhtml\Smsevent\Edit\Tab\Help" name="emipro_smsnotification_smsevent_edit_tab_help"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">help</argument>
+                    <argument name="block" xsi:type="string">emipro_smsnotification_smsevent_edit_tab_help</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

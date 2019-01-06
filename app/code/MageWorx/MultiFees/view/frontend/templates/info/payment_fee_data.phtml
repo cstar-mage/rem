@@ -1,0 +1,10 @@
+<?php
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php /**@var \MageWorx\MultiFees\Block\Checkout\AbstractFeeData $block */ ?>
+<script>
+    window.mageworxPaymentFeeInfo = <?php echo \Zend_Json::encode($block->getFeeData([\MageWorx\MultiFees\Model\AbstractFee::PAYMENT_TYPE])); ?>;
+</script>

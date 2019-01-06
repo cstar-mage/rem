@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Xnotif
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\ProductAlert\Model\ResourceModel\Stock\Customer\Collection"
+                type="Amasty\Xnotif\Model\ResourceModel\Stock\Customer\Collection"/>
+    <preference for="Magento\ProductAlert\Model\ResourceModel\Price\Customer\Collection"
+                type="Amasty\Xnotif\Model\ResourceModel\Price\Customer\Collection"/>
+
+    <!-- rewrite is here for increasing performance -->
+    <preference for="Magento\ConfigurableProduct\Helper\Data"
+                type="Amasty\Xnotif\Plugins\ConfigurableProduct\Data"/>
+
+    <preference for="Magento\ProductAlert\Model\Observer" type="Amasty\Xnotif\Model\Observer"/>
+
+    <preference for="Magento\Bundle\Model\ResourceModel\Selection\Collection"
+                type="Amasty\Xnotif\Model\ResourceModel\Bundle\Selection\Collection"/>
+
+    <!-- fix grouped problem issue -->
+    <preference for="Magento\Catalog\Model\ResourceModel\Product\Link\Product\Collection"
+                type="Amasty\Xnotif\Model\ResourceModel\Product\Link\Product\Collection"/>
+</config>

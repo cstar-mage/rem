@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="mageworx_multifees_api_data_feeinterface_save_before">
+        <observer name="legacy_model_mageworx_multifees_fee_before_save" instance="Magento\Framework\EntityManager\Observer\BeforeEntitySave" />
+    </event>
+    <event name="mageworx_multifees_api_data_feeinterface_save_after">
+        <observer name="legacy_model_mageworx_multifees_fee_after_save" instance="Magento\Framework\EntityManager\Observer\AfterEntitySave" />
+    </event>
+    <event name="mageworx_multifees_api_data_feeinterface_delete_before">
+        <observer name="legacy_model_mageworx_multifees_fee_before_delete" instance="Magento\Framework\EntityManager\Observer\BeforeEntityDelete" />
+    </event>
+    <event name="mageworx_multifees_api_data_feeinterface_delete_after">
+        <observer name="legacy_model_mageworx_multifees_fee_after_delete" instance="Magento\Framework\EntityManager\Observer\AfterEntityDelete" />
+    </event>
+    <event name="mageworx_multifees_api_data_feeinterface_load_after">
+        <observer name="legacy_model_mageworx_multifees_fee_after_load" instance="Magento\Framework\EntityManager\Observer\AfterEntityLoad" />
+    </event>
+    <event name="mageworx_multifees_api_data_feeinterface_load_before">
+        <observer name="legacy_model_mageworx_multifees_fee_after_load" instance="Magento\Framework\EntityManager\Observer\AfterEntityLoad" />
+    </event>
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="mageworx_fee_add_fee_to_order" instance="MageWorx\MultiFees\Observer\AddFeeToOrderObserver" />
+    </event>
+    <event name="sales_order_invoice_save_after">
+        <observer name="mageworx_fee_add_fee_to_invoice" instance="MageWorx\MultiFees\Observer\AddFeeToInvoiceObserver" />
+    </event>
+    <event name="sales_order_place_after">
+        <observer name="mageworx_multifees_add_fees_data" instance="MageWorx\MultiFees\Observer\AddFeeStatistics" />
+    </event>
+    <event name="sales_quote_collect_totals_after">
+        <observer name="mageworx_fee_sales_quote_collect_totals_after" instance="MageWorx\MultiFees\Observer\ValidateQuoteTotals" />
+    </event>
+</config>

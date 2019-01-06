@@ -1,0 +1,21 @@
+<?php
+
+use FME\Events\Model\Event\EventList\EventToolbar;
+?>
+<?php if ($block->getCollectionEvent()): ?>
+    <div class="toolbar toolbar-products" data-mage-init='<?php echo $block->getWidgetOptionsJsonEvent(); ?>'>
+        <?php if ($block->isExpandedEvent()): ?>
+            <?php include ($block->getTemplateFile('FME_Events::events/list/toolbar/eventviewmode.phtml')) ?>
+        <?php endif; ?>
+
+        <?php include ($block->getTemplateFile('FME_Events::events/list/toolbar/eventamount.phtml')) ?>
+
+        <?php echo $block->getPagerHtml() ?>
+
+        <?php include ($block->getTemplateFile('FME_Events::events/list/toolbar/eventlimiter.phtml')) ?>
+
+        <?php if ($block->isExpandedEvent()): ?>
+            <?php include ($block->getTemplateFile('FME_Events::events/list/toolbar/eventsorter.phtml')) ?>
+        <?php endif; ?>
+    </div>
+<?php endif ?>

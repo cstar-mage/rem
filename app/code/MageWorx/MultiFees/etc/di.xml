@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- PLUGINS: -->
+    <type name="Magento\Quote\Model\Cart\TotalsConverter">
+        <plugin name="add_mageworx_fee_details" type="MageWorx\MultiFees\Model\Plugin\Quote\FeeDetailsPlugin"/>
+        <plugin name="add_mageworx_fee_tax_details" type="MageWorx\MultiFees\Model\Plugin\Quote\FeeTaxDetailsPlugin"/>
+    </type>
+    <!-- ENTITIES: -->
+    <preference for="MageWorx\MultiFees\Api\Data\CartFeeInterface" type="MageWorx\MultiFees\Model\CartFee" />
+    <preference for="MageWorx\MultiFees\Api\Data\ShippingFeeInterface" type="MageWorx\MultiFees\Model\ShippingFee" />
+    <preference for="MageWorx\MultiFees\Api\Data\PaymentFeeInterface" type="MageWorx\MultiFees\Model\PaymentFee" />
+    <preference for="MageWorx\MultiFees\Api\Data\FeeDetailsInterface" type="MageWorx\MultiFees\Model\Fee\FeeDetails" />
+    <preference for="MageWorx\MultiFees\Api\Data\FeeOptionsInterface" type="MageWorx\MultiFees\Model\Fee\FeeOptions" />
+    <preference for="MageWorx\MultiFees\Api\FeeCollectionManagerInterface" type="MageWorx\MultiFees\Model\FeeCollectionManager" />
+    <!-- REPOSITORIES: -->
+    <preference for="MageWorx\MultiFees\Api\CartFeeRepositoryInterface" type="MageWorx\MultiFees\Model\Repositories\CartFeeRepository" />
+    <preference for="MageWorx\MultiFees\Api\ShippingFeeRepositoryInterface" type="MageWorx\MultiFees\Model\Repositories\ShippingFeeRepository" />
+    <preference for="MageWorx\MultiFees\Api\PaymentFeeRepositoryInterface" type="MageWorx\MultiFees\Model\Repositories\PaymentFeeRepository" />
+    <!-- ENTITY MANAGER: -->
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="MageWorx\MultiFees\Api\Data\CartFeeInterface" xsi:type="string">MageWorx\MultiFees\Api\CartFeeRepositoryInterface</item>
+                <item name="MageWorx\MultiFees\Api\Data\ShippingFeeInterface" xsi:type="string">MageWorx\MultiFees\Api\ShippingFeeRepositoryInterface</item>
+                <item name="MageWorx\MultiFees\Api\Data\PaymentFeeInterface" xsi:type="string">MageWorx\MultiFees\Api\PaymentFeeRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="MageWorx\MultiFees\Api\Data\CartFeeInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">mageworx_multifees_fee</item>
+                    <item name="identifierField" xsi:type="string">fee_id</item>
+                </item>
+                <item name="MageWorx\MultiFees\Api\Data\ShippingFeeInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">mageworx_multifees_fee</item>
+                    <item name="identifierField" xsi:type="string">fee_id</item>
+                </item>
+                <item name="MageWorx\MultiFees\Api\Data\PaymentFeeInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">mageworx_multifees_fee</item>
+                    <item name="identifierField" xsi:type="string">fee_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\Operation\ExtensionPool">
+        <arguments>
+            <argument name="extensionActions" xsi:type="array">
+                <item name="MageWorx\MultiFees\Api\Data\CartFeeInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="storeReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Store\ReadHandler</item>
+                        <item name="customerGroupReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\CustomerGroup\ReadHandler</item>
+                        <item name="translatedStringReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Language\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="storeCreator" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Store\SaveHandler</item>
+                        <item name="customerGroupCreator" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\CustomerGroup\SaveHandler</item>
+                        <item name="translatedStringReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Language\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="storeUpdater" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Store\SaveHandler</item>
+                        <item name="customerGroupUpdater" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\CustomerGroup\SaveHandler</item>
+                        <item name="translatedStringReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Language\SaveHandler</item>
+                    </item>
+                </item>
+                <item name="MageWorx\MultiFees\Api\Data\ShippingFeeInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="storeReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Store\ReadHandler</item>
+                        <item name="customerGroupReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\CustomerGroup\ReadHandler</item>
+                        <item name="translatedStringReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Language\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="storeCreator" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Store\SaveHandler</item>
+                        <item name="customerGroupCreator" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\CustomerGroup\SaveHandler</item>
+                        <item name="translatedStringReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Language\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="storeUpdater" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Store\SaveHandler</item>
+                        <item name="customerGroupUpdater" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\CustomerGroup\SaveHandler</item>
+                        <item name="translatedStringReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Language\SaveHandler</item>
+                    </item>
+                </item>
+                <item name="MageWorx\MultiFees\Api\Data\PaymentFeeInterface" xsi:type="array">
+                    <item name="read" xsi:type="array">
+                        <item name="storeReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Store\ReadHandler</item>
+                        <item name="customerGroupReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\CustomerGroup\ReadHandler</item>
+                        <item name="translatedStringReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Language\ReadHandler</item>
+                    </item>
+                    <item name="create" xsi:type="array">
+                        <item name="storeCreator" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Store\SaveHandler</item>
+                        <item name="customerGroupCreator" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\CustomerGroup\SaveHandler</item>
+                        <item name="translatedStringReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Language\SaveHandler</item>
+                    </item>
+                    <item name="update" xsi:type="array">
+                        <item name="storeUpdater" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Store\SaveHandler</item>
+                        <item name="customerGroupUpdater" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\CustomerGroup\SaveHandler</item>
+                        <item name="translatedStringReader" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Relation\Language\SaveHandler</item>
+                    </item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="MageWorx\MultiFees\Api\Data\CartFeeInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="MageWorx\MultiFees\Api\Data\ShippingFeeInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="MageWorx\MultiFees\Api\Data\PaymentFeeInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- GRIDS: -->
+    <!-- DATA PROVIDERS: -->
+    <virtualType name="MageWorxMultiFeesCartFeeGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">MageWorx\MultiFees\Model\ResourceModel\Fee\CartFeeCollection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MageWorxMultiFeesCartFeeGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageWorxMultiFeesShippingFeeGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">MageWorx\MultiFees\Model\ResourceModel\Fee\ShippingFeeCollection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MageWorxMultiFeesShippingFeeGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageWorxMultiFeesPaymentFeeGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">MageWorx\MultiFees\Model\ResourceModel\Fee\PaymentFeeCollection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">MageWorxMultiFeesPaymentFeeGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <!-- FILTERS: -->
+    <virtualType name="MageWorxMultiFeesCartFeeGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageWorxMultiFeesShippingFeeGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="MageWorxMultiFeesPaymentFeeGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!-- COLLECTIONS: -->
+    <type name="MageWorx\MultiFees\Model\ResourceModel\Fee\Grid\CartFeeCollection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageworx_multifees_fee</argument>
+            <argument name="eventPrefix" xsi:type="string">mageworx_multifees_cart_fee_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">fee_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\CartFeeResource</argument>
+        </arguments>
+    </type>
+    <type name="MageWorx\MultiFees\Model\ResourceModel\Fee\Grid\ShippingFeeCollection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageworx_multifees_fee</argument>
+            <argument name="eventPrefix" xsi:type="string">mageworx_multifees_shipping_fee_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">fee_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\ShippingFeeResource</argument>
+        </arguments>
+    </type>
+    <type name="MageWorx\MultiFees\Model\ResourceModel\Fee\Grid\PaymentFeeCollection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mageworx_multifees_fee</argument>
+            <argument name="eventPrefix" xsi:type="string">mageworx_multifees_payment_fee_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">fee_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\PaymentFeeResource</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="mageworx_multifees_fee_cart_listing_data_source" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Grid\CartFeeCollection</item>
+                <item name="mageworx_multifees_fee_shipping_listing_data_source" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Grid\ShippingFeeCollection</item>
+                <item name="mageworx_multifees_fee_payment_listing_data_source" xsi:type="string">MageWorx\MultiFees\Model\ResourceModel\Fee\Grid\PaymentFeeCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Layout Processor Render for each fee input type -->
+    <type name="MageWorx\MultiFees\Block\FeeFormInputPlant">
+        <arguments>
+            <argument name="feeRendererByItsType" xsi:type="array">
+                <item name="drop_down" xsi:type="string">MageWorx\MultiFees\Block\FeeFormInput\DropDown</item>
+                <item name="radio" xsi:type="string">MageWorx\MultiFees\Block\FeeFormInput\Radio</item>
+                <item name="checkbox" xsi:type="string">MageWorx\MultiFees\Block\FeeFormInput\Checkbox</item>
+                <item name="hidden" xsi:type="string">MageWorx\MultiFees\Block\FeeFormInput\Hidden</item>
+                <item name="notice" xsi:type="string">MageWorx\MultiFees\Block\FeeFormInput\Notice</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Billing & Shipping address data manager -->
+    <type name="MageWorx\MultiFees\Helper\BillingAddressManager">
+        <arguments>
+            <argument name="allowedBillingAddressDataFields" xsi:type="array">
+                <item name="0" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_COUNTRY_ID</item>
+                <item name="1" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_REGION_ID</item>
+                <item name="2" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_REGION_CODE</item>
+                <item name="3" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_REGION</item>
+                <item name="4" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_STREET</item>
+                <item name="5" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_COMPANY</item>
+                <item name="6" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_TELEPHONE</item>
+                <item name="7" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_FAX</item>
+                <item name="8" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_POSTCODE</item>
+                <item name="9" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_CITY</item>
+                <item name="10" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_FIRSTNAME</item>
+                <item name="11" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_LASTNAME</item>
+                <item name="12" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_MIDDLENAME</item>
+                <item name="13" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_PREFIX</item>
+                <item name="14" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_SUFFIX</item>
+                <item name="15" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_VAT_ID</item>
+                <item name="16" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::CUSTOMER_ADDRESS_ID</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MageWorx\MultiFees\Helper\ShippingAddressManager">
+        <arguments>
+            <argument name="allowedShippingAddressDataFields" xsi:type="array">
+                <item name="0" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_COUNTRY_ID</item>
+                <item name="1" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_REGION_ID</item>
+                <item name="2" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_REGION_CODE</item>
+                <item name="3" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_REGION</item>
+                <item name="4" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_STREET</item>
+                <item name="5" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_COMPANY</item>
+                <item name="6" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_TELEPHONE</item>
+                <item name="7" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_FAX</item>
+                <item name="8" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_POSTCODE</item>
+                <item name="9" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_CITY</item>
+                <item name="10" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_FIRSTNAME</item>
+                <item name="11" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_LASTNAME</item>
+                <item name="12" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_MIDDLENAME</item>
+                <item name="13" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_PREFIX</item>
+                <item name="14" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_SUFFIX</item>
+                <item name="15" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::KEY_VAT_ID</item>
+                <item name="16" xsi:type="const">Magento\Quote\Api\Data\AddressInterface::CUSTOMER_ADDRESS_ID</item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- Billing address missed data which should be transferred from the shipping address -->
+    <type name="MageWorx\MultiFees\Model\Fee\Condition\PaymentFee\Address">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="dataTransferredFromShippingAddress" xsi:type="array">
+                    <item name="base_subtotal" xsi:type="string">base_subtotal</item>
+                    <item name="total_qty" xsi:type="string">total_qty</item>
+                    <item name="weight" xsi:type="string">weight</item>
+                    <item name="base_discount_amount" xsi:type="string">base_discount_amount</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+</config>

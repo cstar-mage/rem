@@ -1,0 +1,10 @@
+<?php
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php /**@var \MageWorx\MultiFees\Block\Checkout\CartFeeData $block */ ?>
+<script>
+    window.mageworxFeeInfo = <?php echo \Zend_Json::encode($block->getFeeData()); ?>;
+</script>

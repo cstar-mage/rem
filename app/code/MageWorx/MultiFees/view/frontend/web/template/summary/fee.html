@@ -1,0 +1,35 @@
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+
+<!-- ko if: isDisplayed() -->
+    <tr class="totals-mageworx-fee-summary"
+        data-bind="mageInit: {'toggleAdvanced':{'selectorsToggleClass': 'shown', 'baseToggleClass': 'expanded', 'toggleContainers': '.totals-mageworx-fee-details'}}">
+        <th data-bind="text: title" class="mark" scope="row"></th>
+        <td data-bind="attr: {'data-th': title }" class="amount">
+                <span class="price"
+                      data-bind="text: getValue()"></span>
+        </td>
+    </tr>
+
+    <!-- ko foreach: getDetails() -->
+        <!-- ko foreach: options -->
+        <tr class="totals-mageworx-fee-details">
+            <!-- ko if: percent -->
+            <th class="mark" scope="row" data-bind="text: title + ' (' + $parents[1].formatToFixed(percent) + '%)'"></th>
+            <!-- /ko -->
+            <!-- ko if: !percent -->
+            <th class="mark" scope="row" data-bind="text: title"></th>
+            <!-- /ko -->
+            <td class="amount">
+                    <span class="price"
+                          data-bind="text: $parents[1].formatPrice(price), attr: {'data-th': title, 'rowspan': $parents[0].options.length }"></span>
+
+            </td>
+        </tr>
+        <!-- /ko -->
+    <!-- /ko -->
+<!-- /ko -->

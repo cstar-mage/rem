@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+-->
+<!--
+We need to add extension attributes and add extend API (using plugins) for this. Now it works by observers.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="sales_convert_quote_address">
+            <field name="mageworx_fee_amount">
+                <aspect name="to_order" />
+            </field>
+            <field name="base_mageworx_fee_amount">
+                <aspect name="to_order" />
+            </field>
+            <field name="mageworx_fee_tax_amount">
+                <aspect name="to_order" />
+            </field>
+            <field name="base_mageworx_fee_tax_amount">
+                <aspect name="to_order" />
+            </field>
+            <field name="mageworx_fee_details">
+                <aspect name="to_order" />
+            </field>
+        </fieldset>
+        <fieldset id="sales_convert_order">
+            <field name="mageworx_fee_amount">
+                <aspect name="to_invoice" />
+                <aspect name="to_cm" />
+            </field>
+            <field name="base_mageworx_fee_amount">
+                <aspect name="to_invoice" />
+                <aspect name="to_cm" />
+            </field>
+            <field name="mageworx_fee_tax_amount">
+                <aspect name="to_invoice" />
+                <aspect name="to_cm" />
+            </field>
+            <field name="base_mageworx_fee_tax_amount">
+                <aspect name="to_invoice" />
+                <aspect name="to_cm" />
+            </field>
+            <field name="mageworx_fee_details">
+                <aspect name="to_invoice" />
+                <aspect name="to_cm" />
+            </field>
+        </fieldset>
+    </scope>
+</config>

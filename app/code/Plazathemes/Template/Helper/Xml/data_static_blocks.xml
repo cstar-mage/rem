@@ -1,0 +1,367 @@
+<?xml version="1.0"?>
+<colora>
+    <blocks>
+	
+		<block>
+            <title>Contact us</title>
+            <identifier>contact_us</identifier>
+            <content>
+                    <![CDATA[
+						<div class="contact-us"><iframe style="border: 0;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6305.678625317825!2d-122.39957047637722!3d37.793805380191266!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858063d63a0215%3A0xcba0af2dfe02048f!2s101+California+Street%2C+San+Francisco%2C+CA+94111%2C+Hoa+K%E1%BB%B3!5e0!3m2!1svi!2s!4v1419099932976" width="100%" height="350"></iframe></div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Footer Top</title>
+            <identifier>footer_top</identifier>
+            <content>
+                    <![CDATA[
+						<div class="footer-static">
+						<div class="row">
+						<div class="col-sm-6">
+						<div class="des">
+						<div class="logo"><img src="{{media url="wysiwyg/logof.png"}}" alt="" /></div>
+						<div class="text">
+						<ul>
+						<li><i class="icon-location-pin icons">icon</i>42 avenue des Champs Elys</li>
+						<li><i class="icon-call-in icons">icon</i>(0123) 456789</li>
+						<li><i class="icon-envelope-open icons">icon</i>demo@ogani.com</li>
+						</ul>
+						</div>
+						</div>
+						</div>
+						<div class="col-sm-3">
+						<ul class="link">
+						<li><a href="#">About us</a></li>
+						<li><a href="#">Contact us</a></li>
+						<li><a href="#">My wishlist</a></li>
+						<li><a href="#">My Compare</a></li>
+						<li><a href="#">My Account</a></li>
+						<li><a href="#">Blogs</a></li>
+						</ul>
+						</div>
+						<div class="col-sm-3">
+						<ul class="link">
+						<li><a href="#">Terms &amp; conditions</a></li>
+						<li><a href="#">Warranty</a></li>
+						<li><a href="#">Privacy plicy</a></li>
+						<li><a href="#">FAQ</a></li>
+						<li><a href="#">Return policy</a></li>
+						<li><a href="#">Payment info</a></li>
+						</ul>
+						</div>
+						</div>
+						</div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Link Payment</title>
+            <identifier>link_payment</identifier>
+            <content>
+                    <![CDATA[
+						<p><img src="{{media url="wysiwyg/payment.png"}}" alt="" /></p>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Banner Text1 Home1</title>
+            <identifier>banner_text1_home1</identifier>
+            <content>
+                    <![CDATA[
+						<div class="banner-text1">
+						<div class="title">
+						<h3>Why choose</h3>
+						<h4>ogani store</h4>
+						</div>
+						<div class="des-content">
+						<div class="box-col1">
+						<div class="box">
+						<h3>RESPONSIVE &amp; RETINA READY</h3>
+						<p>Fusce gravida tortor felis. Ac dictum risus sagittis id morbi posu justo eleifend libero ultricies asunt</p>
+						<div class="images"><img src="{{media url="wysiwyg/box-icon1.jpg"}}" alt="" /></div>
+						</div>
+						<div class="box">
+						<h3>CALANDER AND EVENT MANAGER</h3>
+						<p>Fusce gravida tortor felis. Ac dictum risus sagittis id morbi posu justo eleifend libero ultricies asunt</p>
+						<div class="images"><img src="{{media url="wysiwyg/box-icon2.jpg"}}" alt="" /></div>
+						</div>
+						<div class="box">
+						<h3>PARALLAX VIDEO BACKGROUND</h3>
+						<p>Fusce gravida tortor felis. Ac dictum risus sagittis id morbi posu justo eleifend libero ultricies asunt</p>
+						<div class="images"><img src="{{media url="wysiwyg/box-icon3.jpg"}}" alt="" /></div>
+						</div>
+						</div>
+						<div class="box-col2">
+						<div class="box">
+						<h3>VIDEO &amp; IMAGES BACKGROUND</h3>
+						<p>Fusce gravida tortor felis. Ac dictum risus sagittis id morbi posu justo eleifend libero ultricies asunt</p>
+						<div class="images"><img src="{{media url="wysiwyg/box-icon4.jpg"}}" alt="" /></div>
+						</div>
+						<div class="box">
+						<h3>UNLIMITED COLORS SUPPORT</h3>
+						<p>Fusce gravida tortor felis. Ac dictum risus sagittis id morbi posu justo eleifend libero ultricies asunt</p>
+						<div class="images"><img src="{{media url="wysiwyg/box-icon5.jpg"}}" alt="" /></div>
+						</div>
+						<div class="box">
+						<h3>POWERFUL THEME OPTION</h3>
+						<p>Fusce gravida tortor felis. Ac dictum risus sagittis id morbi posu justo eleifend libero ultricies asunt</p>
+						<div class="images"><img src="{{media url="wysiwyg/box-icon6.jpg"}}" alt="" /></div>
+						</div>
+						</div>
+						</div>
+						</div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Banner Text2 Home1</title>
+            <identifier>banner_text2_home1</identifier>
+            <content>
+                    <![CDATA[
+						<div class="banner-text2">
+						<div class="box-img"><img src="{{media url="wysiwyg/banner-text2.jpg"}}" alt="" /></div>
+						<div class="table">
+						<div class="content">
+						<div class="des">
+						<h3>Every Monday</h3>
+						<h4>DISCOUNT 40% OFF</h4>
+						<h5>Tasty Healthy Organic</h5>
+						<p>Aenean vestibulum pretium enim, non commodo urna volutpat vitae. Pellentesque vel lacus eget est dictum dignissim. Quisque tincidunt nibh sit amet tortor gravida eleifend.</p>
+						<a class="button" href="#">Read more</a></div>
+						</div>
+						</div>
+						</div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Banner Text3 Home1</title>
+            <identifier>banner_text3_home1</identifier>
+            <content>
+                    <![CDATA[
+						<div class="banner-text3">
+						<div class="row">
+						<div class="col-sm-6">
+						<div class="des">
+						<h3>Our story</h3>
+						<h4>ogani store</h4>
+						<p>Aenean vestibulum pretium enim, non commodo urna volutpat vitae. Pellentesque vel lacus eget est dictum dignissim. Quisque tincidunt nibh sit amet tortor gravida eleifend.</p>
+						<a class="button" href="#">Read more</a></div>
+						</div>
+						<div class="col-sm-3">
+						<div class="box-img"><img src="{{media url="wysiwyg/banner-home1.jpg"}}" alt="" /></div>
+						</div>
+						<div class="col-sm-3">
+						<div class="box-img"><img src="{{media url="wysiwyg/banner-home2.jpg"}}" alt="" /></div>
+						</div>
+						</div>
+						</div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Banner images1 home1</title>
+            <identifier>banner_images1_home1</identifier>
+            <content>
+                    <![CDATA[
+						<div class="banner-home">
+						<div class="row">
+						<div class="col-sm-6">
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home3.jpg"}}" alt="" /></a></div>
+						</div>
+						<div class="col-sm-6">
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home4.jpg"}}" alt="" /></a></div>
+						</div>
+						</div>
+						</div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Products Category Home1</title>
+            <identifier>products_category_home1</identifier>
+            <content>
+                    <![CDATA[
+						<div>{{widget type="Plazathemes\Categorytab\Block\CateWidget" title="<strong>products</strong><span>Trend</span>" identify="category" category_id="3,4,5" items_default="5" items_desktop="4" items_desktop_small="3" items_tablet="2" items_mobile="1" show_addtocart="1" show_wishlist="1" show_compare="1" row_show="1" show_pager="1" template="categorytab/grid_top.phtml" page_var_name="pnnjky"}}</div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Banner images1 home2</title>
+            <identifier>banner_images1_home2</identifier>
+            <content>
+                    <![CDATA[
+						<div class="banner-home">
+						<div class="col-sm-4">
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home21.jpg"}}" alt="" /></a></div>
+						</div>
+						<div class="col-sm-4">
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home22.jpg"}}" alt="" /></a></div>
+						</div>
+						<div class="col-sm-4">
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home23.jpg"}}" alt="" /></a></div>
+						</div>
+						</div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Banner Images1 Home3</title>
+            <identifier>banner_images1_home3</identifier>
+            <content>
+                    <![CDATA[
+						<div class="banner-home">
+						<div class="col-sm-3">
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home31.jpg"}}" alt="" /></a></div>
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home34.jpg"}}" alt="" /></a></div>
+						</div>
+						<div class="col-sm-3">
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home32.jpg"}}" alt="" /></a></div>
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home35.jpg"}}" alt="" /></a></div>
+						</div>
+						<div class="col-sm-3">
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home33.jpg"}}" alt="" /></a></div>
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home36.jpg"}}" alt="" /></a></div>
+						</div>
+						<div class="col-sm-3">
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home37.jpg"}}" alt="" /></a></div>
+						</div>
+						</div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Banner Text1 Home3</title>
+            <identifier>banner_text1_home3</identifier>
+            <content>
+                    <![CDATA[
+						<div class="banner-text1">
+						<div class="title">
+						<h4>Why choose ogani</h4>
+						<p>Aenean vestibulum pretium enim, non commodo urna volutpat vitae.</p>
+						</div>
+						<div class="des-content">
+						<div class="box-col1">
+						<div class="box">
+						<h3>RESPONSIVE &amp; RETINA READY</h3>
+						<p>Fusce gravida tortor felis. Ac dictum risus sagittis id morbi posu justo eleifend libero ultricies asunt</p>
+						<div class="images"><img src="{{media url="wysiwyg/box-icon1.jpg"}}" alt="" /></div>
+						</div>
+						<div class="box">
+						<h3>CALANDER AND EVENT MANAGER</h3>
+						<p>Fusce gravida tortor felis. Ac dictum risus sagittis id morbi posu justo eleifend libero ultricies asunt</p>
+						<div class="images"><img src="{{media url="wysiwyg/box-icon2.jpg"}}" alt="" /></div>
+						</div>
+						<div class="box">
+						<h3>PARALLAX VIDEO BACKGROUND</h3>
+						<p>Fusce gravida tortor felis. Ac dictum risus sagittis id morbi posu justo eleifend libero ultricies asunt</p>
+						<div class="images"><img src="{{media url="wysiwyg/box-icon3.jpg"}}" alt="" /></div>
+						</div>
+						<div class="box">
+						<h3>UNLIMITED COLORS SUPPORT</h3>
+						<p>Fusce gravida tortor felis. Ac dictum risus sagittis id morbi posu justo eleifend libero ultricies asunt</p>
+						<div class="images"><img src="{{media url="wysiwyg/box-icon5.jpg"}}" alt="" /></div>
+						</div>
+						</div>
+						<div class="box-col2">
+						<div class="images"><img src="{{media url="wysiwyg/banner-home38.jpg"}}" alt="" /></div>
+						</div>
+						</div>
+						</div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Banner Left</title>
+            <identifier>banner_left</identifier>
+            <content>
+                    <![CDATA[
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-left.jpg"}}" alt="" /></a></div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Call Us</title>
+            <identifier>call_us</identifier>
+            <content>
+                    <![CDATA[
+						<p><i class="icon-call-in icons"></i>Call us :(0123) 456789</p>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Banner Images1 Home4</title>
+            <identifier>banner_images1_home4</identifier>
+            <content>
+                    <![CDATA[
+						<div class="banner-home">
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home41.jpg"}}" alt="" /></a></div>
+						<div class="banner-box"><a href="#"><img src="{{media url="wysiwyg/banner-home42.jpg"}}" alt="" /></a></div>
+						</div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>
+
+		<block>
+            <title>Banner Images2 Home4</title>
+            <identifier>banner_images2_home4</identifier>
+            <content>
+                    <![CDATA[
+						<div class="banner-home banner-home1">
+						<div class="row">
+						<div class="col-sm-4">
+						<div class="banner-box">
+						<h3>Skin care</h3>
+						<p>Organic ingredients</p>
+						<a href="#"><img src="{{media url="wysiwyg/banner-home43.jpg"}}" alt="" /></a></div>
+						</div>
+						<div class="col-sm-4">
+						<div class="banner-box">
+						<h3>Candice green</h3>
+						<p>Creative director, Makeup</p>
+						<a href="#"><img src="{{media url="wysiwyg/banner-home44.jpg"}}" alt="" /></a></div>
+						</div>
+						<div class="col-sm-4">
+						<div class="banner-box">
+						<h3>what&rsquo;s new</h3>
+						<p>Shop our new arrivals</p>
+						<a href="#"><img src="{{media url="wysiwyg/banner-home45.jpg"}}" alt="" /></a></div>
+						</div>
+						</div>
+						</div>
+					]]>
+            </content>
+            <is_active>1</is_active>
+        </block>		
+	
+    </blocks>
+</colora>
+

@@ -1,0 +1,22 @@
+<?php
+/**
+ * @author Amasty Team
+ * @copyright Copyright (c) 2018 Amasty (https://www.amasty.com)
+ * @package Amasty_Label
+ */
+
+/** @var $block \Amasty\Label\Block\Adminhtml\Product\Edit\Labels */
+?>
+
+<script>
+    require([
+        'jquery',
+        'domReady!'
+    ], function($) {
+        $('#edit_form').attr('enctype', 'multipart/form-data');
+    });
+</script>
+<fieldset class="fieldset">
+    <legend class="legend"><span><?php echo __('Product Labels') ?></span></legend>
+
+</fieldset>

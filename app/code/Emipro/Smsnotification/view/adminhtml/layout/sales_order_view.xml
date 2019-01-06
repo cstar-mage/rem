@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Emipro_Smsnotification::css/smsform.css" />
+    </head>
+    <body>  	
+        <referenceBlock name="sales_order_tabs">			
+			<block class="Emipro\Smsnotification\Block\Adminhtml\Order\View\Tab\Sms" name="order.sms_history"></block>
+            	<action method="addTabAfter">
+                    <argument name="name" xsi:type="string">sms_history123</argument>
+                    <argument name="block" xsi:type="string">order.sms_history</argument>  
+                     <argument name="after" xsi:type="string">order_transactions</argument>         
+                </action>                
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,146 @@
+<?php
+use Magento\Framework\App\Action\Action;
+$helper = $this->eventsHelper;
+$currdatetime = $block->getCurrDateTime();
+$arrCurrDateTime = (array)$currdatetime;
+$arrCurrDateTime = $arrCurrDateTime['date'];
+
+?>
+<?php
+$_productCollection = $block->getFrontEvents();
+
+
+
+
+
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+?>
+
+<?php if($helper->isEnabledInFrontend()): ?>
+  <?php if($_productCollection->getData()): ?>
+<?php if ($block->getMode() == 'grid'):?>
+<div id="wrapper">
+  <div class="event_manager">
+    <div class="inner_container">
+      <div class="page_title">
+        <h1><?php echo __( $helper->getEventPageTitle())?></h1>
+      </div> 
+    <div class="toolbar clearfix">
+    <?php 
+     $viewMode = 'grid';       
+         echo $block->getToolbarHtml();?>
+     <?php echo $block->getAdditionalHtml() ?>
+  </div>      
+      <div class="product_grid">
+      <ul>
+      <?php foreach ($_productCollection as $_product):?>
+        <?php if(strtotime($helper->getTimeAccordingToTimeZone($_product->getEventEndDate())) < strtotime($arrCurrDateTime)):
+              //echo 'event expired';exit;
+
+         ?>
+          <?php continue; ?>
+        <?php endif;?>
+        <?php  $url = $_product->getEventUrlPrefix(); ?>
+            <?php $_productNameStripped = $block->stripTags($_product->getEventName(), null, true);?>
+            <?php $productImage = $block->getCurrentImage($_product->getId());?>
+          <li>        
+            <div class="event_block" >
+              <div class="event_title">
+                <h2><a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($url) ?>"><?php echo $_productNameStripped ?></a></h2>
+              </div>
+              <?php  if($productImage):?>
+                    <?php $urlimg = $block->getMediaUrl().'tmp/events/event/media/'.$productImage; ?>
+              <div class="event_thumbnail"> <a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($url) ?>"><img src="<?php echo $urlimg; ?>" alt=""></a> </div>
+               <?php endif; ?>
+              <div class="event_detail">
+              <?php $fromDate = new Zend_Date(strtotime($_product->getEventStartDate()));
+
+                $endDate = new Zend_Date(strtotime($_product->getEventEndDate()));
+                       ?>
+                <p><span><?php echo __('From:') ?></span> <?php echo $helper->getTimeAccordingToTimeZone($fromDate); ?><br>
+                  <span><?php echo __('To:') ?></span><?php echo $helper->getTimeAccordingToTimeZone($_product->getEventEndDate()) ?><br>
+                  <span><?php echo __('Venue:') ?></span> <?php echo $_product->getEventVenue() ?></p>
+                  
+                  <div class="learn_more">
+                    <a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($url) ?>"><?php  echo __('Learn More ..') ?></a>
+                  </div>                  
+              </div>
+            </div>
+          </li>           
+                <?php endforeach; ?>
+        </ul> 
+      </div>    
+    </div>
+<?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif; ?>
+</div>    
+</div>
+ <?php endif; ?>
+
+<?php if ($block->getMode() == 'list'):?>
+  <div id="wrapper">
+  <div class="event_manager">
+    <div class="inner_container">
+      <div class="page_title">
+        <h1><?php echo $helper->getEventPageTitle()?></h1>
+      </div>
+      <div class="toolbar clearfix">
+    <?php echo $block->getToolbarHtml() ?>
+    <?php echo $block->getAdditionalHtml() ?>
+  </div>
+      <div class="product_grid list_view_height">
+        <ul>
+        <?php foreach ($_productCollection as $_product): ?>
+          <?php if(strtotime($helper->getTimeAccordingToTimeZone($_product->getEventEndDate())) < strtotime($arrCurrDateTime)):?>
+          <?php continue; ?>
+        <?php endif;?>
+        <?php  $url = $_product->getEventUrlPrefix(); ?>
+            <?php $_productNameStripped = $block->stripTags($_product->getEventName(), null, true); ?> 
+
+        <?php $productImage = $block->getCurrentImage($_product->getId());?>              
+          <li class="list">
+            <div class="event_block">
+              <div class="event_title">
+                <h2><a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($url) ?>"><?php echo $_productNameStripped ?></a></h2>
+              </div>
+              <?php  if($productImage):?>
+                  <?php $urlimg = $block->getMediaUrl().'tmp/events/event/media/'.$productImage; ?>
+                <div class="event_thumbnail"> <a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($url) ?>"><img src="<?php echo $urlimg; ?>" alt=""></a> </div>
+            <?php endif; ?>
+              <div class="event_detail">
+               <?php $fromDate = new Zend_Date(strtotime($_product->getEventStartDate()));
+                 $endDate = new Zend_Date(strtotime($_product->getEventEndDate()));?>
+                <p><span><?php echo __('From:') ?></span><?php echo $helper->getTimeAccordingToTimeZone($fromDate); ?><br>
+                  <span><?php echo __('To:') ?></span><?php echo $helper->getTimeAccordingToTimeZone($endDate) ?><br>
+                  <span><?php echo __('Venue:') ?></span> <?php echo $_product->getEventVenue() ?></p>
+                  <br>
+       <?php $string = $_product->getEventContent() ?>   
+      <?php $string = strip_tags($string);
+          if (strlen($string) > 500) {
+            $stringCut = substr($string, 0, 500);   
+            $string = substr($stringCut, 0, strrpos($stringCut, ' ')).'... '; }?>            
+                  <p><?php echo $string; ?></p>
+                  <div class="learn_more">
+                    <a href="<?php echo $this->getUrl().$helper->getEventFinalDetailIdentifier($url) ?>"><?php  echo __('Learn More ..') ?></a>
+                  </div>                  
+              </div>
+            </div>
+          </li> 
+          <?php endforeach; ?>        
+         </ul>
+      </div>
+    </div>
+    <?php if ($block->getPagerHtml()): ?>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
+    <?php endif ?>
+  </div>
+</div>
+ <?php endif; ?>
+<?php else: ?>
+<p><?php echo __($helper->getEventEmptyCollection()) ?></p>
+ <?php endif; ?>
+
+<?php else: ?>
+  <?php echo __('Events Module Is Off Right Now'); ?>
+<?php endif; ?>

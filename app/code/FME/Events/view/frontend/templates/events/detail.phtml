@@ -1,0 +1,358 @@
+<div id="wrapper">
+  <div class="event_manager">
+    <div class="inner_container">
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<?php
+const PARAM_NAME_BASE64_URL = 'r64';
+const PARAM_NAME_URL_ENCODED = 'uenc';
+use Magento\Framework\App\Action\Action;
+
+$helper = $this->eventsHelper;
+$dkfdkf=$this->getRequest()->getParams();
+$key = @$dkfdkf['id'];
+$item = $this->getEventDetail($key);
+if (!empty($item->getData())) :
+    foreach ($item as $gloabalitems) {
+        $lat = $gloabalitems->getLatitude();
+        $lng = $gloabalitems->getLongitude();
+        $eid = $gloabalitems->getEventId();
+    }
+?>
+<?php if (!empty($item)) : ?>
+    <script type="text/javascript">
+        
+        function initMap(sel) {        
+            var lat = <?php echo $lat ?>;
+            var lng = <?php echo $lng ?>;
+            var mmzoomlevel = '17';
+                        
+            var uluru = {lat: eval(lat),lng: eval(lng) };
+            var map = new google.maps.Map(document.getElementById('map_canvas'), {
+                zoom: eval(mmzoomlevel),
+                center: uluru                
+            });
+            marker = new google.maps.Marker({
+              position: new google.maps.LatLng(uluru),
+              map: map,              
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+          });  
+   }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=<?php echo $helper->getGMapAPIKey() ?>&callback=initMap">  
+    </script>
+   
+<script>
+    require(
+        [
+            'jquery',
+            'Magento_Ui/js/modal/modal'
+        ],
+        function(
+            $,
+            modal
+        ) {
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Event Tickets & Products',
+                buttons: [{
+                    text: $.mage.__('Continue'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+
+            var popup = modal(options, $('#events_popup'));
+            $("#click-me").on('click',function(){ 
+                $("#events_popup").modal("openModal");
+            });
+
+        }
+    );
+</script>     
+    
+    <?php foreach ($item as $items) : ?>
+        <?php $idimg = $items->getId(); ?>
+     <div class="page_title">
+     <a href="<?php echo $this->getUrl().$helper->getEventFinalIdentifier(); ?>"><strong><?php echo __('back') ?></strong></a>
+        <h1><?php echo $items->getEventName(); ?></h1>
+      </div>
+
+      <!-- Main Image begins -->
+          
+        <?php $productImage = $block->getCurrentImage($items->getId()); ?>
+    <?php if ($productImage) :  ?>
+        <?php $urlimg = $block->getJsUrl().'tmp/events/event/media/'.$productImage; ?>    
+<div class="container"> 
+    <div class="detail_thumbnail"> <img src="<?php echo $urlimg ? $urlimg: ''; ?>" alt="<?php echo $items->getEventName(); ?>"
+                     
+                     style="border: 1px solid #d5d5d5;padding:3px;margin-right: 10px;" /> <?php endif; ?>  </div>
+
+         <!-- Main Image ends --> 
+            <?php
+            $fromDate =new Zend_Date(strtotime($items->getEventStartDate()));
+            $toDate = new Zend_Date(strtotime($items->getEventEndDate()));
+        ?>           
+        <div class="detail_left_col clearfix">
+          <div class="event_info">
+            <h2><?php echo __('Event Information') ?></h2>
+            <div class="event-info-field clearfix">
+              <div class="event-info-label">
+                <label><?php echo __('Time') ?></label>
+              </div>
+              <div class="event-info-content"><?php echo $helper->getTimeAccordingToTimeZone($fromDate);  ?>  -  <?php echo $helper->getTimeAccordingToTimeZone($toDate) ?></div>
+            </div>
+            <div class="event-info-field clearfix">
+              <div class="event-info-label">
+                <label><?php echo __('Venue') ?></label>
+              </div>
+              <div class="event-info-content"><?php echo $items->getEventVenue();?></div>
+            </div>
+            <?php if ($items->getContactName()!= '') :  ?>
+            <div class="event-info-field clearfix">
+              <div class="event-info-label">
+                <label><?php echo __('Contact Person') ?></label>
+              </div>
+              <div class="event-info-content"><?php  echo $items->getContactName();
+            ?></div>
+            </div>
+            <?php endif;?>
+                <?php if ($items->getContactPhone()!= '') :  ?>
+            <div class="event-info-field clearfix">
+              <div class="event-info-label">
+                <label><?php  echo __('Phone') ?></label>
+              </div>
+              <div class="event-info-content"><?php  echo $items->getContactPhone();
+            ?></div>
+            </div>
+            <?php endif;?>
+                <?php if ($items->getContactFax()!= '') :  ?>
+            <div class="event-info-field clearfix">
+              <div class="event-info-label">
+                <label><?php echo __('Fax') ?></label>
+              </div>
+              <div class="event-info-content"><?php echo $items->getContactFax();
+            ?></div>
+            </div>
+            <?php endif;?>
+            <?php if ($items->getContactEmail()!= '') :  ?>
+            <div class="event-info-field clearfix">
+              <div class="event-info-label">
+                <label><?php echo __('Email') ?></label>
+              </div>
+              <div class="event-info-content"><?php echo $items->getContactEmail();
+            ?></div>
+            </div>
+            <?php endif;?>
+                <?php if ($items->getContactAddress()!= '') :  ?>
+            <div class="event-info-field clearfix">
+              <div class="event-info-label">
+                <label><?php echo __('Address') ?></label>
+              </div>
+              <div class="event-info-content"><?php echo $items->getContactAddress();
+            ?></div>
+            </div>
+            <?php endif;?>
+          </div>          
+ <!-- Ticket section begins -->
+            <?php if (!empty($eid)) {
+                  $evtTickets = $this->getEventAssocProducts($eid);
+                    $_productCollection = $block->getProductCollection($evtTickets);
+}
+            ?>
+
+            <?php if ($_productCollection->getData()) : ?> 
+          <div class="buy_tickets"> <a href="#" id="click-me"><?php echo __('Buy Tickets') ?></a> </div>
+          <!-- containder and detailed left clearfix --> 
+ </div></div>
+ <div id="wrapper">
+    <div class="holder">
+      <div id="events_popup" style="display: none;" class="events_popup">           
+<ul>
+        <?php       $_objectManager = \Magento\Framework\App\ObjectManager::getInstance(); ?>      
+                    <?php foreach ($_productCollection as $_product) : ?>
+<?php $customOptions = $_objectManager->get('Magento\Catalog\Model\Product\Option')->getProductOptionCollection($_product);
+$store = $_objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+$imageUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $_product->getImage();
+?>                  
+    <?php $postParams = $block->getAddToCartPostParams($_product); ?>       
+        <li class="clearfix">
+   <h2> <?php echo __($_product->getName())?></h2>   
+   <div class="thumbnail">
+           <img src="<?php echo $imageUrl ?>" alt="">
+         </div>
+  <span class="price"><?php echo $block->getProductPrice($_product)?></span>
+    <form data-role="tocart-form" id="<?php echo $_product->getId()?>" action=<?php echo $block->getAddToCartUrl($_product) ?>;  method="post" enctype="multipart/form-data">    
+        <input type="hidden" name="product" value="<?php echo $postParams['data']['product']; ?>">
+        <input type="hidden" name="<?php echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">         
+            <?php echo $block->getBlockHtml('formkey')?>    
+        <div class="qty">
+             <p class="title"><?php echo __('QTY:') ?></p>           
+                <input class="qty_field" type="number"
+                       name="qty"
+                       id="qty"
+                       maxlength="12"
+                       value="1"
+                       title="<?php echo __('Quantity:') ?>" 
+                       data-validate="<?php echo $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       /></div>
+<?php if ($customOptions) :?>
+<?php foreach ($customOptions as $_option) :
+    $values = $_objectManager->get('Magento\Catalog\Model\Product\Option\Value')->getValuesCollection($_option);?>
+<div class="fieldset" tabindex="0">
+    <?php if ($_option->getType()=='field') :?>            
+    <div class="field required">
+    <label  class="label" for="options_<?php echo $_option->getOptionId() ?>_text">
+        <span><?php echo $_option->getTitle()?></span>
+            </label>
+    <div class="control">
+                                <input id="options_<?php echo $_option->getOptionId() ?>_text" class="field_input input-text  product-custom-option" data-validate="{&quot;required&quot;:true}" name="options[<?php echo $_option->getOptionId() ?>]" data-selector="options[<?php echo $_option->getOptionId() ?>]" value="" aria-required="true" type="text"></div>
+    </div>
+    <?php endif;?>            
+    <?php if ($_option->getType()=='drop_down') :?>       
+    <div class="field required">
+    <label class="label" for="select_<?php echo $_option->getOptionId() ?>">
+    <span><?php echo $_option->getTitle() ?></span>
+    </label>
+    <div class="control">    
+         <select name="options[<?php  echo $_option->getOptionId() ?>]" id="<?php  echo $_option->getOptionId() ?>_select" class=" required product-custom-option admin__control-select" title="" data-selector="options[<?php  echo $_option->getOptionId() ?>]" aria-required="true"><option value=""><?php  echo __('-- Please Select --') ?></option>
+        <?php foreach ($values as $value) : ?>
+                 <option value="<?php  echo $value->getOptionTypeId() ?>" price="0"><?php echo $value->getTitle() ?></option>
+            <?php endforeach; ?>
+            </select>
+    </div>
+    </div>
+<?php endif; ?>
+</div>
+<?php endforeach;?>
+<?php endif;?>       
+            <button type="submit" title="Add to Cart" class="">
+                <span><?php echo __('Add to Cart') ?></span>
+            </button>           
+<script type="text/javascript">
+require(
+        [
+            'jquery'
+            
+        ],
+        function($,modal)
+        {
+$("#<?php echo $_product->getId()?>").submit(function(e) {
+    $.ajax({
+           type: "POST",
+           url:  $(this).attr('action'),
+           data: $("#<?php echo $_product->getId()?>").serialize(), 
+           showLoader: true,
+           success: function(data)
+           {      
+                $('#events_popup').modal('closeModal');
+           }
+         });
+    e.preventDefault(); 
+});
+});        
+</script>
+</form>
+</li>
+<?php endforeach;?>
+  </ul>                  
+<?php endif; ?>
+<!-- wrapper holder event popup , display none-->
+</div></div></div>
+<!-- Ticket section ends -->
+<!-- Content Section begings -->
+      <div class="container">
+        <div class="content">         
+         <p> <?php /* @escapeNotVerified */ echo $items->getEventContent();?></p>
+        </div>
+      </div>
+      <!--Content Section Ends  -->       
+    <?php endforeach;  ?>
+  <!-- Gallery section begins -->
+    <script type="text/javascript">
+            require(["jquery", "owlcarousel", "jqueryfunction",
+                "jqueryfunctionb", "shadowbox"], function ($, owlcarousel, jqueryfunction,jqueryfunctionb, shadowbox) {
+                Shadowbox.init({
+                    overlayOpacity: 0.8,
+                    flashVars: {
+                      skin: '<?php echo $block->getMediaUrl('js/skin01.zip') ?>'
+                    }
+                });
+            });
+        </script>
+        <?php
+          $galids = [];
+          $galleryImages = [];
+          $result = $this->getEventGalleries($idimg);
+          $galleryImages = $this->getEventGalleries($idimg);
+        ?>
+        <?php $sap = 5000;?>        
+        <?php if (count($galleryImages)>1) : ?>
+             <div class="media_gallery_slider">
+             <input type="hidden" id="autoPlay" value="<?php echo $sap ?>">
+                <h2><?php echo $items->getEventName();?> <?php echo __('Gallery') ?></h2>
+              <div class="container-carousel">
+                    <div id="owl-demo2" class="owl-carousel owl-theme">
+                        <?php $i = 1;
+                        foreach ($galleryImages as $_gallery) :
+                            ?>
+                        <?php $imageFile = $block->getCarousUrl().'tmp/events/event/media/'.$_gallery->getFile(); ?>
+                            <div class="item">
+                                <div class="video">
+                                    <a class="image" href="<?php echo $imageFile ?>" title="" rel="shadowbox">
+                                        <img src="<?php echo $imageFile; ?>"  alt="thumbnail" /></a>
+                                </div>
+                            </div>
+            <?php                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 endforeach ?>
+                    </div>          
+        <?php endif; ?>
+       </div>
+    </div>
+        <!-- Gallery section ends -->
+          <!-- Video section && G-Map begins -->
+<div class="container">
+    <div class="events_venue">        
+        <?php
+            $videoId = '';
+            $explode = explode('=', $items->getEventVideo());
+            $videoId = @ $explode['1'];
+            ?>
+           <ul>
+            <?php if ($items->getEventVideo() != '') :?>
+            <li>
+             <h2><?php echo $items->getEventName();?> <?php echo __('Video') ?></h2>              
+        <div class="video">           
+            <iframe class="youtube-player" type="text/html" width="100%" height="100%" src="http://www.youtube.com/embed/<?php echo stripslashes($videoId); ?>" frameborder="0"></iframe> 
+        </div>         
+            </li>
+            <?php endif; ?>
+    <?php if ($lat && $lng) :?>
+        <li>     
+        <h2><?php echo __('Venue') ?></h2>
+        <div class="map">      
+            <div id="map_canvas" style="height:300px;" ></div>
+        </div>     
+        </li>
+            <?php endif;?>            
+          </ul>   
+      </div>
+  </div>  
+<!-- Video section ends -->       
+        <!--Social section begin  -->
+      <div class="container">
+        <div class="event_social_wdgt"> <span class='st_fblike_hcount'></span><span class='st_twitter_hcount'></span><span class='st_plusone_hcount'></span><span class='st_email_hcount'></span><span class='st_sharethis_hcount'></span> </div>
+      </div>
+      <!-- Social Section End -->   
+<?php else : ?>    
+    <?php echo __('This event does not exist.'); ?>
+<?php endif; ?>
+<?php     endif; ?>
+      </div>
+    </div>
+</div>
+
+

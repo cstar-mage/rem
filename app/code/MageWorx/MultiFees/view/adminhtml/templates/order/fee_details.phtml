@@ -1,0 +1,37 @@
+<?php
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/** @var \MageWorx\MultiFees\Block\Adminhtml\Order\View\Info $block */
+?>
+
+<?php if ($multifees = $block->getFeeDetails()): ?>
+<br><br>
+
+        <div class="admin__page-section-title"><span class="title"><?php echo __('Additional Fees') ?></span></div>
+    <?php foreach($multifees as $type => $fees):?>
+        <div id="order-fee-details" class="admin__page-section-item order-payment-method">
+        <?php foreach ($fees as $fee) { ?>
+            <div class="admin__page-section-item-content">
+                <strong><?php echo $block->escapeHtml($fee['title']); ?></strong>
+                <table>
+                    <?php foreach ($fee['options'] as $optionId => $option) { ?>
+                        <tr>
+                            <td>
+                                <?php echo $block->escapeHtml($option['title']); ?>
+                                <?php echo $block->getOptionPriceHtml($option) ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </table>
+                <?php echo $block->getFeeDateHtml($fee); ?>
+                <?php echo $block->getFeeMessageHtml($fee); ?>
+            </div>
+        <?php } ?>
+        </div>
+    <?php endforeach;?>
+
+
+<?php endif; ?>

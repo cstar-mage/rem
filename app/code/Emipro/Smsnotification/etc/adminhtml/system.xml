@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+<system>
+    <tab id="emipro" translate="label" sortOrder="10">
+        <label>Emipro</label>
+    </tab>
+    <section id="emiproconfig" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+        <label>Order Notification By SMS</label>
+        <tab>emipro</tab>
+        <resource>Emipro_Smsnotification::configuration</resource>
+        
+        <group id="licence" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1"> 
+                <label>Licence</label>
+            <!-- Field Id must be 'licence'-->
+                <field id="licence" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Licence Key</label>
+                </field>
+        </group>
+
+        <group id="gatewayconfig" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>SMS Gateway Configuration</label>
+            <!-- create text type field -->
+            <field id="sms_enable" translate="label comment" sortOrder="7" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable SMS Notification</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+            </field>
+            <field id="user_name" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>User Name</label>
+                <comment>SMS Gateway Username of Website</comment>
+            </field>
+            <field id="user_password" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Password</label>
+                <comment>SMS Gateway Password </comment>
+            </field>
+            <field id="user_senderid" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Sender ID</label>
+                <comment>Sender ID for Send SMS</comment>
+            </field>
+            <field id="user_gatewayurl" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>SMS Gateway Url</label>
+                <comment>SMS Gateway Url for Send SMS</comment>
+            </field>
+            <field id="user_parameter_format" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Parameter Format</label>
+                <comment>For E.g:- user={{var username}}&amp;senderID={{var senderid}}</comment>
+            </field>
+        </group>
+
+        <group id="sendtest" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Test SMS Sending process</label>
+            <comment><![CDATA[ <b>Note:</b> SMS will be sent using above gateway configuration. Please test SMS sending process after saving above configuration. <br>]]></comment>
+            <field id="sms_number" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enter Mobile Number</label>
+                <comment>Enter Number</comment>
+                <!-- <validate>validate-digits</validate> -->
+            </field>
+            <field id="sms_text" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enter Text</label>
+                <comment>Message Text</comment>
+            </field>
+            <field id="listbutton" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <frontend_model>Emipro\Smsnotification\Block\System\Config\Form\Button</frontend_model>
+            </field>
+        </group>
+    </section>
+</system>
+</config>

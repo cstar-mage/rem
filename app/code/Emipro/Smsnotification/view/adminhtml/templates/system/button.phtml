@@ -1,0 +1,69 @@
+<div class="pp-buttons-container">
+    <button id="<?php echo $block->getId() ?>" onclick="return false;">
+        <span><span><span><?php echo $block->escapeHtml($block->getButtonLabel()); ?></span></span></span>
+    </button>
+</div>
+<div id ="popup-mpdal"></div>
+<?php 
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $value = $objectManager->get('Magento\Framework\App\Config\ScopeConfigInterface'); 
+?>
+<script>
+    require(['jquery','Magento_Ui/js/modal/modal'], function ($,modal) {
+        var options = {
+            type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'SMS sent successfully..',
+                buttons: [{
+                    text: $.mage.__('Ok'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+        var option = {
+            type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                title: 'Please enter text to send SMS.',
+                buttons: [{
+                    text: $.mage.__('Ok'),
+                    class: '',
+                    click: function () {
+                        this.closeModal();
+                    }
+                }]
+            };
+        jQuery('document').ready(function () {
+            jQuery("#send_sms").click('button.modalRun',function () {
+                var smstext = jQuery("#emiproconfig_sendtest_sms_text").val();
+                var smsnumber = jQuery("#emiproconfig_sendtest_sms_number").val();
+                console.log(smsnumber+smstext);
+                if (smstext != "" && smsnumber != "")
+                {
+                    jQuery("#send_sms").prop("disabled", true);
+                    request = $.ajax({
+                        url: "<?php echo $block->getAjaxCheckUrl(); ?>",
+                        type: "post",
+                        data: {"smstext": smstext, "smsnumber": smsnumber}
+                    });
+
+                    request.done(function (response, textStatus, jqXHR) {
+                        jQuery("#send_sms").prop("disabled", false);
+                        console.log(response);
+                        var popup = modal(options, $('#popup-mpdal'));
+                        $('#popup-mpdal').modal('openModal');
+                        /*$("#order_Comment").prepend('<li class="note-list-item" style="list-style-type:none; margin-bottom:10px;"><b>Send SMS </b><span class="note-list-date">'+response.datetime+'</span><div>'+response.smstext+'</div></li>');*/
+                    });
+                }
+                else
+                {
+                    var popup = modal(option, $('#popup-mpdal'));
+                    $('#popup-mpdal').modal('openModal');
+                }
+            });
+        });
+    });
+</script>

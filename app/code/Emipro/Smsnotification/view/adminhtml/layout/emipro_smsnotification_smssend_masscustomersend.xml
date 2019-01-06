@@ -1,0 +1,11 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+	<head>
+        <css src="Emipro_Smsnotification::css/smsform.css" />
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Emipro\Smsnotification\Block\Adminhtml\SendmassCustomer" name="customer_mass_send" template="Emipro_Smsnotification::masscustomersend.phtml">
+            </block>
+        </referenceContainer>
+    </body>
+</page>

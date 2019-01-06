@@ -1,0 +1,56 @@
+<?php
+/**
+ * Copyright © MageWorx. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+?>
+<?php
+/** @var $block \Magento\Checkout\Block\Cart\Shipping */
+/** @var $block \MageWorx\MultiFees\Block\Cart\Fee */
+?>
+
+<?php if ($block->getIsEnabled()): ?>
+    <div id="block-fee-wrapper">
+        <div id="block-fee" class="block shipping"
+             data-mage-init='{"collapsible":{"openedState": "active", "saveState": true}}'>
+            <div class="title" data-role="title">
+                <strong id="block-fee-heading" role="heading" aria-level="2">
+                    <?php /* @escapeNotVerified */
+                    echo $block->getQuote()->isVirtual() ? __('Estimate Fees') : __('Estimate Fees') ?>
+                </strong>
+            </div>
+            <div id="block-fee-summary" data-bind="scope:'mageworx-fee-form-container'" class="content"
+                 data-role="content" aria-labelledby="block-fee-heading">
+                <!-- ko template: getTemplate() --><!-- /ko -->
+                <script type="text/x-magento-init">
+                    {
+                        "#block-fee": {
+                            "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */
+                    echo $block->getJsLayout(); ?>
+                        }
+                    }
+
+                </script>
+            </div>
+        </div>
+    </div>
+    <script>
+        require(['jquery', 'jquery/ui'], function ($) {
+            if (!$('#mageworx-fee-container').length) {
+                var i = 0;
+                var target = document.querySelector('#block-fee-summary');
+                var observer = new MutationObserver(function (mutations) {
+                    mutations.forEach(function (mutation) {
+                        if ($('#mageworx-fee-container').length && i === 0) {
+                            i++;
+                            $('#block-fee-wrapper').show();
+                            observer.disconnect();
+                        }
+                    });
+                });
+                var config = {childList: true, subtree: true};
+                observer.observe(target, config);
+            }
+        });
+    </script>
+<?php endif; ?>

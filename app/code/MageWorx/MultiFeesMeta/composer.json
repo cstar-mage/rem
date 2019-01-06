@@ -1,0 +1,9 @@
+{
+    "name": "mageworx/module-multifeesmeta",
+    "version": "1.3.2",
+    "type": "metapackage",
+    "require": {
+        "php": ">=5.5",
+        "mageworx/module-multifees": "1.3.2"
+    }
+}
