@@ -64,6 +64,7 @@ $testimonials = $this->getTestimonial();
 <div class="pt-testimonial-left">
 	<div class="content-left">
 	<?php $firstItem = $_productCollection->getFirstItem(); ?>
+        <?php if ($firstItem->getId()): ?>
 	<?php  $firstUrl = $firstItem->getEventUrlPrefix(); ?>
 	 <?php $firstProductImage = $tm_block->getCurrentImage($firstItem->getId());
             $first_url_image = $tm_block->getMediaUrl().'tmp/events/event/media/'.$firstProductImage;
@@ -91,7 +92,7 @@ $testimonials = $this->getTestimonial();
 			?>
 			<span class="date"><?php echo __(date("d", strtotime($date))) ?></span><span class="month"><?php echo __(date("F", strtotime($date))) ?></span><span class="separator">.</span><span class="year"><?php echo __(date("Y", strtotime($date))) ?></span>
 		</div>
-		
+		<?php endif; ?>
 	</div>
 	</div>
 	<div class="pt-testimonial-right">	   

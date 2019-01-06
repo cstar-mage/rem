@@ -16,12 +16,14 @@ $date = new Zend_Date();
 $currdatetime = $block->getCurrDateTime();
 
 $arrCurrDateTime = (array)$currdatetime;
-$arrCurrDateTime = $arrCurrDateTime['date'];    
+$arrCurrDateTime = $arrCurrDateTime['date'];
+
+$items = array();
 foreach ($calendarEventsCollection as $value) :
     $value['url'] = $this->getUrl().$helper->getEventFinalDetailIdentifier($value['event_url_prefix']);       
-         if(strtotime($helper->getTimeAccordingToTimeZone($value['end'])) < strtotime($arrCurrDateTime)):        
-           continue;
-            endif; 
+//    if(strtotime($helper->getTimeAccordingToTimeZone($value['end'])) < strtotime($arrCurrDateTime)):
+//        continue;
+//    endif;
    //get datetime Zend_Date Object
     $rstartd =  new Zend_Date($value['start'], 'YYYY-MM-DD');
     $rendd =  new Zend_Date($value['end'], 'YYYY-MM-DD');

@@ -369,7 +369,7 @@ div#checkout form.form.form-login .input-text {
 }
 button.action.icon-magnifier.icons {
     border-radius: unset;
-    background-color: #ae0814 !;
+    background-color: #ae0814 !important;
     opacity: 1;
     width: 65px !important;
 
@@ -1890,7 +1890,7 @@ div#checkout .form-login .label {
     margin: 0 0 10px;
 }
 .login-container .block.block-customer-login,.login-container .block.block-new-customer{
-   min- width: 48.8%;
+   min-width: 48.8%;
     background: #f5f5f5;
     padding: 25px;
     border: 1px solid #eaeaea;
@@ -2680,7 +2680,7 @@ body.catalog-product-view .product-info-main .product-add-form .box-tocart .acti
 		font-weight: 600;
 	}
 	span.product-image-wrapper {
-		padding-bottom: 1;
+		padding-bottom: 1px;
 	}
 	.content-home .new-product-slider .owl-controls {
 		display: none;

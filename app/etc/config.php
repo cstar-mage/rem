@@ -17,6 +17,7 @@ return array (
     'Magento_Backend' => 1,
     'Magento_AdminNotification' => 1,
     'Magento_Indexer' => 1,
+    'Apptrian_ImageOptimizer' => 1,
     'Auctane_Api' => 1,
     'Magento_Cms' => 1,
     'Magento_Widget' => 1,
