@@ -212,7 +212,7 @@ div#checkout form.form.form-login .input-text {
 	margin: 10px auto;
 	    padding-top: 15px;
 }
-.header-container .header .container-inner .header-inner .h-right .nav-container .pt_custommenu .popup .sub .sub-block .sub-cat span a:after{
+.header-container .header .container-inner .header-inner .h-right .nav-container .pt_custommenu .popup .sub .sub-block .sub-cat.has-children span a:after{
     content: '\f105';
     font-family: FontAwesome;
     color: #000;

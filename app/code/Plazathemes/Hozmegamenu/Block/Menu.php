@@ -481,9 +481,14 @@ class Menu	 extends \Magento\Framework\View\Element\Template
             // --- draw Sub Categories ---
             $html[] = $this->drawSubCategoryTab($name ,$activeChildren, $id);
             if (count($activeChildren))
-            { 
+            {
                 $html[] = '<div class="block1" id="block1' . $id . '">';
-                $html[] = $this->drawColumns($activeChildren, $id);
+//                $html[] = $this->drawColumns($activeChildren, $id);
+                foreach ($activeChildren as $child) {
+                    $children = $this->getActiveChildren($child, $level + 1);
+                    $html[] = $this->drawColumns($children, $child->getId());
+                }
+
                 if ($blockHtml && $blockHtmlRight)
                 {
                     $html[] = '<div class="column blockright last">';
@@ -491,7 +496,7 @@ class Menu	 extends \Magento\Framework\View\Element\Template
                     $html[] = '</div>';
                 }
                 $html[] = '<div class="clearBoth"></div>';
-                $html[] = '</div></div>';
+                $html[] = '</div>';
             }
             // --- draw Custom User Block ---
             if ($blockHtml && !$blockHtmlRight)
@@ -500,7 +505,7 @@ class Menu	 extends \Magento\Framework\View\Element\Template
                 $html[] = $blockHtml;
                 $html[] = '</div>';
             }
-            $html[] = '</div>';
+            $html[] = '</div></div>';
         }
         $html[] = '</div>';
         $html = implode("\n", $html);
@@ -509,20 +514,24 @@ class Menu	 extends \Magento\Framework\View\Element\Template
     }
 	
 	public function drawSubCategoryTab($name, $children, $id){
-        $html = '';
         $html = '<div class="sub"><div class="sub-block"><div class="sub-cat head"><span>'.$name.'</span></div>';
         
         // --- explode by columns ---
 		foreach($children as $key => $value){
-			$html = $html.'<div class=sub-cat><span><a href="'.$value->getUrl().'">'.$value->getName().'</a></span></div>';
+		    $hasActiveChild = count($this->getActiveChildren($value, 1));
+		    if ($hasActiveChild) {
+                $html .= '<div class="sub-cat sub-cat-item has-children" data-id="' . $value->getId() . '"><span><a href="'.$value->getUrl().'">'.$value->getName().'</a></span></div>';
+            } else {
+                $html .= '<div class="sub-cat sub-cat-item" data-id="' . $value->getId() . '"><span><a href="'.$value->getUrl().'">'.$value->getName().'</a></span></div>';
+            }
 		}
-		$html = $html.'</div></div>';
+		$html .= '</div></div>';
         return $html;        		
 	}
 	
 	public function drawColumns($children, $id)
     {
-        $html = '';
+        $html = '<div class="children-' . $id . '">';
         // --- explode by columns ---
         $columns = $this->getConfig('is_column');
         if ($columns < 1) $columns = 1;
@@ -556,6 +565,8 @@ class Menu	 extends \Magento\Framework\View\Element\Template
             $html.= $this->drawMenuItem($value, 1, $columChunk);
             $html.= '</div>';
         }
+
+        $html .= '</div>';
         return $html;
     }
 	

@@ -78,12 +78,8 @@ class Promotional extends \Magento\Framework\View\Element\Template
     {
 		$attributeValue = $this->getAttributeValue($name);
 		$collectionProd = $this->_collectionFactory->create();
-		 $collectionProd->addAttributeToSelect('*')
-            ->addAttributeToFilter(
-            array(
-                array('attribute'=>'manufacturer','eq'=>$attributeValue)
-            )
-        )
+        $collectionProd->addAttributeToSelect('*')
+        ->addAttributeToFilter('manufacturer',array('eq'=>$attributeValue))
         ->addAttributeToFilter('status', array('eq' => 1))
         ->addAttributeToFilter('promote', array('eq' => 1));
         return $collectionProd;

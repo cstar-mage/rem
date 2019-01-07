@@ -235,6 +235,14 @@
 						   if(CUSTOMMENU_POPUP_EFFECT == 2) jQuery(this).find('.popup').stop(true,true).hide('fast');
 						})
 
+                        jQuery('.pt_menu .sub .sub-cat-item').hover(function() {
+                            var catId = jQuery(this).data('id');
+                            var childSelector = '.pt_menu .block1 .children-' + catId;
+
+                            jQuery('.pt_menu .block1 > div').hide();
+                            jQuery(childSelector).show();
+                        });
+
 					});
 
 					
