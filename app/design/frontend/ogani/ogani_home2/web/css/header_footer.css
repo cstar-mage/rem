@@ -2896,3 +2896,19 @@ body.catalog-product-view .product-info-main .product-add-form .box-tocart .acti
 	color: #ae0814!important;
 }
 
+button.action.primary {
+    border-radius: 0;
+    color: #fff;
+    background-color: #ae0814;
+    border: none;
+}
+button.action.primary:hover {
+    background-color: #ae0814;
+}
+
+.catalogsearch-advanced-index .actions-toolbar {
+    text-align: right;
+}
+.catalogsearch-advanced-index .actions-toolbar .primary {
+    float: none;
+}
